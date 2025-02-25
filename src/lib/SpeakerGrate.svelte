@@ -1,4 +1,4 @@
-<svg id="d" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 170 170"
+<svg id="d" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 170 170" class="hidden md:block"
 	><path
 		d="M62.74,146.41c-2.97,0-5.37,2.41-5.37,5.37s2.41,5.37,5.37,5.37,5.37-2.41,5.37-5.37-2.41-5.37-5.37-5.37Z"
 		style="fill:currentColor; stroke-width:0px;"

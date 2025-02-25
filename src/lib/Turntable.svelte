@@ -3,9 +3,9 @@
 		<div class="record">
 			<div class="grooves"></div>
 			<div class="label">
-				<div class="record-text">
+				<div class="record-text font-jersey">
 					{#each Array(12) as _, i}
-						<span style="transform: rotate({i * 30}deg) translateY(-120%)">WATERHOUSE</span>
+						<span style="transform: rotate({i * 30}deg) translateY(-310%)">WATERHOUSE</span>
 					{/each}
 				</div>
 			</div>

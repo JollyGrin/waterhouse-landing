@@ -1,11 +1,12 @@
 <script lang="ts">
+	import MidiScreen from '$lib/MidiScreen.svelte';
 	import SpeakerGrate from '$lib/SpeakerGrate.svelte';
 	import Turntable from '$lib/Turntable.svelte';
 </script>
 
-<div class="grid min-h-screen place-items-center bg-teal-50 px-6">
-	<div class="w-full max-w-[1000px] rounded-lg border-3 border-black bg-white p-4">
-		<div class="grid gap-2 md:grid-cols-[1fr_1fr_4fr]">
+<div class="font-jersey grid min-h-screen place-items-center bg-teal-950 px-6">
+	<div class="w-full max-w-[1000px] rounded-lg border-3 border-black bg-teal-800 p-4">
+		<div class="grid gap-2 text-xl text-teal-100 md:grid-cols-[1fr_1fr_4fr]">
 			<div class="grid grid-rows-[2rem_auto] gap-2">
 				<div class="midi grid place-items-center">about</div>
 				<div
@@ -28,7 +29,7 @@
 				</div>
 			</div>
 			<div class="flex flex-col gap-2">
-				<div class="min-h-20 bg-teal-100">xc</div>
+				<MidiScreen />
 				<Turntable />
 			</div>
 		</div>
