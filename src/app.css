@@ -1,1 +1,12 @@
 @import 'tailwindcss';
+
+@theme {
+	--shadow-flat: 3px 3px 0px black;
+	--shadow-hover: 0px 0px 0px black;
+	--translate-adjust: -3px;
+	--translate-reset: 0px;
+}
+
+.midi {
+	@apply shadow-flat hover:shadow-hover hover:translate-reset translate-adjust rounded border-2 border-black transition-all;
+}
