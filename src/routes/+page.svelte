@@ -1,4 +1,5 @@
 <script lang="ts">
+	import SpeakerGrate from '$lib/SpeakerGrate.svelte';
 	import Turntable from '$lib/Turntable.svelte';
 </script>
 
@@ -12,6 +13,8 @@
 				>
 					<input type="range" min="0" max="100" value="0" class="range-slider" id="color-slider" />
 				</div>
+
+				<SpeakerGrate />
 			</div>
 			<div class="flex flex-col gap-2">
 				<div class="midi grid h-full place-items-center">

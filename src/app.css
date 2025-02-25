@@ -8,5 +8,5 @@
 }
 
 .midi {
-	@apply shadow-flat hover:shadow-hover hover:translate-reset translate-adjust rounded border-2 border-black transition-all;
+	@apply shadow-flat hover:shadow-hover hover:translate-reset translate-adjust active:shadow-hover active:translate-reset rounded border-2 border-black transition-all;
 }
