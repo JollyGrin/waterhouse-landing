@@ -3,6 +3,7 @@
 	import MidiScreen from '$lib/MidiScreen.svelte';
 	import MidiSlider from '$lib/MidiSlider.svelte';
 	import ModalFacilities from '$lib/modal/ModalFacilities.svelte';
+	import ModalOpportunities from '$lib/modal/ModalOpportunities.svelte';
 	import ModalServices from '$lib/modal/ModalServices.svelte';
 	import SpeakerGrate from '$lib/SpeakerGrate.svelte';
 	import Turntable from '$lib/Turntable.svelte';
@@ -12,6 +13,7 @@
 </script>
 
 <ModalFacilities isOpen={isOpen === 'facilities'} {onClose} />
+<ModalOpportunities isOpen={isOpen === 'opportunities'} {onClose} />
 <ModalServices isOpen={isOpen === 'services'} {onClose} />
 
 <div
@@ -56,9 +58,12 @@
 				>
 					<p>services</p>
 				</button>
-				<div class="midi grid h-full flex-grow place-items-center">
+				<button
+					class="midi grid h-full flex-grow place-items-center"
+					onclick={() => (isOpen = 'opportunities')}
+				>
 					<p>opportunities</p>
-				</div>
+				</button>
 			</div>
 			<div class="flex flex-col gap-2">
 				<MidiScreen />
