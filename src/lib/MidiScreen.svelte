@@ -22,8 +22,14 @@
 	<div class="absolute top-2 right-2 w-6">
 		<IconNetwork />
 	</div>
-	<div class="absolute bottom-0 left-2 w-full">
-		<span class="animate-pulse text-xs tracking-wide select-none"> {formattedDate} </span>
+
+	<div class="absolute bottom-0 left-2 hidden md:flex">
+		<span class="animate-pulse text-xs tracking-wide select-none">
+			Rent a music studio in Amsterdam
+		</span>
+	</div>
+	<div class="absolute right-2 bottom-0">
+		<span class="text-xs tracking-wide select-none"> {formattedDate} </span>
 	</div>
 	<p>Waterhouse Studios</p>
 </div>
