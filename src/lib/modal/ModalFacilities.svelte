@@ -10,10 +10,10 @@
 {#if isOpen}
 	<Modal {isOpen} {onClose} title="State-of-the-Art Facilities">
 		<div class="space-y-1">
-			<p class="font-jersey text-2xl text-teal-400">Designed for optimal acoustics and workflow</p>
+			<p class="font-jersey text-highlight text-2xl">Designed for optimal acoustics and workflow</p>
 
 			<div class="grid gap-8 md:grid-cols-2">
-				<div class="space-y-6 rounded-lg border border-teal-700 bg-black/20 p-6">
+				<div class=" bg-secondary/20 space-y-6 rounded-lg p-6">
 					<div class="space-y-4">
 						<h3 class="font-jersey text-2xl">Music Studios</h3>
 						<p class="font-ovo text-sm leading-relaxed">
@@ -23,7 +23,7 @@
 
 					<div class="grid gap-6 md:grid-cols-2">
 						<div class="space-y-3">
-							<h4 class="font-jersey text-lg text-teal-400">Recording</h4>
+							<h4 class="font-jersey text-highlight text-lg">Recording</h4>
 							<ul class="space-y-2 font-mono text-sm">
 								<li>Pro microphones</li>
 								<li>Isolation booths</li>
@@ -33,7 +33,7 @@
 						</div>
 
 						<div class="space-y-3">
-							<h4 class="font-jersey text-lg text-teal-400">Production</h4>
+							<h4 class="font-jersey text-highlight text-lg">Production</h4>
 							<ul class="space-y-2 font-mono text-sm">
 								<li>Pro Tools HD</li>
 								<li>Mixing consoles</li>
@@ -44,7 +44,7 @@
 					</div>
 				</div>
 
-				<div class="space-y-6 rounded-lg border border-teal-700 bg-black/20 p-6">
+				<div class="bg-secondary/20 space-y-6 rounded-lg p-6">
 					<div class="space-y-4">
 						<h3 class="font-jersey text-2xl">Stream Room</h3>
 						<p class="font-ovo text-sm leading-relaxed">
@@ -54,7 +54,7 @@
 
 					<div class="grid gap-6 md:grid-cols-2">
 						<div class="space-y-3">
-							<h4 class="font-jersey text-lg text-teal-400">Stream Setup</h4>
+							<h4 class="font-jersey text-highlight text-lg">Stream Setup</h4>
 							<ul class="space-y-2 font-mono text-sm">
 								<li>4K cameras</li>
 								<li>Pro lighting</li>
@@ -64,7 +64,7 @@
 						</div>
 
 						<div class="space-y-3">
-							<h4 class="font-jersey text-lg text-teal-400">Audio/Visual</h4>
+							<h4 class="font-jersey text-highlight text-lg">Audio/Visual</h4>
 							<ul class="space-y-2 font-mono text-sm">
 								<li>Audio interface</li>
 								<li>Multiple mics</li>
@@ -76,7 +76,10 @@
 				</div>
 			</div>
 		</div>
-		<button class="midi bg-highlight font-sigmar py-1 tracking-widest" onclick={onOpenJoin}>
+		<button
+			class="midi bg-highlight text-primary font-sigmar py-1 tracking-widest"
+			onclick={onOpenJoin}
+		>
 			View Plans
 		</button>
 	</Modal>
