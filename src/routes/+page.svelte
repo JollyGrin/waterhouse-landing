@@ -5,13 +5,18 @@
 	import ModalFacilities from '$lib/modal/ModalFacilities.svelte';
 	import ModalOpportunities from '$lib/modal/ModalOpportunities.svelte';
 	import ModalPrices from '$lib/modal/ModalPrices.svelte';
+	import ModalSendEmail from '$lib/modal/ModalSendEmail.svelte';
 	import ModalServices from '$lib/modal/ModalServices.svelte';
 	import SpeakerGrate from '$lib/SpeakerGrate.svelte';
 	import Turntable from '$lib/Turntable.svelte';
 
-	let isOpen: 'facilities' | 'services' | 'opportunities' | 'prices' | null = $state(null);
+	type ModalKey = 'contact' | 'facilities' | 'services' | 'opportunities' | 'prices';
+	let isOpen: ModalKey | null = $state(null);
 	const onClose = () => (isOpen = null);
+	const onOpenContact = () => (isOpen = 'contact');
 </script>
+
+<ModalSendEmail isOpen={isOpen === 'contact'} {onClose} />
 
 <ModalFacilities
 	isOpen={isOpen === 'facilities'}
@@ -19,7 +24,7 @@
 	{onClose}
 />
 <ModalOpportunities isOpen={isOpen === 'opportunities'} {onClose} />
-<ModalPrices isOpen={isOpen === 'prices'} {onClose} />
+<ModalPrices isOpen={isOpen === 'prices'} {onClose} {onOpenContact} />
 <ModalServices isOpen={isOpen === 'services'} {onClose} />
 
 <div
