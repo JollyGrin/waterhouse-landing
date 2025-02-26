@@ -1,5 +1,6 @@
 <script lang="ts">
 	import IconBattery from './icon/IconBattery.svelte';
+	import IconLogo from './icon/IconLogo.svelte';
 	import IconNetwork from './icon/IconNetwork.svelte';
 
 	const date = new Date();
@@ -25,11 +26,14 @@
 
 	<div class="absolute bottom-0 left-2 hidden md:flex">
 		<span class="animate-pulse text-xs tracking-wide select-none">
-			Rent a music studio in Amsterdam
+			rent a music studio in amsterdam
 		</span>
 	</div>
 	<div class="absolute right-2 bottom-0">
 		<span class="text-xs tracking-wide select-none"> {formattedDate} </span>
+	</div>
+	<div class="absolute top-1 hidden w-8 text-teal-500 md:block">
+		<IconLogo />
 	</div>
 	<p>Waterhouse Studios</p>
 </div>

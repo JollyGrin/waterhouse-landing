@@ -1,4 +1,5 @@
 <script lang="ts">
+	import IconLogo from '$lib/icon/IconLogo.svelte';
 	import MidiScreen from '$lib/MidiScreen.svelte';
 	import MidiSlider from '$lib/MidiSlider.svelte';
 	import SpeakerGrate from '$lib/SpeakerGrate.svelte';
@@ -9,9 +10,10 @@
 	class="font-jersey grid gap-4 bg-teal-950 px-4 pt-4 md:min-h-screen md:place-items-center md:gap-0 md:px-6 md:pt-0"
 >
 	<div class="grid h-full min-h-30 place-items-center md:hidden">
-		<p class="font-ovo text-center text-4xl text-teal-500/20">
-			rent musical studios <br />in Amsterdam
-		</p>
+		<div class="w-20 text-teal-600">
+			<IconLogo />
+		</div>
+		<p class="text-xl text-teal-600/50">rent a musical studio in amsterdam</p>
 	</div>
 	<div class="w-full max-w-[1000px] rounded-lg border-3 border-black bg-teal-800 p-4">
 		<div class="grid gap-2 text-xl text-teal-100 md:grid-cols-[1fr_1fr_4fr]">
