@@ -2,9 +2,15 @@
 	import IconLogo from '$lib/icon/IconLogo.svelte';
 	import MidiScreen from '$lib/MidiScreen.svelte';
 	import MidiSlider from '$lib/MidiSlider.svelte';
+	import ModalFacilities from '$lib/modal/ModalFacilities.svelte';
 	import SpeakerGrate from '$lib/SpeakerGrate.svelte';
 	import Turntable from '$lib/Turntable.svelte';
+
+	let isOpen: 'facilities' | 'services' | 'opportunities' | null = $state(null);
+	const onClose = () => (isOpen = null);
 </script>
+
+<ModalFacilities isOpen={isOpen === 'facilities'} {onClose} />
 
 <div
 	class="font-jersey grid gap-4 bg-teal-950 px-4 pt-4 md:min-h-screen md:place-items-center md:gap-0 md:px-6 md:pt-0"
@@ -28,9 +34,9 @@
 				<SpeakerGrate />
 			</div>
 			<div class="flex gap-2 md:flex-col">
-				<div class="midi grid h-full flex-grow place-items-center">
+				<button class="midi grid h-full flex-grow place-items-center">
 					<p>facilities</p>
-				</div>
+				</button>
 				<div class="midi grid h-full flex-grow place-items-center">
 					<p>services</p>
 				</div>
