@@ -4,24 +4,23 @@
 </script>
 
 {#if isOpen}
-	<Modal {isOpen} {onClose}>
+	<Modal {isOpen} {onClose} title="Helping You Get Work">
 		<div class="space-y-8">
-			<div class="space-y-4">
-				<h2 class="text-4xl">Helping You Get Work</h2>
-				<p class="font-mono text-sm text-teal-400">Breaking into the industry</p>
-			</div>
+			<p class="font-jersey text-lg text-teal-400">Breaking into the industry</p>
 
-			<div class="space-y-4 font-mono text-sm leading-relaxed">
+			<div class="font-ovo space-y-4 text-sm leading-relaxed">
 				<p>
-					We know that breaking into the industry can be tough, which is why we're dedicated to helping you find work as a DJ, sound designer, or musician. Through strategic partnerships with local venues and online platforms, we connect you with opportunities that matter.
+					We know that breaking into the industry can be tough, which is why we're dedicated to
+					helping you find work as a DJ, sound designer, or musician. Through strategic partnerships
+					with local venues and online platforms, we connect you with opportunities that matter.
 				</p>
 			</div>
 
 			<div class="grid gap-8 md:grid-cols-2">
 				<div class="space-y-6">
 					<div class="space-y-4">
-						<h3 class="text-2xl">Performance</h3>
-						<div class="space-y-4 font-mono text-sm">
+						<h3 class="font-jersey text-2xl">Performance</h3>
+						<div class="font-ovo space-y-4 text-sm">
 							<p>Perform at clubs, festivals, and events in Amsterdam.</p>
 							<ul class="list-inside list-disc space-y-2">
 								<li>Club performances</li>
@@ -32,9 +31,12 @@
 					</div>
 
 					<div class="space-y-4">
-						<h3 class="text-2xl">Collaborations</h3>
-						<div class="space-y-4 font-mono text-sm">
-							<p>Work with other artists, producers, and creatives to expand your network and portfolio.</p>
+						<h3 class="font-jersey text-2xl">Collaborations</h3>
+						<div class="font-ovo space-y-4 text-sm">
+							<p>
+								Work with other artists, producers, and creatives to expand your network and
+								portfolio.
+							</p>
 							<ul class="list-inside list-disc space-y-2">
 								<li>Artist collaborations</li>
 								<li>Producer networking</li>
@@ -46,8 +48,8 @@
 
 				<div class="space-y-6">
 					<div class="space-y-4">
-						<h3 class="text-2xl">Exposure</h3>
-						<div class="space-y-4 font-mono text-sm">
+						<h3 class="font-jersey text-2xl">Exposure</h3>
+						<div class="font-ovo space-y-4 text-sm">
 							<p>Grow your fanbase through streaming, social media, and live performances.</p>
 							<ul class="list-inside list-disc space-y-2">
 								<li>Streaming platforms</li>
@@ -58,9 +60,12 @@
 					</div>
 
 					<div class="space-y-4">
-						<h3 class="text-2xl">Government Support</h3>
-						<div class="space-y-4 font-mono text-sm">
-							<p>Help artists apply for subsidies to fund their projects. Our team is here to assist you every step of the way.</p>
+						<h3 class="font-jersey text-2xl">Government Support</h3>
+						<div class="font-ovo space-y-4 text-sm">
+							<p>
+								Help artists apply for subsidies to fund their projects. Our team is here to assist
+								you every step of the way.
+							</p>
 							<ul class="list-inside list-disc space-y-2">
 								<li>Subsidy applications</li>
 								<li>Project funding</li>

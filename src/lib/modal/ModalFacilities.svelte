@@ -76,10 +76,7 @@
 				</div>
 			</div>
 		</div>
-		<button
-			class="midi bg-highlight text-primary font-sigmar py-1 tracking-widest"
-			onclick={onOpenJoin}
-		>
+		<button class="midi bg-highlight text-primary font-jersey py-1 text-2xl" onclick={onOpenJoin}>
 			View Plans
 		</button>
 	</Modal>

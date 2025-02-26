@@ -5,44 +5,33 @@
 </script>
 
 {#snippet priceText(price: string)}
-	<div class="flex flex-wrap items-baseline justify-center">
-		<span class="text-4xl font-bold">€{price}</span>
-		<span class="ml-1 font-mono text-xs text-teal-400/50">per month</span>
+	<div class="flex flex-col items-start justify-center">
+		<span class="font-ovo text-4xl font-bold">€{price}</span>
+		<span class="text-secondary/30 font-ovo ml-1 text-xs">per month</span>
 	</div>
 {/snippet}
 
 {#if isOpen}
-	<Modal {isOpen} {onClose}>
+	<Modal {isOpen} {onClose} title="Choose your plan">
+		<p class="font-jersey text-highlight text-2xl">
+			Simple subscriptions so you can focus on creativity.
+		</p>
 		<div class="space-y-8">
-			<h2 class="text-4xl">Choose your plan</h2>
-
 			<div class="grid gap-2 md:grid-cols-3">
 				<!-- Shared Studio -->
-				<div class="space-y-6 rounded-lg border border-teal-700 bg-black/20 p-6">
+				<div class="bg-secondary/20 space-y-6 rounded-lg p-6">
 					<div class="space-y-2">
-						<h3 class="text-2xl">Shared Studio</h3>
-						<p class="font-mono text-sm text-teal-400">Perfect for emerging artists</p>
+						<h3 class="font-ovo text-2xl">Shared Studio</h3>
+						<p class="text-highlight font-ovo">Perfect for emerging artists</p>
 					</div>
 
 					{@render priceText('275')}
 
 					<ul class="space-y-4 font-mono text-sm">
-						<li class="flex items-center gap-2">
-							<span class="text-teal-400">•</span>
-							80 hours per month
-						</li>
-						<li class="flex items-center gap-2">
-							<span class="text-teal-400">•</span>
-							Shared workspace
-						</li>
-						<li class="flex items-center gap-2">
-							<span class="text-teal-400">•</span>
-							Basic equipment included
-						</li>
-						<li class="flex items-center gap-2">
-							<span class="text-teal-400">•</span>
-							Stream room access
-						</li>
+						<li class="flex items-center gap-2">80 hours per month</li>
+						<li class="flex items-center gap-2">Shared workspace</li>
+						<li class="flex items-center gap-2">Basic equipment included</li>
+						<li class="flex items-center gap-2">Stream room access</li>
 					</ul>
 
 					<button
@@ -53,31 +42,19 @@
 				</div>
 
 				<!-- Solo Studio -->
-				<div class="space-y-6 rounded-lg border border-teal-700 bg-black/20 p-6">
+				<div class="bg-highlight/20 space-y-6 rounded-lg p-6">
 					<div class="space-y-2">
-						<h3 class="text-2xl">Solo Studio</h3>
-						<p class="font-mono text-sm text-teal-400">Your private creative space</p>
+						<h3 class="font-ovo text-2xl">Solo Studio</h3>
+						<p class="text-highlight font-ovo">Your private creative space</p>
 					</div>
 
 					{@render priceText('1,100')}
 
 					<ul class="space-y-4 font-mono text-sm">
-						<li class="flex items-center gap-2">
-							<span class="text-teal-400">•</span>
-							24/7 private access
-						</li>
-						<li class="flex items-center gap-2">
-							<span class="text-teal-400">•</span>
-							Premium equipment
-						</li>
-						<li class="flex items-center gap-2">
-							<span class="text-teal-400">•</span>
-							Storage space
-						</li>
-						<li class="flex items-center gap-2">
-							<span class="text-teal-400">•</span>
-							Stream room access
-						</li>
+						<li class="flex items-center gap-2">24/7 private access</li>
+						<li class="flex items-center gap-2">Premium equipment</li>
+						<li class="flex items-center gap-2">Storage space</li>
+						<li class="flex items-center gap-2">Stream room access</li>
 					</ul>
 
 					<button
@@ -88,31 +65,19 @@
 				</div>
 
 				<!-- Office Space -->
-				<div class="space-y-6 rounded-lg border border-teal-700 bg-black/20 p-6">
+				<div class="bg-secondary/20 space-y-6 rounded-lg p-6">
 					<div class="space-y-2">
-						<h3 class="text-2xl">Office Space</h3>
-						<p class="font-mono text-sm text-teal-400">For industry professionals</p>
+						<h3 class="font-ovo text-2xl">Office Space</h3>
+						<p class="text-highlight font-ovo">For industry professionals</p>
 					</div>
 
 					{@render priceText('500')}
 
 					<ul class="space-y-4 font-mono text-sm">
-						<li class="flex items-center gap-2">
-							<span class="text-teal-400">•</span>
-							Dedicated desk
-						</li>
-						<li class="flex items-center gap-2">
-							<span class="text-teal-400">•</span>
-							Meeting room access
-						</li>
-						<li class="flex items-center gap-2">
-							<span class="text-teal-400">•</span>
-							Business amenities
-						</li>
-						<li class="flex items-center gap-2">
-							<span class="text-teal-400">•</span>
-							Stream room access
-						</li>
+						<li class="flex items-center gap-2">Dedicated desk</li>
+						<li class="flex items-center gap-2">Meeting room access</li>
+						<li class="flex items-center gap-2">Business amenities</li>
+						<li class="flex items-center gap-2">Stream room access</li>
 					</ul>
 
 					<button
