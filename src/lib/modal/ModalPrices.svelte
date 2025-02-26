@@ -1,7 +1,11 @@
 <script lang="ts">
 	import Modal from './Modal.svelte';
 
-	let { isOpen = false, onClose }: { isOpen?: boolean; onClose(): void } = $props();
+	let {
+		isOpen = false,
+		onClose,
+		onOpenContact
+	}: { isOpen?: boolean; onClose(): void; onOpenContact(): void } = $props();
 </script>
 
 {#snippet priceText(price: string)}
@@ -36,6 +40,7 @@
 
 					<button
 						class="w-full rounded border border-teal-700 px-4 py-2 font-mono text-sm transition-colors hover:bg-teal-900/30"
+						onclick={onOpenContact}
 					>
 						Select Plan
 					</button>
@@ -59,6 +64,7 @@
 
 					<button
 						class="w-full rounded border border-teal-700 px-4 py-2 font-mono text-sm transition-colors hover:bg-teal-900/30"
+						onclick={onOpenContact}
 					>
 						Select Plan
 					</button>
@@ -82,6 +88,7 @@
 
 					<button
 						class="w-full rounded border border-teal-700 px-4 py-2 font-mono text-sm transition-colors hover:bg-teal-900/30"
+						onclick={onOpenContact}
 					>
 						Select Plan
 					</button>
