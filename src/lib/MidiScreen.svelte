@@ -15,7 +15,7 @@
 </script>
 
 <div
-	class="screen font-jersey relative grid min-h-20 place-items-center rounded border-2 border-teal-950 bg-teal-100 p-2 text-4xl text-teal-500"
+	class="screen font-jersey border-secondary text-highlight relative grid min-h-20 place-items-center rounded border-2 bg-teal-100 p-2 text-4xl"
 >
 	<div class="absolute top-2 left-2 w-6 animate-pulse">
 		<IconBattery />

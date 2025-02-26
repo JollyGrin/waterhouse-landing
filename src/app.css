@@ -2,10 +2,15 @@
 
 .html,
 body {
-	@apply bg-teal-950;
+	/* background-color: #37392e; */
 }
 
 @theme {
+	--color-primary: #faf6f6; /* RGB format */
+	--color-secondary: #2f1847;
+	--color-back: #19647e;
+	--color-highlight: #28afb0;
+
 	--shadow-flat: 3px 3px 0px black;
 	--shadow-hover: 0px 0px 0px black;
 	--translate-adjust: -3px;

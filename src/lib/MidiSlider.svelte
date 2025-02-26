@@ -14,32 +14,17 @@
 	input[type='range']::-webkit-slider-runnable-track {
 		height: 10px;
 		-webkit-appearance: none;
-		color: #13bba4;
+		/* color: #13bba4; */
 		margin-top: -1px;
 	}
 
 	input[type='range']::-webkit-slider-thumb {
 		width: 20px;
 		-webkit-appearance: none;
-		height: 5px;
+		height: 2px;
 		cursor: ns-resize;
-		background: #43e5f7;
-		box-shadow: 0px 0 0 10px oklch(0.277 0.046 192.524);
+		background: var(--color-primary);
+		box-shadow: 0px 0 0 5px var(--color-highlight);
 		border-radius: 1px;
-	}
-
-	input[type='range']::-moz-range-progress {
-		background-color: #43e5f7;
-	}
-	input[type='range']::-moz-range-track {
-		background-color: #9a905d;
-	}
-
-	/* IE*/
-	input[type='range']::-ms-fill-lower {
-		background-color: #43e5f7;
-	}
-	input[type='range']::-ms-fill-upper {
-		background-color: #9a905d;
 	}
 </style>
