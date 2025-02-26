@@ -52,7 +52,7 @@
 			out:scale={{ duration: 150, start: 1 }}
 		>
 			<div class="flex items-center justify-between">
-				<h2 class="text-2xl font-bold">{title}</h2>
+				<h2 class="font-ovo text-4xl font-bold">{title}</h2>
 				{@render closeXButton()}
 			</div>
 
