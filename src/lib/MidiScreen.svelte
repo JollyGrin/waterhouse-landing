@@ -23,7 +23,7 @@
 		<IconNetwork />
 	</div>
 	<div class="absolute bottom-0 left-2 w-full">
-		<span class="animate-pulse text-xs tracking-wide"> {formattedDate} </span>
+		<span class="animate-pulse text-xs tracking-wide select-none"> {formattedDate} </span>
 	</div>
 	<p>Waterhouse Studios</p>
 </div>
