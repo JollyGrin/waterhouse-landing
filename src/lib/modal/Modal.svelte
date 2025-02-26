@@ -33,12 +33,16 @@
 
 {#if isOpen}
 	<div
-		onkeydown={(e) => e.key === 'Enter' && onClose()}
+		onkeydown={(e) => e.key === 'Enter'}
 		tabindex="0"
 		role="button"
 		aria-label="close backdrop"
 		class="fixed inset-0 z-50 grid place-items-center bg-black/50 px-4 backdrop-blur-sm transition-all"
-		onclick={onClose}
+		id="backdrop"
+		onclick={(e) => {
+			e.preventDefault();
+			if ((e?.target as HTMLElement)?.id === 'backdrop') onClose();
+		}}
 		in:fade={{ duration: 200 }}
 		out:fade={{ duration: 150 }}
 	>

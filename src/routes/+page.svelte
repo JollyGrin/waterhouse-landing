@@ -13,7 +13,11 @@
 	const onClose = () => (isOpen = null);
 </script>
 
-<ModalFacilities isOpen={isOpen === 'facilities'} {onClose} />
+<ModalFacilities
+	isOpen={isOpen === 'facilities'}
+	onOpenJoin={() => (isOpen = 'prices')}
+	{onClose}
+/>
 <ModalOpportunities isOpen={isOpen === 'opportunities'} {onClose} />
 <ModalPrices isOpen={isOpen === 'prices'} {onClose} />
 <ModalServices isOpen={isOpen === 'services'} {onClose} />

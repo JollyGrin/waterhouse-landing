@@ -1,11 +1,15 @@
 <script lang="ts">
 	import Modal from './Modal.svelte';
-	let { isOpen = false, onClose }: { isOpen?: boolean; onClose(): void } = $props();
+	let {
+		isOpen = false,
+		onClose,
+		onOpenJoin
+	}: { isOpen?: boolean; onClose(): void; onOpenJoin(): void } = $props();
 </script>
 
 {#if isOpen}
 	<Modal {isOpen} {onClose}>
-		<div class="space-y-8">
+		<div class="space-y-1">
 			<div class="space-y-4">
 				<h2 class="text-4xl">State-of-the-Art Facilities</h2>
 				<p class="font-mono text-sm text-teal-400">Designed for optimal acoustics and workflow</p>
@@ -75,6 +79,9 @@
 				</div>
 			</div>
 		</div>
+		<button class="midi bg-highlight font-sigmar py-1 tracking-widest" onclick={onOpenJoin}>
+			View Plans
+		</button>
 	</Modal>
 {/if}
 
