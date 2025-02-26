@@ -1,15 +1,12 @@
-<script lang="ts" context="module">
-	import { fade, scale } from 'svelte/transition';
-</script>
-
 <script lang="ts">
+	import { fade, scale } from 'svelte/transition';
 	let { isOpen = false, onClose }: { isOpen?: boolean; onClose(): void } = $props();
 </script>
 
 {#if isOpen}
 	<div
 		class="fixed inset-0 z-50 grid place-items-center bg-black/50 px-4 backdrop-blur-sm transition-all"
-		on:click|self={onClose}
+		onclick={onClose}
 		in:fade={{ duration: 200 }}
 		out:fade={{ duration: 150 }}
 	>
@@ -22,7 +19,7 @@
 				<h2 class="text-2xl font-bold">Studio Facilities</h2>
 				<button
 					class="rounded-full p-2 text-teal-100 transition-colors hover:bg-black/10"
-					on:click={onClose}
+					onclick={onClose}
 				>
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
@@ -86,7 +83,7 @@
 			<div class="mt-8 text-center">
 				<button
 					class="shadow-flat rounded-lg border-2 border-black bg-teal-700 px-6 py-2 text-lg transition-colors hover:bg-teal-600"
-					on:click={onClose}
+					onclick={onClose}
 				>
 					Close
 				</button>

@@ -34,7 +34,10 @@
 				<SpeakerGrate />
 			</div>
 			<div class="flex gap-2 md:flex-col">
-				<button class="midi grid h-full flex-grow place-items-center">
+				<button
+					class="midi grid h-full flex-grow place-items-center"
+					onclick={() => (isOpen = 'facilities')}
+				>
 					<p>facilities</p>
 				</button>
 				<div class="midi grid h-full flex-grow place-items-center">
