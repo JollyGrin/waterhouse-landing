@@ -44,5 +44,9 @@
 		appearance: slider-vertical;
 		width: 16px;
 		vertical-align: bottom;
+		background: transparent;
+	}
+	input[type='range']::-moz-range-track {
+		background: red;
 	}
 </style>
