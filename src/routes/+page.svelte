@@ -23,8 +23,14 @@
 	</div>
 	<div class="w-full max-w-[1000px] rounded-lg border-3 border-black bg-teal-800 p-4">
 		<div class="grid gap-2 text-xl text-teal-100 md:grid-cols-[1fr_1fr_4fr]">
-			<div class="grid grid-rows-[2rem_auto] gap-2">
-				<div class="midi grid place-items-center">about</div>
+			<div class="flex justify-between gap-2 md:flex-col-reverse">
+				<div
+					class="midi grid w-full flex-grow place-items-center bg-teal-600 text-teal-900 transition-all hover:bg-teal-300 hover:text-teal-700 active:bg-teal-300 active:text-teal-700"
+				>
+					join
+				</div>
+				<div class="midi grid w-full flex-grow place-items-center">about</div>
+
 				<div
 					class="shadow-flat translate-adjust hidden max-h-[300px] items-center justify-center rounded-lg border-2 border-black px-2 py-6 md:flex"
 				>

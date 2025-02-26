@@ -1,7 +1,3 @@
-<script lang="ts" context="module">
-	import { fade, scale } from 'svelte/transition';
-</script>
-
 <script lang="ts">
 	import Modal from './Modal.svelte';
 
