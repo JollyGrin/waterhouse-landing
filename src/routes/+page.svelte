@@ -4,16 +4,18 @@
 	import MidiSlider from '$lib/MidiSlider.svelte';
 	import ModalFacilities from '$lib/modal/ModalFacilities.svelte';
 	import ModalOpportunities from '$lib/modal/ModalOpportunities.svelte';
+	import ModalPrices from '$lib/modal/ModalPrices.svelte';
 	import ModalServices from '$lib/modal/ModalServices.svelte';
 	import SpeakerGrate from '$lib/SpeakerGrate.svelte';
 	import Turntable from '$lib/Turntable.svelte';
 
-	let isOpen: 'facilities' | 'services' | 'opportunities' | null = $state(null);
+	let isOpen: 'facilities' | 'services' | 'opportunities' | 'prices' | null = $state(null);
 	const onClose = () => (isOpen = null);
 </script>
 
 <ModalFacilities isOpen={isOpen === 'facilities'} {onClose} />
 <ModalOpportunities isOpen={isOpen === 'opportunities'} {onClose} />
+<ModalPrices isOpen={isOpen === 'prices'} {onClose} />
 <ModalServices isOpen={isOpen === 'services'} {onClose} />
 
 <div
@@ -30,6 +32,7 @@
 			<div class="flex flex-row-reverse justify-between gap-2 md:flex-col-reverse">
 				<div
 					class="midi grid flex-grow place-items-center bg-teal-600 text-teal-900 transition-all hover:bg-teal-300 hover:text-teal-700 active:bg-teal-300 active:text-teal-700"
+					onclick={() => (isOpen = 'prices')}
 				>
 					join
 				</div>
