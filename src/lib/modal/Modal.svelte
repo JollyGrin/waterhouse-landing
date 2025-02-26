@@ -42,7 +42,7 @@
 		out:fade={{ duration: 150 }}
 	>
 		<div
-			class="shadow-flat flex w-full max-w-2xl flex-col gap-4 rounded-lg border-2 border-black bg-teal-800 p-6 text-teal-100 max-h-[90vh] overflow-y-auto"
+			class="shadow-flat flex max-h-[90vh] w-full max-w-2xl flex-col gap-4 overflow-y-auto rounded-lg border-2 border-black bg-teal-800 p-6 text-teal-100"
 			in:scale={{ duration: 200, start: 0.95 }}
 			out:scale={{ duration: 150, start: 1 }}
 		>
@@ -52,15 +52,6 @@
 			</div>
 
 			{@render children()}
-
-			<div class="flex w-full justify-end">
-				<button
-					class="shadow-flat rounded-lg border-2 border-black bg-teal-700 px-6 py-2 text-lg transition-colors hover:bg-teal-600"
-					onclick={onClose}
-				>
-					Close
-				</button>
-			</div>
 		</div>
 	</div>
 {/if}

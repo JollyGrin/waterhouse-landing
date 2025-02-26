@@ -30,12 +30,12 @@
 	<div class="w-full max-w-[1000px] rounded-lg border-3 border-black bg-teal-800 p-4">
 		<div class="grid gap-2 text-xl text-teal-100 md:grid-cols-[1fr_1fr_4fr]">
 			<div class="flex flex-row-reverse justify-between gap-2 md:flex-col-reverse">
-				<div
+				<button
 					class="midi grid flex-grow place-items-center bg-teal-600 text-teal-900 transition-all hover:bg-teal-300 hover:text-teal-700 active:bg-teal-300 active:text-teal-700"
 					onclick={() => (isOpen = 'prices')}
 				>
 					join
-				</div>
+				</button>
 				<div class="midi grid flex-grow place-items-center">about</div>
 
 				<div

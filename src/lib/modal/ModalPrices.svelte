@@ -4,12 +4,19 @@
 	let { isOpen = false, onClose }: { isOpen?: boolean; onClose(): void } = $props();
 </script>
 
+{#snippet priceText(price: string)}
+	<div class="flex flex-wrap items-baseline justify-center">
+		<span class="text-4xl font-bold">€{price}</span>
+		<span class="ml-1 font-mono text-xs text-teal-400/50">per month</span>
+	</div>
+{/snippet}
+
 {#if isOpen}
 	<Modal {isOpen} {onClose}>
 		<div class="space-y-8">
 			<h2 class="text-4xl">Choose your plan</h2>
 
-			<div class="grid gap-6 md:grid-cols-3">
+			<div class="grid gap-2 md:grid-cols-3">
 				<!-- Shared Studio -->
 				<div class="space-y-6 rounded-lg border border-teal-700 bg-black/20 p-6">
 					<div class="space-y-2">
@@ -17,12 +24,7 @@
 						<p class="font-mono text-sm text-teal-400">Perfect for emerging artists</p>
 					</div>
 
-					<div class="space-y-1">
-						<div class="flex items-baseline gap-1">
-							<span class="text-4xl font-bold">€275</span>
-							<span class="font-mono text-sm text-teal-400">/month</span>
-						</div>
-					</div>
+					{@render priceText('275')}
 
 					<ul class="space-y-4 font-mono text-sm">
 						<li class="flex items-center gap-2">
@@ -57,12 +59,7 @@
 						<p class="font-mono text-sm text-teal-400">Your private creative space</p>
 					</div>
 
-					<div class="space-y-1">
-						<div class="flex items-baseline gap-1">
-							<span class="text-4xl font-bold">€1,100</span>
-							<span class="font-mono text-sm text-teal-400">/month</span>
-						</div>
-					</div>
+					{@render priceText('1,100')}
 
 					<ul class="space-y-4 font-mono text-sm">
 						<li class="flex items-center gap-2">
@@ -97,12 +94,7 @@
 						<p class="font-mono text-sm text-teal-400">For industry professionals</p>
 					</div>
 
-					<div class="space-y-1">
-						<div class="flex items-baseline gap-1">
-							<span class="text-4xl font-bold">€500</span>
-							<span class="font-mono text-sm text-teal-400">/month</span>
-						</div>
-					</div>
+					{@render priceText('500')}
 
 					<ul class="space-y-4 font-mono text-sm">
 						<li class="flex items-center gap-2">
