@@ -6,45 +6,33 @@
 
 {#if isOpen}
 	<Modal {isOpen} {onClose}>
-		<div class="mt-6 grid gap-6 md:grid-cols-2">
+		<div class="space-y-8">
 			<div class="space-y-4">
-				<h3 class="text-xl font-bold">Recording Studios</h3>
-				<ul class="list-inside list-disc space-y-2">
-					<li>Professional acoustic treatment</li>
-					<li>Vintage and modern microphones</li>
-					<li>High-end preamps and interfaces</li>
-					<li>Multiple isolation booths</li>
-				</ul>
+				<h2 class="text-4xl">State-of-the-Art Facilities</h2>
+				<p class="font-mono text-sm text-teal-400">Designed for optimal acoustics and workflow</p>
 			</div>
 
-			<div class="space-y-4">
-				<h3 class="text-xl font-bold">Control Rooms</h3>
-				<ul class="list-inside list-disc space-y-2">
-					<li>Analog mixing consoles</li>
-					<li>Pro Tools HD systems</li>
-					<li>Extensive outboard gear</li>
-					<li>Reference monitors</li>
-				</ul>
-			</div>
+			<div class="grid gap-8 md:grid-cols-2">
+				<div class="space-y-4">
+					<h3 class="text-2xl">Music Studios</h3>
+					<div class="space-y-4 font-mono text-sm leading-relaxed">
+						<p>
+							Our fully equipped music studios are designed for recording, mixing, and producing, complete with professional-grade equipment to bring your vision to life.
+						</p>
+						<p>
+							Subscription model provides a flexible and affordable way to secure consistent studio time. With access to our top-notch facilities tailored to your schedule, you'll have the freedom to record, mix, or stream at your own pace, making it easier to bring your vision to life.
+						</p>
+					</div>
+				</div>
 
-			<div class="space-y-4">
-				<h3 class="text-xl font-bold">Live Room</h3>
-				<ul class="list-inside list-disc space-y-2">
-					<li>Grand piano</li>
-					<li>Drum kit setup</li>
-					<li>Guitar and bass amplifiers</li>
-					<li>Variable acoustics</li>
-				</ul>
-			</div>
-
-			<div class="space-y-4">
-				<h3 class="text-xl font-bold">Amenities</h3>
-				<ul class="list-inside list-disc space-y-2">
-					<li>Lounge area</li>
-					<li>Kitchen facilities</li>
-					<li>24/7 access</li>
-					<li>Secure equipment storage</li>
-				</ul>
+				<div class="space-y-4">
+					<h3 class="text-2xl">Stream Room</h3>
+					<div class="space-y-4 font-mono text-sm leading-relaxed">
+						<p>
+							Ready for Twitch and YouTube broadcasts, our stream room is perfect for artists looking to build their online presence and connect with global audiences.
+						</p>
+					</div>
+				</div>
 			</div>
 		</div>
 	</Modal>

@@ -3,8 +3,9 @@
 	let {
 		isOpen = false,
 		onClose,
+		title = '',
 		children
-	}: { isOpen?: boolean; onClose(): void; children?: any } = $props();
+	}: { isOpen?: boolean; onClose(): void; children?: any; title?: string } = $props();
 </script>
 
 {#snippet closeXButton()}
@@ -47,7 +48,7 @@
 			out:scale={{ duration: 150, start: 1 }}
 		>
 			<div class="flex items-center justify-between">
-				<h2 class="text-2xl font-bold">Studio Facilities</h2>
+				<h2 class="text-2xl font-bold">{title}</h2>
 				{@render closeXButton()}
 			</div>
 
