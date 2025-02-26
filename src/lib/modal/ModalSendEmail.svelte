@@ -7,17 +7,23 @@
 	// Form data
 	let name = $state('');
 	let email = $state('');
-	let message = $state('');
+	let phone = $state('');
+	let portfolio = $state('');
+	let studio = $state('shared'); // Default to shared studio
 	let submitting = $state(false);
 	let success = $state(false);
 	let error = $state('');
 
-	// Supabase URL - replace with your actual Supabase URL and function endpoint
-	const SUPABASE_URL = 'https://your-supabase-project.supabase.co/functions/v1/send-email';
+	// Supabase URL and auth token
+	const SUPABASE_URL = 'https://vyjgzmwpqtuoucjgmxyf.supabase.co/functions/v1/signup-waterhouse';
+	const SUPABASE_AUTH_TOKEN =
+		'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ5amd6bXdwcXR1b3VjamdteHlmIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTczOTIwMjU3OSwiZXhwIjoyMDU0Nzc4NTc5fQ.jcpzjIzAdq_-fW3jfkCevs2YCbs65EBlzO9qQV9gN-E';
 
-	async function handleSubmit() {
-		if (!name || !email || !message) {
-			error = 'Please fill out all fields';
+	async function handleSubmit(event: Event) {
+		event.preventDefault();
+		console.log('hi');
+		if (!name || !email || !phone || !portfolio) {
+			error = 'Please fill out all required fields';
 			return;
 		}
 
@@ -28,25 +34,36 @@
 			const response = await fetch(SUPABASE_URL, {
 				method: 'POST',
 				headers: {
-					'Content-Type': 'application/json'
+					'Content-Type': 'application/json',
+					Authorization: `Bearer ${SUPABASE_AUTH_TOKEN}`
 				},
 				body: JSON.stringify({
 					name,
 					email,
-					message
+					phone,
+					portfolio,
+					studio
 				})
 			});
 
-			const data = await response.json();
+			let data;
+			try {
+				data = await response.json();
+			} catch (e) {
+				// Handle case where response might not be JSON
+				console.log('Response may not be JSON:', e);
+			}
 
 			if (!response.ok) {
-				throw new Error(data.error || 'Failed to send message');
+				throw new Error(data?.error || `Failed to submit (${response.status})`);
 			}
 
 			// Reset form and show success message
 			name = '';
 			email = '';
-			message = '';
+			phone = '';
+			portfolio = '';
+			studio = 'shared';
 			success = true;
 
 			// Auto-close after success (optional)
@@ -54,8 +71,8 @@
 				if (success) onClose();
 			}, 3000);
 		} catch (err) {
-			console.error('Error sending message:', err);
-			error = err instanceof Error ? err.message : 'Failed to send message';
+			console.error('Error submitting form:', err);
+			error = err instanceof Error ? err.message : 'Failed to submit form';
 		} finally {
 			submitting = false;
 		}
@@ -63,19 +80,19 @@
 </script>
 
 {#if isOpen}
-	<Modal {isOpen} {onClose} title="Contact Us">
+	<Modal {isOpen} {onClose} title="Sign Up for Studio Space">
 		<div class="space-y-6">
 			<p class="font-jersey text-highlight text-lg">
-				Send us a message and we'll get back to you soon
+				Complete this form to reserve your studio space
 			</p>
 
 			{#if success}
 				<div class="rounded-lg bg-green-800/20 p-4 text-center">
-					<p class="font-ovo text-lg">Message sent successfully!</p>
-					<p class="font-ovo mt-2 text-sm">We'll get back to you soon.</p>
+					<p class="font-ovo text-lg">Application submitted successfully!</p>
+					<p class="font-ovo mt-2 text-sm">We'll contact you soon to confirm your reservation.</p>
 				</div>
 			{:else}
-				<form on:submit|preventDefault={handleSubmit} class="space-y-4">
+				<form class="space-y-4">
 					{#if error}
 						<div class="rounded-lg bg-red-800/20 p-4">
 							<p class="font-ovo text-sm text-red-300">{error}</p>
@@ -83,49 +100,106 @@
 					{/if}
 
 					<div class="space-y-2">
-						<label for="name" class="font-jersey text-highlight block">Name</label>
+						<label for="name" class="font-jersey text-highlight block">Full Name *</label>
 						<input
 							type="text"
 							id="name"
 							bind:value={name}
 							class="bg-secondary/20 border-secondary/30 font-ovo w-full rounded-lg border p-2"
 							disabled={submitting}
+							required
 						/>
 					</div>
 
 					<div class="space-y-2">
-						<label for="email" class="font-jersey text-highlight block">Email</label>
+						<label for="email" class="font-jersey text-highlight block">Email Address *</label>
 						<input
 							type="email"
 							id="email"
 							bind:value={email}
 							class="bg-secondary/20 border-secondary/30 font-ovo w-full rounded-lg border p-2"
 							disabled={submitting}
+							required
 						/>
 					</div>
 
 					<div class="space-y-2">
-						<label for="message" class="font-jersey text-highlight block">Message</label>
-						<textarea
-							id="message"
-							bind:value={message}
-							rows="4"
+						<label for="phone" class="font-jersey text-highlight block">Phone Number *</label>
+						<input
+							type="tel"
+							id="phone"
+							bind:value={phone}
 							class="bg-secondary/20 border-secondary/30 font-ovo w-full rounded-lg border p-2"
 							disabled={submitting}
-						></textarea>
+							required
+						/>
+					</div>
+
+					<div class="space-y-2">
+						<label for="portfolio" class="font-jersey text-highlight block">Portfolio URL *</label>
+						<input
+							type="url"
+							id="portfolio"
+							bind:value={portfolio}
+							placeholder="https://your-portfolio.com"
+							class="bg-secondary/20 border-secondary/30 font-ovo w-full rounded-lg border p-2"
+							disabled={submitting}
+							required
+						/>
+					</div>
+
+					<div class="space-y-2">
+						<label class="font-jersey text-highlight block">Studio Type *</label>
+						<div class="grid gap-4 md:grid-cols-3">
+							<label class="flex cursor-pointer items-center gap-2">
+								<input
+									type="radio"
+									name="studio"
+									value="shared"
+									bind:group={studio}
+									class="accent-highlight"
+									disabled={submitting}
+								/>
+								<span class="font-ovo">Shared Studio</span>
+							</label>
+							<label class="flex cursor-pointer items-center gap-2">
+								<input
+									type="radio"
+									name="studio"
+									value="solo"
+									bind:group={studio}
+									class="accent-highlight"
+									disabled={submitting}
+								/>
+								<span class="font-ovo">Solo Studio</span>
+							</label>
+							<label class="flex cursor-pointer items-center gap-2">
+								<input
+									type="radio"
+									name="studio"
+									value="office"
+									bind:group={studio}
+									class="accent-highlight"
+									disabled={submitting}
+								/>
+								<span class="font-ovo">Office Space</span>
+							</label>
+						</div>
 					</div>
 
 					<button
 						type="submit"
 						class="midi bg-highlight text-primary font-jersey w-full px-4 py-2 text-xl"
 						disabled={submitting}
+						onclick={handleSubmit}
 					>
 						{#if submitting}
-							Sending...
+							Submitting...
 						{:else}
-							Send Message
+							Submit Application
 						{/if}
 					</button>
+					{#if submitting}Debug: submitting{/if}
 				</form>
 			{/if}
 		</div>
