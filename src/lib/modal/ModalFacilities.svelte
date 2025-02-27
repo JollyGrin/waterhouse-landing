@@ -61,7 +61,7 @@
 							>
 								Recording
 							</h4>
-							<ul class="font-jersey text-md space-y-2">
+							<ul class="font-jersey text-md">
 								<li class="flex items-center gap-2">Pro microphones</li>
 								<li class="flex items-center gap-2">Acoustic treatment</li>
 								<li class="flex items-center gap-2">Multiple rooms</li>
@@ -74,7 +74,7 @@
 							>
 								Production
 							</h4>
-							<ul class="font-jersey text-md space-y-2">
+							<ul class="font-jersey text-md">
 								<li class="flex items-center gap-2">Mixing consoles</li>
 								<li class="flex items-center gap-2">MIDI equipment</li>
 								<li class="flex items-center gap-2">Monitor speakers</li>
@@ -122,7 +122,7 @@
 							>
 								Stream Setup
 							</h4>
-							<ul class="font-jersey text-md space-y-2">
+							<ul class="font-jersey text-md">
 								<li class="flex items-center gap-2">4K cameras</li>
 								<li class="flex items-center gap-2">Pro lighting</li>
 								<li class="flex items-center gap-2">Green screen</li>
@@ -136,7 +136,7 @@
 							>
 								Audio/Visual
 							</h4>
-							<ul class="font-jersey text-md space-y-2">
+							<ul class="font-jersey text-md">
 								<li class="flex items-center gap-2">Audio interface</li>
 								<li class="flex items-center gap-2">Multiple mics</li>
 								<li class="flex items-center gap-2">Monitor setup</li>
