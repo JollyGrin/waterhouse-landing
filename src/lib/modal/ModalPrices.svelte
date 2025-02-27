@@ -63,7 +63,7 @@
 				])}
 
 				<!-- Office Space -->
-				{@render pane('Office Space', 'For industry professionals', '450', [
+				{@render pane('Atelier', 'For industry professionals', '450', [
 					'Dedicated desk',
 					'Meeting room access',
 					'Business amenities',

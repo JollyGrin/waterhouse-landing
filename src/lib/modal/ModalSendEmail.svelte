@@ -157,7 +157,7 @@
 						>
 							<option value="shared">Shared Studio</option>
 							<option value="solo">Solo Studio</option>
-							<option value="office">Office Space</option>
+							<option value="office">Atelier</option>
 						</select>
 					</div>
 
