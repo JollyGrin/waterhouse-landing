@@ -9,7 +9,7 @@
 		width: 6px;
 		vertical-align: bottom;
 		-webkit-appearance: none;
-		background-color: var(--color-highlight);
+		background-color: var(--color-secondary);
 	}
 	input[type='range']::-webkit-slider-runnable-track {
 		height: 10px;
@@ -22,8 +22,8 @@
 		-webkit-appearance: none;
 		height: 4px;
 		cursor: ns-resize;
-		background: var(--color-highlight);
-		box-shadow: 0px 0 0 5px var(--color-highlight);
+		background: var(--color-secondary);
+		box-shadow: 0px 0 0 5px var(--color-secondary);
 		border-radius: 1px;
 	}
 </style>

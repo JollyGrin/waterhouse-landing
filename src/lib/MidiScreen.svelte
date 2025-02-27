@@ -19,6 +19,9 @@
 			creative spaces in amsterdam
 		</span>
 	</div>
+	<div class="text-secondary absolute top-2 w-10">
+		<IconLogo />
+	</div>
 
 	<p class="text-secondary">Waterhouse Studios</p>
 </div>

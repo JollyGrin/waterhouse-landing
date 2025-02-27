@@ -23,7 +23,7 @@
 	.turntable {
 		position: relative;
 		width: 80%;
-		height: 80%;
+		height: 82%;
 		background: transparent;
 		border-radius: 10px;
 		padding: 2rem;
