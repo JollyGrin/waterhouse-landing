@@ -9,7 +9,7 @@
 		<div class="space-y-8">
 			<p class="font-jersey text-highlight text-2xl">A launchpad for your career</p>
 			<div class="text-md space-y-4 font-mono leading-relaxed">
-				<p class="font-ovo">
+				<p class="font-jersey">
 					At Waterhouse Studios, we're not just a space to create—we're a launchpad for your career.
 					Our mission is to help artists grow professionally, connect with opportunities, and thrive
 					in the industry.
@@ -19,7 +19,7 @@
 			<div class="grid gap-8 md:grid-cols-3">
 				<div class="space-y-4">
 					<h3 class="font-jersey text-2xl">Workshops</h3>
-					<p class="font-ovo text-sm leading-relaxed">
+					<p class="font-jersey text-lg leading-relaxed">
 						Learn the ins and outs of music production, online promotion, and content creation from
 						industry experts.
 					</p>
@@ -27,7 +27,7 @@
 
 				<div class="space-y-4">
 					<h3 class="font-jersey text-2xl">Mentorship</h3>
-					<p class="font-ovo text-sm leading-relaxed">
+					<p class="font-jersey text-lg leading-relaxed">
 						Get personalized guidance from seasoned professionals who understand the challenges and
 						opportunities of the music world.
 					</p>
@@ -35,7 +35,7 @@
 
 				<div class="space-y-4">
 					<h3 class="font-jersey text-2xl">Performance</h3>
-					<p class="font-ovo text-sm leading-relaxed">
+					<p class="font-jersey text-lg leading-relaxed">
 						Showcase your talents at our regular events and artist showcases, where you can perform
 						for live audiences and connect with industry insiders.
 					</p>

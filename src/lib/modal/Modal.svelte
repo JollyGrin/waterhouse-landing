@@ -47,12 +47,12 @@
 		out:fade={{ duration: 150 }}
 	>
 		<div
-			class="shadow-flat bg-primary text-secondary flex max-h-[90vh] w-full max-w-2xl flex-col gap-4 overflow-y-auto rounded-lg border-2 border-black p-6"
+			class="shadow-flat bg-primary text-secondary flex max-h-[95vh] w-full max-w-2xl flex-col gap-4 overflow-y-auto rounded-lg border-2 border-black p-6"
 			in:scale={{ duration: 200, start: 0.95 }}
 			out:scale={{ duration: 150, start: 1 }}
 		>
 			<div class="flex items-center justify-between">
-				<h2 class="font-ovo text-4xl font-bold">{title}</h2>
+				<h2 class="font-jersey text-8xl font-bold">{title}</h2>
 				{@render closeXButton()}
 			</div>
 
