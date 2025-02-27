@@ -36,7 +36,7 @@
 		</div>
 		<p class="text-secondary/50 text-xl">creative spaces in amsterdam</p>
 	</div>
-	<div class="bg-primary w-full max-w-[1000px] rounded-lg border-4 border-black p-4">
+	<div class="bg-secondary/5 w-full max-w-[1000px] rounded-lg border-4 border-black p-4">
 		<div class="text-secondary grid gap-2 text-xl md:grid-cols-[1fr_1.5fr_4fr] md:text-3xl">
 			<div class="flex flex-row-reverse justify-between gap-2 md:flex-col-reverse">
 				<button
@@ -45,10 +45,10 @@
 				>
 					join
 				</button>
-				<div class="midi grid flex-grow place-items-center">about</div>
+				<div class="midi bg-primary grid flex-grow place-items-center">about</div>
 
 				<div
-					class="shadow-flat translate-adjust hidden max-h-[300px] items-center justify-center rounded-lg border-2 border-black px-2 py-6 md:flex"
+					class="shadow-flat translate-adjust bg-primary hidden max-h-[300px] items-center justify-center rounded-lg border-2 border-black px-2 py-6 md:flex"
 				>
 					<MidiSlider />
 				</div>
@@ -59,19 +59,19 @@
 			</div>
 			<div class="flex gap-2 md:flex-col">
 				<button
-					class="midi grid h-full flex-grow place-items-center"
+					class="midi bg-primary grid h-full flex-grow place-items-center"
 					onclick={() => (isOpen = 'facilities')}
 				>
 					<p>facilities</p>
 				</button>
 				<button
-					class="midi grid h-full flex-grow place-items-center"
+					class="midi bg-primary grid h-full flex-grow place-items-center"
 					onclick={() => (isOpen = 'services')}
 				>
 					<p>services</p>
 				</button>
 				<button
-					class="midi grid h-full flex-grow place-items-center"
+					class="midi bg-primary grid h-full flex-grow place-items-center"
 					onclick={() => (isOpen = 'opportunities')}
 				>
 					<p>opportunities</p>

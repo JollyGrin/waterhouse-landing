@@ -1,4 +1,4 @@
-<div class="turntable-container bg-primary flex items-center justify-center p-4">
+<div class="turntable-container flex items-center justify-center p-4">
 	<div class="turntable">
 		<div class="record">
 			<div class="grooves"></div>
@@ -24,7 +24,7 @@
 		position: relative;
 		width: 100%;
 		height: 100%;
-		background: var(--color-primary);
+		background: transparent;
 		border-radius: 10px;
 		padding: 2rem;
 	}
