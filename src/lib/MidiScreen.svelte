@@ -32,10 +32,10 @@
 	<div class="absolute right-2 bottom-0">
 		<span class="text-xs tracking-wide select-none"> {formattedDate} </span>
 	</div>
-	<div class="text-highlight absolute top-3 hidden w-12 md:block">
+	<div class="text-highlight absolute top-4 hidden w-16 md:block">
 		<IconLogo />
 	</div>
-	<p>Waterhouse Studios</p>
+	<p class="mt-6">Waterhouse Studios</p>
 </div>
 
 <style>

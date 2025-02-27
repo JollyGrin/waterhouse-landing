@@ -1,4 +1,4 @@
-<div class="turntable-container flex items-center justify-center bg-black p-4">
+<div class="turntable-container bg-highlight flex items-center justify-center p-4">
 	<div class="turntable">
 		<div class="record">
 			<div class="grooves"></div>
@@ -23,7 +23,7 @@
 		position: relative;
 		width: 100%;
 		height: 100%;
-		background: #333;
+		background: var(--color-secondary);
 		border-radius: 10px;
 		padding: 2rem;
 	}
@@ -41,7 +41,13 @@
 	.grooves {
 		position: absolute;
 		inset: 0;
-		background: repeating-radial-gradient(circle at center, #111 0, #111 2px, #222 3px, #222 4px);
+		background: repeating-radial-gradient(
+			circle at center,
+			var(--color-highlight) 0,
+			var(--color-highlight) 2px,
+			var(--color-secondary) 3px,
+			var(--color-secondary) 4px
+		);
 	}
 
 	.label {
@@ -51,7 +57,7 @@
 		transform: translate(-50%, -50%);
 		width: 40%;
 		height: 40%;
-		background: #666;
+		background: black;
 		border-radius: 50%;
 		z-index: 1;
 		display: flex;
@@ -75,7 +81,7 @@
 		font-weight: bold;
 		text-transform: uppercase;
 		user-select: none;
-		color: #222;
+		color: var(--color-secondary);
 		white-space: nowrap;
 		letter-spacing: 0.1em;
 	}
@@ -95,7 +101,7 @@
 		right: 10%;
 		width: 40%;
 		height: 4px;
-		background: #666;
+		background: var(--color-highlight);
 		transform-origin: right center;
 		transform: rotate(-20deg);
 		z-index: 2;
@@ -109,7 +115,7 @@
 		transform: translateY(-50%);
 		width: 8px;
 		height: 8px;
-		background: #666;
+		background: var(--color-highlight);
 		border-radius: 50%;
 	}
 
