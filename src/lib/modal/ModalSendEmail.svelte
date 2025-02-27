@@ -149,42 +149,17 @@
 					</div>
 
 					<div class="space-y-2">
-						<label class="font-jersey text-highlight block">Studio Type *</label>
-						<div class="grid gap-4 md:grid-cols-3">
-							<label class="flex cursor-pointer items-center gap-2">
-								<input
-									type="radio"
-									name="studio"
-									value="shared"
-									bind:group={studio}
-									class="accent-highlight"
-									disabled={submitting}
-								/>
-								<span class="font-ovo">Shared Studio</span>
-							</label>
-							<label class="flex cursor-pointer items-center gap-2">
-								<input
-									type="radio"
-									name="studio"
-									value="solo"
-									bind:group={studio}
-									class="accent-highlight"
-									disabled={submitting}
-								/>
-								<span class="font-ovo">Solo Studio</span>
-							</label>
-							<label class="flex cursor-pointer items-center gap-2">
-								<input
-									type="radio"
-									name="studio"
-									value="office"
-									bind:group={studio}
-									class="accent-highlight"
-									disabled={submitting}
-								/>
-								<span class="font-ovo">Office Space</span>
-							</label>
-						</div>
+						<label class="font-ovo block text-sm" for="studio">Studio Type</label>
+						<select
+							id="studio"
+							bind:value={studio}
+							class="bg-primary font-ovo w-full rounded-lg p-2 text-sm"
+							disabled={submitting}
+						>
+							<option value="shared">Shared Studio</option>
+							<option value="solo">Solo Studio</option>
+							<option value="office">Office Space</option>
+						</select>
 					</div>
 
 					<button
@@ -199,7 +174,6 @@
 							Submit Application
 						{/if}
 					</button>
-					{#if submitting}Debug: submitting{/if}
 				</form>
 			{/if}
 		</div>
