@@ -14,10 +14,8 @@
 	let success = $state(false);
 	let error = $state('');
 
-	// Supabase URL and auth token
-	const SUPABASE_URL = 'https://vyjgzmwpqtuoucjgmxyf.supabase.co/functions/v1/signup-waterhouse';
-	const SUPABASE_AUTH_TOKEN =
-		'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ5amd6bXdwcXR1b3VjamdteHlmIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTczOTIwMjU3OSwiZXhwIjoyMDU0Nzc4NTc5fQ.jcpzjIzAdq_-fW3jfkCevs2YCbs65EBlzO9qQV9gN-E';
+	// Supabase Edge Function URL
+	const EDGE_FUNCTION_URL = 'https://vyjgzmwpqtuoucjgmxyf.supabase.co/functions/v1/signup-waterhouse';
 
 	async function handleSubmit(event: Event) {
 		event.preventDefault();
@@ -31,11 +29,10 @@
 		error = '';
 
 		try {
-			const response = await fetch(SUPABASE_URL, {
+			const response = await fetch(EDGE_FUNCTION_URL, {
 				method: 'POST',
 				headers: {
-					'Content-Type': 'application/json',
-					Authorization: `Bearer ${SUPABASE_AUTH_TOKEN}`
+					'Content-Type': 'application/json'
 				},
 				body: JSON.stringify({
 					name,
