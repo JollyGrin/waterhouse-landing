@@ -57,14 +57,13 @@
 				<!-- Solo Studio -->
 				{@render pane('Solo Studio', 'Your private creative space', '900', [
 					'24/7 private access',
-					'Premium equipment',
 					'Storage space',
+					'Premium equipment',
 					'Stream room access'
 				])}
 
 				<!-- Office Space -->
-				{@render pane('Atelier', 'For industry professionals', '450', [
-					'Dedicated desk',
+				{@render pane('Atelier', 'For artist & industry professionals', '450', [
 					'Meeting room access',
 					'Business amenities',
 					'Stream room access'
