@@ -18,7 +18,9 @@
 {/snippet}
 
 {#snippet pane(title: string, desc: string, price: string, features: string[])}
-	<div class="bg-secondary/20 flex flex-col justify-between rounded-lg p-6">
+	<div
+		class="bg-secondary/20 hover:bg-secondary/10 flex flex-col justify-between rounded-lg p-6 transition-all"
+	>
 		<div class="flex flex-col gap-4">
 			<div class="">
 				<h3 class="font-ovo text-2xl">{title}</h3>

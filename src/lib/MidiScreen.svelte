@@ -35,7 +35,7 @@
 	<div class="text-highlight absolute top-4 hidden w-16 md:block">
 		<IconLogo />
 	</div>
-	<p class="mt-6">Waterhouse Studios</p>
+	<p class="md:mt-6">Waterhouse Studios</p>
 </div>
 
 <style>
