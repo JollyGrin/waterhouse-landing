@@ -26,7 +26,7 @@
 
 	<div class="absolute bottom-0 left-2 hidden md:flex">
 		<span class="animate-pulse text-xs tracking-wide select-none">
-			rent a creative space in amsterdam
+			creative spaces in amsterdam
 		</span>
 	</div>
 	<div class="absolute right-2 bottom-0">

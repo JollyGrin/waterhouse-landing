@@ -3,6 +3,7 @@
 		<div class="record">
 			<div class="grooves"></div>
 			<div class="label">
+				<div class="center-dot"></div>
 				<div class="record-text font-jersey">
 					{#each Array(12) as _, i}
 						<span style="transform: rotate({i * 30}deg) translateY(-310%)">WATERHOUSE</span>
@@ -63,6 +64,18 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
+	}
+
+	.center-dot {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		width: 12px;
+		height: 12px;
+		background: #000;
+		border-radius: 50%;
+		z-index: 2;
 	}
 
 	.record-text {
