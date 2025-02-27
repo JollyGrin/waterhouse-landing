@@ -15,11 +15,11 @@
 	let error = $state('');
 
 	// Supabase Edge Function URL
-	const EDGE_FUNCTION_URL = 'https://vyjgzmwpqtuoucjgmxyf.supabase.co/functions/v1/signup-waterhouse';
+	const EDGE_FUNCTION_URL =
+		'https://vyjgzmwpqtuoucjgmxyf.supabase.co/functions/v1/signup-waterhouse';
 
 	async function handleSubmit(event: Event) {
 		event.preventDefault();
-		console.log('hi');
 		if (!name || !email || !phone || !portfolio) {
 			error = 'Please fill out all required fields';
 			return;
