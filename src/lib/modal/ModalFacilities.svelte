@@ -10,8 +10,8 @@
 
 {#if isOpen}
 	<Modal {isOpen} {onClose} title="State-of-the-Art Facilities">
-		<div class="space-y-6">
-			<p class="font-jersey bg-secondary text-primary inline-block w-full p-2 text-2xl">
+		<div class="">
+			<p class="font-jersey bg-secondary text-primary mb-8 inline-block w-full p-2 text-2xl">
 				Designed for optimal acoustics and workflow
 			</p>
 

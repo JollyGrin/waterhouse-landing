@@ -6,11 +6,11 @@
 
 {#if isOpen}
 	<Modal {isOpen} {onClose} title="Artists Development Programs">
-		<div class="space-y-8">
+		<div class="">
 			<p class="font-jersey text-highlight bg-secondary text-primary p-2 text-2xl">
 				A launchpad for your career
 			</p>
-			<div class="space-y-4 font-mono text-xl leading-relaxed">
+			<div class="my-8 font-mono text-xl leading-relaxed">
 				<p class="font-jersey">
 					At Waterhouse Studios, we're not just a space to create—we're a launchpad for your career.
 					Our mission is to help artists grow professionally, connect with opportunities, and thrive

@@ -10,8 +10,8 @@
 
 {#snippet priceText(price: string)}
 	<div class="flex flex-col items-start justify-center">
-		<span class="font-ovo text-4xl font-bold">€{price}</span>
-		<span class="text-secondary/30 font-ovo ml-1 text-xs"
+		<span class="font-jersey text-6xl">€{price}</span>
+		<span class="text-secondary/30 font-jersey ml-1 text-xs"
 			>per month <br />(not including utilities)</span
 		>
 	</div>
@@ -19,27 +19,24 @@
 
 {#snippet pane(title: string, desc: string, price: string, features: string[])}
 	<div
-		class="bg-secondary/20 hover:bg-secondary/10 flex flex-col justify-between rounded-lg p-6 transition-all"
+		class="bg-secondary/10 hover:bg-secondary/5 border-secondary flex flex-col justify-between rounded-lg border-4 p-6 transition-all"
 	>
 		<div class="flex flex-col gap-4">
 			<div class="">
-				<h3 class="font-ovo text-2xl">{title}</h3>
-				<p class="text-highlight font-ovo">{desc}</p>
+				<h3 class="font-jersey text-2xl">{title}</h3>
+				<p class="text-highlight font-jersey">{desc}</p>
 			</div>
 
 			{@render priceText(price)}
 
-			<ul class="text-md font-ovo space-y-2">
+			<ul class="text-md font-jersey space-y-2">
 				{#each features as feature}
 					<li class=" flex items-center gap-2">{feature}</li>
 				{/each}
 			</ul>
 		</div>
 
-		<button
-			class="font-ovo text-md border-secondary hover:bg-secondary/30 hover:text-highlight mt-8 w-full rounded border px-4 py-2 transition-colors"
-			onclick={onOpenContact}
-		>
+		<button class="midi bg-highlight font-jersey text-primary mt-4 text-xl" onclick={onOpenContact}>
 			Select Plan
 		</button>
 	</div>
@@ -47,9 +44,6 @@
 
 {#if isOpen}
 	<Modal {isOpen} {onClose} title="Choose your plan">
-		<p class="font-jersey text-highlight text-2xl">
-			Simple subscriptions so you can focus on creativity.
-		</p>
 		<div class="space-y-8">
 			<div class="grid gap-2 md:grid-cols-3">
 				<!-- Shared Studio -->

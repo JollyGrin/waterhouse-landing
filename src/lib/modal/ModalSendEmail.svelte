@@ -79,78 +79,80 @@
 {#if isOpen}
 	<Modal {isOpen} {onClose} title="Sign Up for Studio Space">
 		<div class="space-y-6">
-			<p class="font-jersey text-highlight text-lg">
+			<p class="font-jersey text-highlight bg-secondary text-primary p-2 text-lg text-xl">
 				Complete this form to reserve your studio space
 			</p>
 
 			{#if success}
 				<div class="rounded-lg bg-green-800/20 p-4 text-center">
-					<p class="font-ovo text-lg">Application submitted successfully!</p>
-					<p class="font-ovo mt-2 text-sm">We'll contact you soon to confirm your reservation.</p>
+					<p class="font-jersey text-lg">Application submitted successfully!</p>
+					<p class="font-jersey mt-2 text-sm">
+						We'll contact you soon to confirm your reservation.
+					</p>
 				</div>
 			{:else}
 				<form class="space-y-4">
 					{#if error}
 						<div class="rounded-lg bg-red-800/20 p-4">
-							<p class="font-ovo text-sm text-red-300">{error}</p>
+							<p class="font-jersey text-sm text-red-300">{error}</p>
 						</div>
 					{/if}
 
-					<div class="space-y-2">
+					<div class="">
 						<label for="name" class="font-jersey text-highlight block">Full Name *</label>
 						<input
 							type="text"
 							id="name"
 							bind:value={name}
-							class="bg-secondary/20 border-secondary/30 font-ovo w-full rounded-lg border p-2"
+							class="bg-secondary/20 border-secondary/30 font-jersey w-full rounded-lg border p-2"
 							disabled={submitting}
 							required
 						/>
 					</div>
 
-					<div class="space-y-2">
+					<div class=" ">
 						<label for="email" class="font-jersey text-highlight block">Email Address *</label>
 						<input
 							type="email"
 							id="email"
 							bind:value={email}
-							class="bg-secondary/20 border-secondary/30 font-ovo w-full rounded-lg border p-2"
+							class="bg-secondary/20 border-secondary/30 font-jersey w-full rounded-lg border p-2"
 							disabled={submitting}
 							required
 						/>
 					</div>
 
-					<div class="space-y-2">
+					<div class="">
 						<label for="phone" class="font-jersey text-highlight block">Phone Number *</label>
 						<input
 							type="tel"
 							id="phone"
 							bind:value={phone}
-							class="bg-secondary/20 border-secondary/30 font-ovo w-full rounded-lg border p-2"
+							class="bg-secondary/20 border-secondary/30 font-jersey w-full rounded-lg border p-2"
 							disabled={submitting}
 							required
 						/>
 					</div>
 
-					<div class="space-y-2">
+					<div class="">
 						<label for="portfolio" class="font-jersey text-highlight block">Portfolio URL *</label>
 						<input
 							type="url"
 							id="portfolio"
 							bind:value={portfolio}
 							placeholder="https://your-portfolio.com"
-							class="bg-secondary/20 border-secondary/30 font-ovo w-full rounded-lg border p-2"
+							class="bg-secondary/20 border-secondary/30 font-jersey w-full rounded-lg border p-2"
 							disabled={submitting}
 							required
 						/>
 					</div>
 
-					<div class="space-y-2">
-						<label class="font-ovo block text-sm" for="studio">Studio Type</label>
+					<div class="">
+						<label class="font-jersey block text-sm" for="studio">Studio Type</label>
 						<select
 							id="studio"
 							bind:value={studio}
-							class="bg-primary font-ovo w-full rounded-lg p-2 text-sm"
+							class="bg-primary font-jersey w-full rounded-lg p-2 text-sm"
 							disabled={submitting}
 						>
 							<option value="shared">Shared Studio</option>
@@ -184,7 +186,7 @@
 
 	input,
 	textarea {
-		color: white;
+		color: var(--color-secondary);
 		outline: none;
 	}
 
