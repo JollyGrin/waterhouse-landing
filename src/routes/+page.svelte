@@ -28,19 +28,19 @@
 <ModalServices isOpen={isOpen === 'services'} {onClose} />
 
 <div
-	class="font-jersey bg-back/10 grid w-screen gap-4 overflow-hidden px-4 pt-4 md:min-h-screen md:place-items-center md:gap-0 md:px-6 md:pt-0"
+	class="font-jersey bg-primary grid w-screen gap-4 overflow-hidden px-4 pt-4 md:min-h-screen md:place-items-center md:gap-0 md:px-6 md:pt-0"
 >
 	<div class="grid h-full min-h-30 place-items-center md:hidden">
 		<div class="text-secondary w-20">
 			<IconLogo />
 		</div>
-		<p class="text-secondary/50 text-xl">rent a musical studio in amsterdam</p>
+		<p class="text-secondary/50 text-xl">rent a creative space in amsterdam</p>
 	</div>
 	<div class="bg-primary w-full max-w-[1000px] rounded-lg border-3 border-black p-4">
 		<div class="text-secondary grid gap-2 text-xl md:grid-cols-[1fr_1fr_4fr]">
 			<div class="flex flex-row-reverse justify-between gap-2 md:flex-col-reverse">
 				<button
-					class="midi bg-highlight/20 text-secondary hover:bg-highlight grid flex-grow place-items-center transition-all active:bg-teal-300 active:text-teal-700"
+					class="midi bg-highlight/20 text-secondary hover:bg-highlight active:bg-highlight active:text-secondary grid flex-grow place-items-center transition-all"
 					onclick={() => (isOpen = 'prices')}
 				>
 					join
@@ -53,7 +53,7 @@
 					<MidiSlider />
 				</div>
 
-				<div class="hidden text-teal-950 md:flex">
+				<div class="text-secondary hidden md:flex">
 					<SpeakerGrate />
 				</div>
 			</div>

@@ -7,9 +7,9 @@ body {
 
 @theme {
 	--color-primary: #faf6f6; /* RGB format */
-	--color-secondary: #2f1847;
+	--color-secondary: #a9a9a9;
 	--color-back: #19647e;
-	--color-highlight: #28afb0;
+	--color-highlight: #696969;
 
 	--shadow-flat: 3px 3px 0px black;
 	--shadow-hover: 0px 0px 0px black;
