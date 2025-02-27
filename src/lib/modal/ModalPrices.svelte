@@ -11,7 +11,35 @@
 {#snippet priceText(price: string)}
 	<div class="flex flex-col items-start justify-center">
 		<span class="font-ovo text-4xl font-bold">€{price}</span>
-		<span class="text-secondary/30 font-ovo ml-1 text-xs">per month</span>
+		<span class="text-secondary/30 font-ovo ml-1 text-xs"
+			>per month <br />(not including utilities)</span
+		>
+	</div>
+{/snippet}
+
+{#snippet pane(title: string, desc: string, price: string, features: string[])}
+	<div class="bg-secondary/20 flex flex-col justify-between rounded-lg p-6">
+		<div class="flex flex-col gap-4">
+			<div class="">
+				<h3 class="font-ovo text-2xl">{title}</h3>
+				<p class="text-highlight font-ovo">{desc}</p>
+			</div>
+
+			{@render priceText(price)}
+
+			<ul class="text-md font-ovo space-y-2">
+				{#each features as feature}
+					<li class=" flex items-center gap-2">{feature}</li>
+				{/each}
+			</ul>
+		</div>
+
+		<button
+			class="font-ovo text-md border-secondary hover:bg-secondary/30 hover:text-highlight mt-8 w-full rounded border px-4 py-2 transition-colors"
+			onclick={onOpenContact}
+		>
+			Select Plan
+		</button>
 	</div>
 {/snippet}
 
@@ -23,76 +51,28 @@
 		<div class="space-y-8">
 			<div class="grid gap-2 md:grid-cols-3">
 				<!-- Shared Studio -->
-				<div class="bg-secondary/20 space-y-6 rounded-lg p-6">
-					<div class="space-y-2">
-						<h3 class="font-ovo text-2xl">Shared Studio</h3>
-						<p class="text-highlight font-ovo">Perfect for emerging artists</p>
-					</div>
-
-					{@render priceText('275')}
-
-					<ul class="space-y-4 font-mono text-sm">
-						<li class="flex items-center gap-2">80 hours per month</li>
-						<li class="flex items-center gap-2">Shared workspace</li>
-						<li class="flex items-center gap-2">Basic equipment included</li>
-						<li class="flex items-center gap-2">Stream room access</li>
-					</ul>
-
-					<button
-						class="w-full rounded border border-teal-700 px-4 py-2 font-mono text-sm transition-colors hover:bg-teal-900/30"
-						onclick={onOpenContact}
-					>
-						Select Plan
-					</button>
-				</div>
+				{@render pane('Shared Studio', 'Perfect for emerging artists', '250', [
+					'80 hours per month',
+					'Shared workspace',
+					'Basic equipment',
+					'Stream room access'
+				])}
 
 				<!-- Solo Studio -->
-				<div class="bg-highlight/20 space-y-6 rounded-lg p-6">
-					<div class="space-y-2">
-						<h3 class="font-ovo text-2xl">Solo Studio</h3>
-						<p class="text-highlight font-ovo">Your private creative space</p>
-					</div>
-
-					{@render priceText('1,100')}
-
-					<ul class="space-y-4 font-mono text-sm">
-						<li class="flex items-center gap-2">24/7 private access</li>
-						<li class="flex items-center gap-2">Premium equipment</li>
-						<li class="flex items-center gap-2">Storage space</li>
-						<li class="flex items-center gap-2">Stream room access</li>
-					</ul>
-
-					<button
-						class="w-full rounded border border-teal-700 px-4 py-2 font-mono text-sm transition-colors hover:bg-teal-900/30"
-						onclick={onOpenContact}
-					>
-						Select Plan
-					</button>
-				</div>
+				{@render pane('Solo Studio', 'Your private creative space', '900', [
+					'24/7 private access',
+					'Premium equipment',
+					'Storage space',
+					'Stream room access'
+				])}
 
 				<!-- Office Space -->
-				<div class="bg-secondary/20 space-y-6 rounded-lg p-6">
-					<div class="space-y-2">
-						<h3 class="font-ovo text-2xl">Office Space</h3>
-						<p class="text-highlight font-ovo">For industry professionals</p>
-					</div>
-
-					{@render priceText('500')}
-
-					<ul class="space-y-4 font-mono text-sm">
-						<li class="flex items-center gap-2">Dedicated desk</li>
-						<li class="flex items-center gap-2">Meeting room access</li>
-						<li class="flex items-center gap-2">Business amenities</li>
-						<li class="flex items-center gap-2">Stream room access</li>
-					</ul>
-
-					<button
-						class="w-full rounded border border-teal-700 px-4 py-2 font-mono text-sm transition-colors hover:bg-teal-900/30"
-						onclick={onOpenContact}
-					>
-						Select Plan
-					</button>
-				</div>
+				{@render pane('Office Space', 'For industry professionals', '450', [
+					'Dedicated desk',
+					'Meeting room access',
+					'Business amenities',
+					'Stream room access'
+				])}
 			</div>
 		</div>
 	</Modal>
