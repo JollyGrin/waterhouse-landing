@@ -7,13 +7,13 @@ body {
 
 @theme {
 	--color-primary: #faf6f6; /* RGB format */
-	--color-secondary: #696969;
+	--color-secondary: black;
 	--color-back: #19647e;
-	--color-highlight: #a9a9a9;
+	--color-highlight: #696969;
 
-	--shadow-flat: 3px 3px 0px black;
+	--shadow-flat: 4px 4px 0px black;
 	--shadow-hover: 0px 0px 0px black;
-	--translate-adjust: -3px;
+	--translate-adjust: -4px;
 	--translate-reset: 0px;
 	--font-jersey: 'Jersey 15', cursive;
 	--font-ovo: 'Ovo', cursive;

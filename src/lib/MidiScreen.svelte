@@ -15,7 +15,7 @@
 </script>
 
 <div
-	class="font-jersey border-secondary text-highlight bg-primary relative grid min-h-34 place-items-center rounded border-2 p-2 text-4xl"
+	class="font-jersey border-secondary text-highlight bg-primary relative grid min-h-34 place-items-center rounded border-4 p-2 text-4xl"
 >
 	<div class="absolute top-2 left-2 w-6 animate-pulse">
 		<IconBattery />
@@ -32,10 +32,10 @@
 	<div class="absolute right-2 bottom-0">
 		<span class="text-xs tracking-wide select-none"> {formattedDate} </span>
 	</div>
-	<div class="text-highlight absolute top-4 hidden w-16 md:block">
+	<div class="text-secondary absolute top-4 hidden w-16 md:block">
 		<IconLogo />
 	</div>
-	<p class="md:mt-6">Waterhouse Studios</p>
+	<p class="text-secondary md:mt-6">Waterhouse Studios</p>
 </div>
 
 <style>

@@ -13,7 +13,7 @@
 			<p class="font-jersey text-highlight text-2xl">Designed for optimal acoustics and workflow</p>
 
 			<div class="grid gap-8 md:grid-cols-2">
-				<div class=" bg-secondary/10 space-y-6 rounded-lg p-6">
+				<div class="  space-y-6 rounded-lg p-6">
 					<div class="space-y-4">
 						<h3 class="font-jersey text-2xl">Music Studios</h3>
 						<p class="font-ovo leading-relaxed">
@@ -42,7 +42,7 @@
 					</div>
 				</div>
 
-				<div class="bg-secondary/10 space-y-6 rounded-lg p-6">
+				<div class="0 space-y-6 p-6">
 					<div class="space-y-4">
 						<h3 class="font-jersey text-2xl">Stream Room</h3>
 						<p class="font-ovo leading-relaxed">
