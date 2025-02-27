@@ -37,7 +37,7 @@
 		<p class="text-secondary/50 text-xl">rent a creative space in amsterdam</p>
 	</div>
 	<div class="bg-primary w-full max-w-[1000px] rounded-lg border-4 border-black p-4">
-		<div class="text-secondary grid gap-2 text-xl md:grid-cols-[1fr_1fr_4fr]">
+		<div class="text-secondary grid gap-2 text-3xl md:grid-cols-[1fr_1.5fr_4fr]">
 			<div class="flex flex-row-reverse justify-between gap-2 md:flex-col-reverse">
 				<button
 					class="midi bg-highlight/20 text-secondary hover:bg-highlight active:bg-highlight active:text-secondary grid flex-grow place-items-center transition-all"

@@ -57,7 +57,7 @@
 		transform: translate(-50%, -50%);
 		width: 40%;
 		height: 40%;
-		background: black;
+		background: var(--color-primary);
 		border-radius: 50%;
 		z-index: 1;
 		display: flex;
