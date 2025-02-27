@@ -6,7 +6,7 @@
 {#if isOpen}
 	<Modal {isOpen} {onClose} title="Helping You Get Work">
 		<div class="">
-			<p class="font-jersey text-highlight bg-secondary text-primary w-fit p-2 text-2xl">
+			<p class="font-jersey text-highlight bg-secondary text-primary p-2 text-2xl">
 				Breaking into the industry
 			</p>
 
