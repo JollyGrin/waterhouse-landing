@@ -1,4 +1,8 @@
-<svg viewBox="0 0 756 508" fill="none" xmlns="http://www.w3.org/2000/svg">
+<script lang="ts">
+	let { w = 200 }: { w?: number } = $props();
+</script>
+
+<svg width={w} viewBox="0 0 756 508" fill="none" xmlns="http://www.w3.org/2000/svg">
 	<path
 		fill-rule="evenodd"
 		clip-rule="evenodd"
