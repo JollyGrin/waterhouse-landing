@@ -5,7 +5,7 @@
 </script>
 
 <div
-	class="font-jersey border-secondary text-highlight bg-primary relative grid min-h-[120px] place-items-center rounded border-4 p-2 text-4xl md:text-6xl"
+	class="font-jersey border-secondary text-highlight bg-primary relative grid min-h-[220px] place-items-center rounded border-4 p-2 text-4xl md:text-6xl"
 >
 	<div class="absolute top-2 left-2 w-6 animate-pulse">
 		<IconBattery />
@@ -15,15 +15,19 @@
 	</div>
 
 	<div class="absolute bottom-0 left-2 hidden md:flex">
-		<span class="animate-pulse text-xs tracking-wide select-none">
-			creative spaces in amsterdam
-		</span>
+		<!-- <span class="animate-pulse text-xs tracking-wide select-none"> -->
+		<!-- 	creative spaces in amsterdam -->
+		<!-- </span> -->
 	</div>
-	<div class="text-secondary absolute top-2 w-10">
-		<IconLogo />
+	<div class="text-secondary absolute top-2 md:hidden">
+		<IconLogo w={100} />
 	</div>
 
-	<p class="text-secondary">Waterhouse Studios</p>
+	<div class="hidden flex-col items-center md:flex">
+		<p class="text-8xl">RENT</p>
+		<p class="text-secondary md:text-md text-[2rem]">a creative space in Amsterdam</p>
+	</div>
+	<p class="text-secondary md:text-md text-[2rem] md:hidden">Waterhouse Studios</p>
 </div>
 
 <style>

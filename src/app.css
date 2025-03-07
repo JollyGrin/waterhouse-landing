@@ -11,9 +11,9 @@ body {
 	--color-back: #19647e;
 	--color-highlight: #696969;
 
-	--shadow-flat: 4px 4px 0px black;
+	--shadow-flat: 8px 8px 0px black;
 	--shadow-hover: 0px 0px 0px black;
-	--translate-adjust: -4px;
+	--translate-adjust: -8px;
 	--translate-reset: 0px;
 	--font-jersey: 'Jersey 15', cursive;
 	--font-ovo: 'Ovo', cursive;
