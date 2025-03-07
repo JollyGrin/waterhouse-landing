@@ -23,7 +23,7 @@
 		<IconLogo />
 	</div>
 
-	<p class="text-secondary">Waterhouse Studios</p>
+	<p class="text-secondary md:text-md text-[2rem]">Waterhouse Studios</p>
 </div>
 
 <style>
