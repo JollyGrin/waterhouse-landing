@@ -65,11 +65,7 @@
 			<div class="grooves"></div>
 			<div class="label">
 				<div class="center-dot"></div>
-				<div class="record-text font-jersey">
-					{#each Array(12) as _, i}
-						<span style="transform: rotate({i * 30}deg) translateY(-310%)">WATERHOUSE</span>
-					{/each}
-				</div>
+				<div class="big-w font-jersey">W</div>
 			</div>
 		</div>
 		<div class="tonearm"></div>
@@ -163,33 +159,25 @@
 		z-index: 2;
 	}
 
-	.record-text {
+	.big-w {
 		position: absolute;
-		width: 100%;
-		height: 100%;
-		animation: text-spin 20s linear infinite reverse;
-	}
-
-	.record-text span {
-		position: absolute;
-		left: 50%;
 		top: 50%;
-		transform-origin: 0 0;
-		font-size: 0.8rem;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		font-size: 5rem;
 		font-weight: bold;
 		text-transform: uppercase;
 		user-select: none;
 		color: var(--color-secondary);
-		white-space: nowrap;
-		letter-spacing: 0.1em;
+		animation: text-spin 8s linear infinite reverse;
 	}
-
+	
 	@keyframes text-spin {
 		from {
-			transform: rotate(0deg);
+			transform: translate(-50%, -50%) rotate(0deg);
 		}
 		to {
-			transform: rotate(360deg);
+			transform: translate(-50%, -50%) rotate(360deg);
 		}
 	}
 
