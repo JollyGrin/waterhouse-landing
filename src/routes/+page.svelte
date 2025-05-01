@@ -11,7 +11,7 @@
 	import ModalServices from '$lib/modal/ModalServices.svelte';
 	import ModalStream from '$lib/modal/ModalStream.svelte';
 	import ShaderCanvas from '$lib/shader/ShaderCanvas.svelte';
-	import { shaderConfigOrganicRainbow } from '$lib/shader/shaders';
+	import { shaderConfigOrganicRainbow, shaderConfigRainbow } from '$lib/shader/shaders';
 	import ShineBorder from '$lib/ShineBorder.svelte';
 	import SpeakerGrate from '$lib/SpeakerGrate.svelte';
 	import Turntable from '$lib/Turntable.svelte';
@@ -45,12 +45,12 @@
 <ModalPrices isOpen={isOpen === 'prices'} {onClose} {onOpenContact} />
 <ModalServices isOpen={isOpen === 'services'} {onClose} />
 
-<div class="font-jersey bg-primary relative min-h-screen overflow-hidden md:p-8">
+<div class="font-jersey bg-primary relative min-h-screen overflow-hidden sm:p-8">
 	<div class="mx-auto max-w-[1000px] space-y-8">
 		<!-- Title Section -->
 		<div class="text-secondary hidden flex-col items-center text-center md:flex">
 			<div class="h-[100px] w-[150px]">
-				<MaskedLogoShader width="100%" height="100%" shader={shaderConfigOrganicRainbow} outline />
+				<MaskedLogoShader width="100%" height="100%" shader={shaderConfigRainbow} outline />
 			</div>
 			<p class="text-6xl">Waterhouse Studios</p>
 		</div>
