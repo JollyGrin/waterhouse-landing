@@ -2,6 +2,8 @@
 	import IconBattery from './icon/IconBattery.svelte';
 	import IconLogo from './icon/IconLogo.svelte';
 	import IconNetwork from './icon/IconNetwork.svelte';
+	import MaskedLogoShader from './MaskedLogoShader.svelte';
+	import { shaderConfigOrganicRainbow } from './shader/shaders';
 </script>
 
 <div
@@ -20,14 +22,16 @@
 		<!-- </span> -->
 	</div>
 	<div class="text-secondary absolute top-2 md:hidden">
-		<IconLogo w={100} />
+		<MaskedLogoShader width="10rem" height="7rem" shader={shaderConfigOrganicRainbow} outline />
 	</div>
 
 	<div class="hidden flex-col items-center md:flex">
 		<p class="text-8xl">RENT</p>
 		<p class="text-secondary md:text-md text-[2rem]">a creative space in Amsterdam</p>
 	</div>
-	<p class="text-secondary md:text-md text-[2rem] md:hidden">Waterhouse Studios</p>
+	<p class="text-secondary md:text-md translate-y-[2rem] text-[2rem] md:hidden">
+		Waterhouse Studios
+	</p>
 </div>
 
 <style>

@@ -45,7 +45,7 @@
 <ModalPrices isOpen={isOpen === 'prices'} {onClose} {onOpenContact} />
 <ModalServices isOpen={isOpen === 'services'} {onClose} />
 
-<div class="font-jersey bg-primary relative min-h-screen overflow-hidden p-8">
+<div class="font-jersey bg-primary relative min-h-screen overflow-hidden md:p-8">
 	<div class="mx-auto max-w-[1000px] space-y-8">
 		<!-- Title Section -->
 		<div class="text-secondary hidden flex-col items-center text-center md:flex">
@@ -56,7 +56,7 @@
 		</div>
 
 		<!-- Main Content -->
-		<div class=" relative rounded border-4 border-black p-5">
+		<div class="relative rounded border-black p-5 md:border-4">
 			<ShineBorder borderWidth={12} shineColor={['#A07CFE', '#FE8FB5', '#FFBE7B']} />
 			<div class="pb-6">
 				<MidiScreen />
@@ -121,11 +121,13 @@
 				<!-- </div> -->
 			</div>
 
-			<Turntable
-				videoSrc="https://samplelib.com/lib/preview/mp4/sample-5s.mp4"
-				width="900px"
-				height="900px"
-			/>
+			<div class="hidden md:block">
+				<Turntable
+					videoSrc="https://samplelib.com/lib/preview/mp4/sample-5s.mp4"
+					width="900px"
+					height="900px"
+				/>
+			</div>
 		</div>
 	</div>
 </div>
