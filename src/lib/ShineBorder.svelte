@@ -4,6 +4,7 @@
 	export let shineColor = ['#000000'];
 	export let className = '';
 	export let style = '';
+	export let fullScreen = false;
 
 	$: backgroundImage = `radial-gradient(transparent, transparent, ${Array.isArray(shineColor) ? shineColor.join(',') : shineColor}, transparent, transparent)`;
 </script>
@@ -15,7 +16,7 @@
     background-image: ${backgroundImage};
     ${style}
   `}
-	class={`shine-border pointer-events-none absolute inset-0 size-full rounded-[inherit] will-change-[background-position] ${className}`}
+	class={`shine-border pointer-events-none absolute inset-0 size-full rounded-[inherit] will-change-[background-position] ${fullScreen ? 'sm:-left-5 sm:-right-5 sm:-top-5 sm:-bottom-5 md:left-0 md:right-0 md:top-0 md:bottom-0' : ''} ${className}`}
 ></div>
 
 <style>
