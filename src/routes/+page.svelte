@@ -50,13 +50,13 @@
 		<!-- Title Section -->
 		<div class="text-secondary hidden flex-col items-center text-center md:flex">
 			<div class="h-[100px] w-[150px]">
-				<MaskedLogoShader width="100%" height="100%" shader={shaderConfigOrganicRainbow} />
+				<MaskedLogoShader width="100%" height="100%" shader={shaderConfigOrganicRainbow} outline />
 			</div>
 			<p class="text-6xl">Waterhouse Studios</p>
 		</div>
 
 		<!-- Main Content -->
-		<div class="bg-secondary/5 relative rounded-[3rem] border-4 border-black p-5">
+		<div class=" relative rounded border-4 border-black p-5">
 			<ShineBorder borderWidth={12} shineColor={['#A07CFE', '#FE8FB5', '#FFBE7B']} />
 			<div class="pb-6">
 				<MidiScreen />

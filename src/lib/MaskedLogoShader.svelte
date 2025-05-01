@@ -4,7 +4,14 @@
   import { shaderConfigWarpGrid } from '$lib/shader/shaders/shader-warpgrid';
   import { onMount } from 'svelte';
   
-  let { width = '100%', height = '100%', shader = shaderConfigWarpGrid } = $props();
+  let { 
+    width = '100%', 
+    height = '100%', 
+    shader = shaderConfigWarpGrid, 
+    outline = false, 
+    outlineColor = 'black', 
+    outlineWidth = '2px' 
+  } = $props();
   let logoSvgUrl = $state('');
   let logoContainerRef: HTMLDivElement;
 
@@ -28,7 +35,12 @@
   </div>
   
   <!-- Shader canvas with mask applied -->
-  <div class="shader-container" style={logoSvgUrl ? `-webkit-mask-image: url('${logoSvgUrl}'); mask-image: url('${logoSvgUrl}')` : ''}>
+  <div 
+    class="shader-container" 
+    class:with-outline={outline}
+    style={logoSvgUrl ? `-webkit-mask-image: url('${logoSvgUrl}'); mask-image: url('${logoSvgUrl}')` : ''}
+    style:--outline-color={outlineColor}
+    style:--outline-width={outlineWidth}>
     <ShaderCanvas {shader} />
   </div>
 </div>
@@ -57,5 +69,25 @@
     mask-size: contain;
     mask-repeat: no-repeat;
     mask-position: center;
+  }
+  
+  .with-outline {
+    position: relative;
+  }
+  
+  .with-outline::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    -webkit-mask-image: inherit;
+    -webkit-mask-size: inherit;
+    -webkit-mask-repeat: inherit;
+    -webkit-mask-position: inherit;
+    mask-image: inherit;
+    mask-size: inherit;
+    mask-repeat: inherit;
+    mask-position: inherit;
+    box-shadow: 0 0 0 var(--outline-width) var(--outline-color);
+    pointer-events: none;
   }
 </style>
