@@ -121,7 +121,11 @@
 				<!-- </div> -->
 			</div>
 
-			<Turntable />
+			<Turntable
+				videoSrc="https://samplelib.com/lib/preview/mp4/sample-5s.mp4"
+				width="900px"
+				height="900px"
+			/>
 		</div>
 	</div>
 </div>
