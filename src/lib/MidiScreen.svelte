@@ -5,7 +5,7 @@
 </script>
 
 <div
-	class="font-jersey border-secondary text-highlight bg-primary relative grid min-h-[220px] place-items-center rounded border-4 p-2 text-4xl md:text-6xl"
+	class="font-jersey border-secondary text-highlight bg-primary relative m-[-8px] grid min-h-[220px] place-items-center rounded border-4 p-2 text-4xl md:text-6xl"
 >
 	<div class="absolute top-2 left-2 w-6 animate-pulse">
 		<IconBattery />

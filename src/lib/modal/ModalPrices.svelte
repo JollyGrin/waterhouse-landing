@@ -11,9 +11,7 @@
 {#snippet priceText(price: string)}
 	<div class="flex flex-col items-start justify-center">
 		<span class="font-jersey text-6xl">€{price}</span>
-		<span class="text-secondary/30 font-jersey ml-1 text-xs"
-			>per month <br />(not including utilities)</span
-		>
+		<span class="text-secondary/30 font-jersey ml-1 text-xs">per month</span>
 	</div>
 {/snippet}
 
@@ -47,7 +45,7 @@
 		<div class="space-y-8">
 			<div class="grid gap-2 md:grid-cols-3">
 				<!-- Shared Studio -->
-				{@render pane('Shared Studio', 'Perfect for emerging artists', '250', [
+				{@render pane('Shared Studio', 'Perfect for emerging artists', '300', [
 					'80 hours per month',
 					'Shared workspace',
 					'Basic equipment',
@@ -55,7 +53,7 @@
 				])}
 
 				<!-- Solo Studio -->
-				{@render pane('Solo Studio', 'Your private creative space', '900', [
+				{@render pane('Solo Studio', 'Your private creative space', '1100', [
 					'24/7 private access',
 					'Storage space',
 					'Premium equipment',
@@ -63,7 +61,7 @@
 				])}
 
 				<!-- Office Space -->
-				{@render pane('Atelier', 'For artist & industry professionals', '450', [
+				{@render pane('Atelier', 'For artist & industry professionals', '500', [
 					'Meeting room access',
 					'Business amenities',
 					'Stream room access'
