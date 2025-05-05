@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { PRICES } from '$lib/constants-price';
 	import Modal from './Modal.svelte';
 	import { fade, fly } from 'svelte/transition';
 	let {
@@ -90,7 +91,7 @@
 					<div class="flex h-full flex-col bg-white/10 p-6 transition-all hover:bg-white/5">
 						<h2 class="text-2xl">Shared Studio</h2>
 						<div class="flex items-center gap-2">
-							<span class="text-6xl"> €250 </span>
+							<span class="text-6xl"> €{PRICES.SHARED} </span>
 							<div class="flex flex-col text-sm">
 								<span class=""> /month </span>
 								<span class=" opacity-50"> (not including utilities) </span>
@@ -107,7 +108,7 @@
 					<div class="flex h-full flex-col bg-white/10 p-6 transition-all hover:bg-white/5">
 						<h2 class="text-2xl">Solo Studio</h2>
 						<div class="flex items-center gap-2">
-							<span class="text-6xl"> €900 </span>
+							<span class="text-6xl"> €{PRICES.SOLO} </span>
 							<div class="flex flex-col text-sm">
 								<span class=""> /month </span>
 								<span class=" opacity-50"> (not including utilities) </span>

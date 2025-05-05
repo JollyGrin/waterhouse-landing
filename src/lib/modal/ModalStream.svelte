@@ -1,7 +1,8 @@
 <script lang="ts">
 	import Modal from './Modal.svelte';
-	import { fade, fly } from 'svelte/transition';
+	import { fly } from 'svelte/transition';
 	import Product from './pane/Product.svelte';
+	import { PRICES } from '$lib/constants-price';
 	let {
 		isOpen = false,
 		onClose,
@@ -35,7 +36,7 @@
 					>
 						<h2 class="text-2xl">Shared Studio</h2>
 						<div class="flex items-center gap-2">
-							<span class="text-4xl"> €250 </span>
+							<span class="text-4xl"> €{PRICES.SHARED} </span>
 							<div class="flex flex-col text-sm">
 								<span class=""> /month </span>
 								<span class=" opacity-50"> (not including utilities) </span>
@@ -46,7 +47,7 @@
 					<div class=" flex flex-col border-b-2 border-dotted px-2 transition-all hover:bg-white/5">
 						<h2 class="text-2xl">Atelier</h2>
 						<div class="flex items-center gap-2">
-							<span class="text-4xl"> €450 </span>
+							<span class="text-4xl"> €{PRICES.OFFICE} </span>
 							<div class="flex flex-col text-sm">
 								<span class=""> /month </span>
 								<span class=" opacity-50"> (not including utilities) </span>
@@ -56,7 +57,7 @@
 					<div class="flex flex-col px-2 transition-all hover:bg-white/5">
 						<h2 class="text-2xl">Solo Studio</h2>
 						<div class="flex items-center gap-2">
-							<span class="text-4xl"> €900 </span>
+							<span class="text-4xl"> €{PRICES.SOLO} </span>
 							<div class="flex flex-col text-sm">
 								<span class=""> /month </span>
 								<span class=" opacity-50"> (not including utilities) </span>

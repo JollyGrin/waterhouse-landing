@@ -19,26 +19,28 @@
 		if (recordRef) {
 			// Wait a bit for the styles to be applied
 			setTimeout(() => {
-				// Create an SVG mask that represents the record grooves
+				// Create an SVG mask that represents the record grooves with a clean center
 				const svg = `
           <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 500 500">
             <defs>
-              <radialGradient id="grooves" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
-                <stop offset="0%" stop-color="black" />
-                <stop offset="40%" stop-color="black" />
-                <stop offset="40.5%" stop-color="white" />
-                <stop offset="100%" stop-color="white" />
-              </radialGradient>
               <mask id="grooveMask">
+                <!-- Create the grooves only in the outer area, not in the center where the label is -->
                 ${Array.from({ length: 50 })
 									.map((_, i) => {
 										const radius = 250 - i * 4;
+										// Don't draw any grooves in the center 40% (label area)
+										if (radius <= 250 * 0.4) return '';
 										return `<circle cx="250" cy="250" r="${radius}" fill="${i % 2 === 0 ? 'black' : 'white'}" />`;
 									})
 									.join('')}
               </mask>
             </defs>
-            <rect x="0" y="0" width="500" height="500" fill="url(#grooves)" mask="url(#grooveMask)" />
+            <!-- Base black record --> 
+            <circle cx="250" cy="250" r="250" fill="black" />
+            <!-- Apply groove mask pattern to the black record -->
+            <circle cx="250" cy="250" r="250" fill="black" mask="url(#grooveMask)" />
+            <!-- White center for label (this ensures no grooves in center) -->
+            <circle cx="250" cy="250" r="${250 * 0.4}" fill="white" />
           </svg>`;
 
 				const encodedSvg = encodeURIComponent(svg);
@@ -139,12 +141,13 @@
 		transform: translate(-50%, -50%);
 		width: 40%;
 		height: 40%;
-		background: var(--color-primary);
+		background: white;
 		border-radius: 50%;
 		z-index: 1;
 		display: flex;
 		align-items: center;
 		justify-content: center;
+		box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
 	}
 
 	.center-dot {

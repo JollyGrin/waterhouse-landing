@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { PRICES } from '$lib/constants-price';
 	import Modal from './Modal.svelte';
 
 	let {
@@ -45,7 +46,7 @@
 		<div class="space-y-8">
 			<div class="grid gap-2 md:grid-cols-3">
 				<!-- Shared Studio -->
-				{@render pane('Shared Studio', 'Perfect for emerging artists', '300', [
+				{@render pane('Shared Studio', 'Perfect for emerging artists', PRICES.SHARED.toString(), [
 					'80 hours per month',
 					'Shared workspace',
 					'Basic equipment',
@@ -53,7 +54,7 @@
 				])}
 
 				<!-- Solo Studio -->
-				{@render pane('Solo Studio', 'Your private creative space', '1100', [
+				{@render pane('Solo Studio', 'Your private creative space', PRICES.SOLO.toString(), [
 					'24/7 private access',
 					'Storage space',
 					'Premium equipment',
@@ -61,7 +62,7 @@
 				])}
 
 				<!-- Office Space -->
-				{@render pane('Atelier', 'For artist & industry professionals', '500', [
+				{@render pane('Atelier', 'For artist & industry professionals', PRICES.OFFICE.toString(), [
 					'Meeting room access',
 					'Business amenities',
 					'Stream room access'

@@ -2,6 +2,7 @@
 	import Modal from './Modal.svelte';
 	import { fade, fly } from 'svelte/transition';
 	import Product from './pane/Product.svelte';
+	import { PRICES } from '$lib/constants-price';
 	let {
 		isOpen = false,
 		onClose,
@@ -33,7 +34,7 @@
 					<div class="flex flex-col p-6 transition-all">
 						<h2 class="text-2xl">Atelier (Office)</h2>
 						<div class="flex items-center gap-2">
-							<span class="text-6xl"> €450 </span>
+							<span class="text-6xl"> €{PRICES.OFFICE} </span>
 							<div class="flex flex-col text-sm">
 								<span class=""> /month </span>
 								<span class=" opacity-50"> (not including utilities) </span>
