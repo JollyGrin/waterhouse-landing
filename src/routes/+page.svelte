@@ -1,7 +1,6 @@
 <script lang="ts">
 	import MaskedLogoShader from '$lib/MaskedLogoShader.svelte';
 	import MidiScreen from '$lib/MidiScreen.svelte';
-	import MidiSlider from '$lib/MidiSlider.svelte';
 	import ModalFacilities from '$lib/modal/ModalFacilities.svelte';
 	import ModalMusicStudio from '$lib/modal/ModalMusicStudio.svelte';
 	import ModalOffice from '$lib/modal/ModalOffice.svelte';
@@ -10,10 +9,8 @@
 	import ModalSendEmail from '$lib/modal/ModalSendEmail.svelte';
 	import ModalServices from '$lib/modal/ModalServices.svelte';
 	import ModalStream from '$lib/modal/ModalStream.svelte';
-	import ShaderCanvas from '$lib/shader/ShaderCanvas.svelte';
-	import { shaderConfigOrganicRainbow, shaderConfigRainbow } from '$lib/shader/shaders';
+	import { shaderConfigRainbow } from '$lib/shader/shaders';
 	import ShineBorder from '$lib/ShineBorder.svelte';
-	import SpeakerGrate from '$lib/SpeakerGrate.svelte';
 	import Turntable from '$lib/Turntable.svelte';
 
 	type ModalKey =
@@ -57,7 +54,11 @@
 
 		<!-- Main Content -->
 		<div class="relative rounded border-black p-5 md:border-4">
-			<ShineBorder borderWidth={12} shineColor={['#A07CFE', '#FE8FB5', '#FFBE7B']} />
+			<ShineBorder
+				className="hidden md:block"
+				borderWidth={12}
+				shineColor={['#A07CFE', '#FE8FB5', '#FFBE7B']}
+			/>
 			<div class="pb-6">
 				<MidiScreen />
 			</div>
