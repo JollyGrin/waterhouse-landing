@@ -39,7 +39,7 @@
 							<span class="text-4xl"> €{PRICES.SHARED} </span>
 							<div class="flex flex-col text-sm">
 								<span class=""> /month </span>
-								<span class=" opacity-50"> (not including utilities) </span>
+								<!-- <span class=" opacity-50"> (not including utilities) </span> -->
 							</div>
 						</div>
 					</div>
@@ -50,7 +50,7 @@
 							<span class="text-4xl"> €{PRICES.OFFICE} </span>
 							<div class="flex flex-col text-sm">
 								<span class=""> /month </span>
-								<span class=" opacity-50"> (not including utilities) </span>
+								<!-- <span class=" opacity-50"> (not including utilities) </span> -->
 							</div>
 						</div>
 					</div>
@@ -60,7 +60,7 @@
 							<span class="text-4xl"> €{PRICES.SOLO} </span>
 							<div class="flex flex-col text-sm">
 								<span class=""> /month </span>
-								<span class=" opacity-50"> (not including utilities) </span>
+								<!-- <span class=" opacity-50"> (not including utilities) </span> -->
 							</div>
 						</div>
 					</div>

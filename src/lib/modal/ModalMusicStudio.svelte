@@ -94,7 +94,7 @@
 							<span class="text-6xl"> €{PRICES.SHARED} </span>
 							<div class="flex flex-col text-sm">
 								<span class=""> /month </span>
-								<span class=" opacity-50"> (not including utilities) </span>
+								<!-- <span class=" opacity-50"> (not including utilities) </span> -->
 							</div>
 						</div>
 						<div class="flex flex-wrap gap-2 tracking-tight text-white/80">
@@ -111,7 +111,7 @@
 							<span class="text-6xl"> €{PRICES.SOLO} </span>
 							<div class="flex flex-col text-sm">
 								<span class=""> /month </span>
-								<span class=" opacity-50"> (not including utilities) </span>
+								<!-- <span class=" opacity-50"> (not including utilities) </span> -->
 							</div>
 						</div>
 						<div class="flex flex-wrap gap-2 tracking-tight text-white/80">
