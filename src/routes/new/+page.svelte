@@ -1,8 +1,27 @@
 <script lang="ts">
 	import IconEmail from '$lib/icon/IconEmail.svelte';
 	import IconLocation from '$lib/icon/IconLocation.svelte';
+	import ModalMusicStudio from '$lib/modal/ModalMusicStudio.svelte';
+	import ModalOffice from '$lib/modal/ModalOffice.svelte';
+	import ModalOpportunities from '$lib/modal/ModalOpportunities.svelte';
+	import ModalSendEmail from '$lib/modal/ModalSendEmail.svelte';
+	import ModalServices from '$lib/modal/ModalServices.svelte';
+	import ModalStream from '$lib/modal/ModalStream.svelte';
 	import Nav from '$lib/Nav.svelte';
+	import ShineBorder from '$lib/ShineBorder.svelte';
 	import SpeakerGrate from '$lib/SpeakerGrate.svelte';
+
+	let isModalOpen:
+		| null
+		| 'studios'
+		| 'offices'
+		| 'stream'
+		| 'services'
+		| 'opportunities'
+		| 'stream'
+		| 'join' = $state(null);
+	const onClose = () => (isModalOpen = null);
+	const onOpenJoin = () => (isModalOpen = 'join');
 </script>
 
 {#snippet screen()}
@@ -11,13 +30,24 @@
 	</div>
 {/snippet}
 {#snippet mainButtons()}
-	<button class="rounded-lg">studios</button>
-	<button class="rounded-lg">ateliers</button>
+	<button class="rounded-lg" onclick={() => (isModalOpen = 'studios')}>studios</button>
+	<button class="rounded-lg" onclick={() => (isModalOpen = 'offices')}>ateliers</button>
 {/snippet}
-<Nav />
+
+<ModalMusicStudio {onClose} {onOpenJoin} isOpen={isModalOpen === 'studios'} />
+<ModalOffice {onClose} {onOpenJoin} isOpen={isModalOpen === 'offices'} />
+<ModalServices {onClose} isOpen={isModalOpen === 'services'} />
+<ModalStream {onClose} {onOpenJoin} isOpen={isModalOpen === 'stream'} />
+<ModalOpportunities {onClose} isOpen={isModalOpen === 'opportunities'} />
+<ModalSendEmail {onClose} isOpen={isModalOpen === 'join'} />
+
+<Nav
+	onOpenStudio={() => (isModalOpen = 'studios')}
+	onOpenAtelier={() => (isModalOpen = 'offices')}
+/>
 
 <div
-	class="ctrl-container font-jersey container mx-auto w-full overflow-clip rounded-xl border-2 bg-slate-50 p-2 text-2xl md:min-h-[300px]"
+	class="ctrl-container font-jersey container mx-auto w-full overflow-clip rounded-xl border-2 bg-slate-50 p-3 text-xl md:min-h-[300px] md:p-2 xl:text-4xl"
 >
 	<div class="buttons flex flex-col gap-2 md:hidden">
 		{@render mainButtons()}
@@ -30,7 +60,7 @@
 	</div>
 	<div class="news grid place-items-center">
 		<div
-			class="relative grid h-[60%] w-[60%] place-items-center rounded-full border-2 bg-white shadow-[2px_2px_0_black]"
+			class="relative grid h-full w-full place-items-center rounded-full border-2 bg-white shadow-[2px_2px_0_black] md:h-[60%] md:w-[60%]"
 		>
 			news
 		</div>
@@ -69,17 +99,17 @@
 		</div>
 	</div>
 	<div class="social-1">
-		<button class="rounded-lg"> services </button>
+		<button class="rounded-lg" onclick={() => (isModalOpen = 'services')}> services </button>
 	</div>
 	<div class="social-2">
-		<button class="rounded-lg text-[1.15rem]"> opportunities </button>
+		<button class="rounded-lg" onclick={() => (isModalOpen = 'opportunities')}> benefits </button>
 	</div>
 	<div class="social-3">
-		<button class="rounded-lg"> stream </button>
+		<button class="rounded-lg" onclick={() => (isModalOpen = 'stream')}> stream </button>
 	</div>
-	<div class="social-4">
-		<button class="rounded-lg"> s4 </button>
-	</div>
+	<!-- <div class="social-4"> -->
+	<!-- 	<button class="rounded-lg"> s4 </button> -->
+	<!-- </div> -->
 	<div class="special hidden md:grid">
 		<button class="rounded-lg"> special </button>
 	</div>
@@ -138,7 +168,7 @@
 			'location contact screen screen screen screen special speaker'
 			'slider rec screen screen screen screen sample drum'
 			'slider play screen screen screen screen news news'
-			'slider volume social-1 social-2 social-3 social-4 news news';
+			'slider volume social-1 social-3 social-3 social-2 news news';
 	}
 
 	@media (max-width: 767px) {
@@ -152,7 +182,7 @@
 				'screen screen screen screen'
 				'location contact news speaker'
 				'slider buttons buttons buttons'
-				'social-1 social-2 social-3 social-4';
+				'social-1 social-2 social-3 social-3';
 		}
 	}
 
