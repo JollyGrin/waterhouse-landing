@@ -8,7 +8,6 @@
 	import ModalServices from '$lib/modal/ModalServices.svelte';
 	import ModalStream from '$lib/modal/ModalStream.svelte';
 	import Nav from '$lib/Nav.svelte';
-	import ShineBorder from '$lib/ShineBorder.svelte';
 	import SpeakerGrate from '$lib/SpeakerGrate.svelte';
 
 	let isModalOpen:

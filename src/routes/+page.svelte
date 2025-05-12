@@ -1,134 +1,258 @@
 <script lang="ts">
-	import MaskedLogoShader from '$lib/MaskedLogoShader.svelte';
-	import MidiScreen from '$lib/MidiScreen.svelte';
-	import ModalFacilities from '$lib/modal/ModalFacilities.svelte';
+	import IconEmail from '$lib/icon/IconEmail.svelte';
+	import IconLocation from '$lib/icon/IconLocation.svelte';
 	import ModalMusicStudio from '$lib/modal/ModalMusicStudio.svelte';
 	import ModalOffice from '$lib/modal/ModalOffice.svelte';
 	import ModalOpportunities from '$lib/modal/ModalOpportunities.svelte';
-	import ModalPrices from '$lib/modal/ModalPrices.svelte';
 	import ModalSendEmail from '$lib/modal/ModalSendEmail.svelte';
 	import ModalServices from '$lib/modal/ModalServices.svelte';
 	import ModalStream from '$lib/modal/ModalStream.svelte';
-	import { shaderConfigRainbow } from '$lib/shader/shaders';
-	import ShineBorder from '$lib/ShineBorder.svelte';
-	import Turntable from '$lib/Turntable.svelte';
+	import Nav from '$lib/Nav.svelte';
+	import SpeakerGrate from '$lib/SpeakerGrate.svelte';
+	import toast from 'svelte-french-toast';
 
-	type ModalKey =
-		| 'contact'
-		| 'facilities'
+	let isModalOpen:
+		| null
+		| 'studios'
+		| 'offices'
+		| 'stream'
 		| 'services'
 		| 'opportunities'
-		| 'prices'
-		| 'music'
 		| 'stream'
-		| 'office';
-	let isOpen: ModalKey | null = $state(null);
-	const onClose = () => (isOpen = null);
-	const onOpenContact = () => (isOpen = 'contact');
+		| 'join' = $state(null);
+	const onClose = () => (isModalOpen = null);
+	const onOpenJoin = () => (isModalOpen = 'join');
+
+	const comingSoon = () => toast.success('Coming soon!');
 </script>
 
-<ModalSendEmail isOpen={isOpen === 'contact'} {onClose} />
+{#snippet screen()}
+	<div class="grid min-h-40 w-full place-items-center rounded bg-black md:min-h-50">
+		<video src="/screen.mp4" autoplay muted loop class="h-50 object-cover"></video>
+	</div>
+{/snippet}
+{#snippet mainButtons()}
+	<button class="rounded-lg" onclick={() => (isModalOpen = 'studios')}>studios</button>
+	<button class="rounded-lg" onclick={() => (isModalOpen = 'offices')}>ateliers</button>
+{/snippet}
 
-<ModalFacilities
-	isOpen={isOpen === 'facilities'}
-	onOpenJoin={() => (isOpen = 'prices')}
-	{onClose}
+<ModalMusicStudio {onClose} {onOpenJoin} isOpen={isModalOpen === 'studios'} />
+<ModalOffice {onClose} {onOpenJoin} isOpen={isModalOpen === 'offices'} />
+<ModalServices {onClose} isOpen={isModalOpen === 'services'} />
+<ModalStream {onClose} {onOpenJoin} isOpen={isModalOpen === 'stream'} />
+<ModalOpportunities {onClose} isOpen={isModalOpen === 'opportunities'} />
+<ModalSendEmail {onClose} isOpen={isModalOpen === 'join'} />
+
+<Nav
+	onOpenStudio={() => (isModalOpen = 'studios')}
+	onOpenAtelier={() => (isModalOpen = 'offices')}
 />
 
-<ModalMusicStudio isOpen={isOpen === 'music'} onOpenJoin={() => (isOpen = 'contact')} {onClose} />
-<ModalStream isOpen={isOpen === 'stream'} onOpenJoin={() => (isOpen = 'contact')} {onClose} />
-<ModalOffice isOpen={isOpen === 'office'} onOpenJoin={() => (isOpen = 'contact')} {onClose} />
-<ModalOpportunities isOpen={isOpen === 'opportunities'} {onClose} />
-<ModalPrices isOpen={isOpen === 'prices'} {onClose} {onOpenContact} />
-<ModalServices isOpen={isOpen === 'services'} {onClose} />
-
-<div class="font-jersey bg-primary relative min-h-screen overflow-hidden sm:p-8">
-	<div class="mx-auto max-w-[1000px] space-y-8">
-		<!-- Title Section -->
-		<div class="text-secondary hidden flex-col items-center text-center md:flex">
-			<div class="h-[100px] w-[150px]">
-				<MaskedLogoShader width="100%" height="100%" shader={shaderConfigRainbow} outline />
-			</div>
-			<p class="text-6xl">Waterhouse Studios</p>
-		</div>
-
-		<!-- Main Content -->
-		<div class="relative rounded border-black p-5 md:border-4">
-			<ShineBorder
-				className="hidden md:block"
-				borderWidth={12}
-				shineColor={['#A07CFE', '#FE8FB5', '#FFBE7B']}
-			/>
-			<div class="pb-6">
-				<MidiScreen />
-			</div>
-			<div class="grid gap-4">
-				<!-- Top Row: Studio Types -->
-				<div
-					class="grid grid-cols-1 grid-rows-[50px_50px_50px] gap-4 md:grid-cols-3 md:grid-rows-[100px]"
-				>
-					<button
-						class="midi bg-primary text-secondary relative grid place-items-center text-3xl"
-						onclick={() => (isOpen = 'music')}
-					>
-						<ShineBorder borderWidth={2} shineColor={['#A07CFE', '#FE8FB5', '#FFBE7B']} />
-						<p>Music Studio</p>
-					</button>
-					<button
-						class="midi bg-primary text-secondary grid place-items-center text-3xl"
-						onclick={() => (isOpen = 'stream')}
-					>
-						<ShineBorder borderWidth={2} shineColor={['#A07CFE', '#FE8FB5', '#FFBE7B']} />
-						<p>Stream Studio</p>
-					</button>
-					<button
-						class="midi bg-primary text-secondary grid place-items-center text-3xl"
-						onclick={() => (isOpen = 'office')}
-					>
-						<ShineBorder borderWidth={2} shineColor={['#A07CFE', '#FE8FB5', '#FFBE7B']} />
-						<p>Atelier Studio</p>
-					</button>
-				</div>
-
-				<!-- Bottom Row: Actions -->
-				<div
-					class="grid grid-cols-1 grid-rows-[50px_50px_50px] gap-4 md:grid-cols-3 md:grid-rows-[100px]"
-				>
-					<button
-						onclick={() => (isOpen = 'opportunities')}
-						class="midi bg-primary text-secondary grid place-items-center text-3xl"
-					>
-						<ShineBorder borderWidth={2} shineColor={['#A07CFE', '#FE8FB5', '#FFBE7B']} />
-						<p>Opportunities</p>
-					</button>
-					<button
-						class="midi bg-primary text-secondary grid place-items-center text-3xl"
-						onclick={() => (isOpen = 'services')}
-					>
-						<ShineBorder borderWidth={2} shineColor={['#A07CFE', '#FE8FB5', '#FFBE7B']} />
-						<p>Service</p>
-					</button>
-					<button
-						class="midi bg-highlight/20 text-secondary hover:bg-highlight active:bg-highlight active:text-secondary grid place-items-center text-3xl transition-all"
-						onclick={() => (isOpen = 'prices')}
-					>
-						<ShineBorder borderWidth={2} shineColor={['#A07CFE', '#FE8FB5', '#FFBE7B']} />
-						<p>Join</p>
-					</button>
-				</div>
-
-				<!-- MidiScreen and Turntable -->
-				<!-- <div class="grid grid-cols-2 gap-4"> -->
-				<!-- </div> -->
-			</div>
-
-			<div class="relative hidden w-full md:block">
-				<Turntable
-					videoSrc="https://samplelib.com/lib/preview/mp4/sample-5s.mp4"
-					width="100%"
-					height="100%"
-				/>
-			</div>
+<div
+	class="ctrl-container font-jersey container mx-auto w-full overflow-clip rounded-xl border-2 bg-slate-50 p-3 text-xl md:min-h-[300px] md:p-2 xl:text-4xl"
+>
+	<div class="buttons flex flex-col gap-2 md:hidden">
+		{@render mainButtons()}
+	</div>
+	<div class="screen flex flex-col gap-2">
+		{@render screen()}
+		<div class="hidden h-full grid-cols-2 gap-2 md:grid">
+			{@render mainButtons()}
 		</div>
 	</div>
+	<div class="news grid place-items-center">
+		<div
+			class="relative grid h-full w-full place-items-center rounded-full border-2 bg-white shadow-[2px_2px_0_black] md:h-[60%] md:w-[60%]"
+		>
+			news
+		</div>
+	</div>
+	<div class="slider">
+		<div class="relative grid h-full w-full place-items-center rounded-lg border-2">
+			<input
+				type="range"
+				min="0"
+				max="100"
+				value="0"
+				class="range-slider h-[calc(100%-20px)]"
+				id="color-slider"
+			/>
+		</div>
+	</div>
+	<div class="location">
+		<button class="grid place-items-center rounded-lg">
+			<IconLocation width="60%" height="60%" />
+		</button>
+	</div>
+	<div class="contact">
+		<button class="grid place-items-center rounded-lg">
+			<IconEmail width="60%" height="60%" />
+		</button>
+	</div>
+	<div class="rec hidden place-items-center md:grid">
+		<button class="rounded-full"> rec </button>
+	</div>
+	<div class="play hidden md:grid">
+		<button class="rounded-full"> play </button>
+	</div>
+	<div class="volume hidden place-items-center md:grid">
+		<div class="relative h-20 w-20 rounded-full border-2 bg-white shadow-[2px_2px_0_black]">
+			<div class="absolute left-[49%] h-10 w-1 rounded-b-full border-l-4"></div>
+		</div>
+	</div>
+	<div class="social-1">
+		<button class="rounded-lg" onclick={() => (isModalOpen = 'services')}> services </button>
+	</div>
+	<div class="social-2">
+		<button class="rounded-lg" onclick={() => (isModalOpen = 'opportunities')}> benefits </button>
+	</div>
+	<div class="social-3">
+		<button class="rounded-lg" onclick={() => (isModalOpen = 'stream')}> stream </button>
+	</div>
+	<!-- <div class="social-4"> -->
+	<!-- 	<button class="rounded-lg"> s4 </button> -->
+	<!-- </div> -->
+	<div class="special hidden md:grid">
+		<button class="rounded-lg"> special </button>
+	</div>
+	<div class="sample hidden md:grid">
+		<button class="rounded-lg"> sample </button>
+	</div>
+	<div class="drum hidden md:grid">
+		<button class="rounded-lg"> drum </button>
+	</div>
+	<div class="speaker">
+		<SpeakerGrate />
+	</div>
 </div>
+
+<style>
+	:root {
+		--ctrl-unit: calc(calc(100vw - calc(60 * 2px)) / 89.66);
+		--ctrl-grid-height: calc(var(--ctrl-unit) * 10);
+	}
+	input[type='range'] {
+		writing-mode: vertical-lr;
+		direction: rtl;
+		appearance: slider-vertical;
+		width: 16px;
+		vertical-align: bottom;
+	}
+	input[type='range']::-webkit-slider-thumb {
+		-webkit-appearance: none;
+		appearance: none;
+		width: 25px;
+		height: 25px;
+		border-radius: 50%;
+		background: #04aa6d;
+		cursor: pointer;
+	}
+	button {
+		width: 100%;
+		height: 100%;
+		border: solid 2px black;
+		box-shadow: 3px 3px 0 black;
+		transition: all 0.25s ease;
+		background-color: var(--color-white);
+	}
+	button:hover {
+		transform: translate(2px, 2px);
+		box-shadow: 1px 1px 0px black;
+	}
+
+	.ctrl-container {
+		display: grid;
+		grid-template-columns: repeat(8, 1fr);
+		grid-template-rows: repeat(4, var(--ctrl-grid-height));
+		gap: 12px;
+		grid-auto-flow: row;
+		grid-template-areas:
+			'location contact screen screen screen screen special speaker'
+			'slider rec screen screen screen screen sample drum'
+			'slider play screen screen screen screen news news'
+			'slider volume social-1 social-3 social-3 social-2 news news';
+	}
+
+	@media (max-width: 767px) {
+		.ctrl-container {
+			display: grid;
+			grid-template-columns: repeat(4, 1fr);
+			grid-template-rows: 0.5fr 0.5fr 1.75fr 0.5fr;
+			gap: 8px;
+			grid-auto-flow: row;
+			grid-template-areas:
+				'screen screen screen screen'
+				'location contact news speaker'
+				'slider buttons buttons buttons'
+				'social-1 social-2 social-3 social-3';
+		}
+	}
+
+	.screen {
+		grid-area: screen;
+	}
+
+	.buttons {
+		grid-area: buttons;
+	}
+
+	.news {
+		grid-area: news;
+	}
+
+	.slider {
+		grid-area: slider;
+	}
+
+	.location {
+		grid-area: location;
+	}
+
+	.contact {
+		grid-area: contact;
+	}
+
+	.rec {
+		grid-area: rec;
+	}
+
+	.play {
+		grid-area: play;
+	}
+
+	.volume {
+		grid-area: volume;
+	}
+
+	.social-1 {
+		grid-area: social-1;
+	}
+
+	.social-2 {
+		grid-area: social-2;
+	}
+
+	.social-3 {
+		grid-area: social-3;
+	}
+
+	.social-4 {
+		grid-area: social-4;
+	}
+
+	.special {
+		grid-area: special;
+	}
+
+	.sample {
+		grid-area: sample;
+	}
+
+	.drum {
+		grid-area: drum;
+	}
+
+	.speaker {
+		grid-area: speaker;
+	}
+</style>

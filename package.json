@@ -38,6 +38,7 @@
 	"dependencies": {
 		"@threlte/core": "^8.0.2",
 		"@threlte/extras": "^9.1.4",
+		"svelte-french-toast": "^1.2.0",
 		"three": "^0.176.0"
 	}
 }
