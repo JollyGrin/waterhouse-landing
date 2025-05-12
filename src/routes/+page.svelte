@@ -61,8 +61,12 @@
 		</div>
 	</div>
 	<div class="news grid place-items-center">
+		<!-- svelte-ignore a11y_no_static_element_interactions -->
 		<div
 			class="relative grid h-full w-full place-items-center rounded-full border-2 bg-white shadow-[2px_2px_0_black] md:h-[60%] md:w-[60%]"
+			onkeydown={() => {}}
+			onclick={comingSoon}
+			aria-label="dialog"
 		>
 			news
 		</div>
@@ -90,10 +94,10 @@
 		</button>
 	</div>
 	<div class="rec hidden place-items-center md:grid">
-		<button class="rounded-full"> rec </button>
+		<button class="rounded-full" onclick={comingSoon}> rec </button>
 	</div>
 	<div class="play hidden md:grid">
-		<button class="rounded-full"> play </button>
+		<button class="rounded-full" onclick={comingSoon}> play </button>
 	</div>
 	<div class="volume hidden place-items-center md:grid">
 		<div class="relative h-20 w-20 rounded-full border-2 bg-white shadow-[2px_2px_0_black]">
@@ -113,13 +117,13 @@
 	<!-- 	<button class="rounded-lg"> s4 </button> -->
 	<!-- </div> -->
 	<div class="special hidden md:grid">
-		<button class="rounded-lg"> special </button>
+		<button class="rounded-lg" onclick={comingSoon}> special </button>
 	</div>
 	<div class="sample hidden md:grid">
-		<button class="rounded-lg"> sample </button>
+		<button class="rounded-lg" onclick={comingSoon}> sample </button>
 	</div>
 	<div class="drum hidden md:grid">
-		<button class="rounded-lg"> drum </button>
+		<button class="rounded-lg" onclick={comingSoon}> drum </button>
 	</div>
 	<div class="speaker">
 		<SpeakerGrate />
