@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Nav from '$lib/Nav.svelte';
 	import SpeakerGrate from '$lib/SpeakerGrate.svelte';
 </script>
 
@@ -9,6 +10,7 @@
 	<button class="rounded-lg">studios</button>
 	<button class="rounded-lg">ateliers</button>
 {/snippet}
+<Nav />
 
 <div
 	class="ctrl-container container mx-auto w-full overflow-clip rounded-xl border-2 bg-slate-50 p-2 md:min-h-[300px]"
