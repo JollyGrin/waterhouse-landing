@@ -1,4 +1,6 @@
 <script lang="ts">
+	import IconEmail from '$lib/icon/IconEmail.svelte';
+	import IconLocation from '$lib/icon/IconLocation.svelte';
 	import Nav from '$lib/Nav.svelte';
 	import SpeakerGrate from '$lib/SpeakerGrate.svelte';
 </script>
@@ -13,7 +15,7 @@
 <Nav />
 
 <div
-	class="ctrl-container container mx-auto w-full overflow-clip rounded-xl border-2 bg-slate-50 p-2 md:min-h-[300px]"
+	class="ctrl-container font-jersey container mx-auto w-full overflow-clip rounded-xl border-2 bg-slate-50 p-2 text-2xl md:min-h-[300px]"
 >
 	<div class="buttons flex flex-col gap-2 md:hidden">
 		{@render mainButtons()}
@@ -44,10 +46,14 @@
 		</div>
 	</div>
 	<div class="location">
-		<button class="rounded-lg"> location </button>
+		<button class="grid place-items-center rounded-lg">
+			<IconLocation width="60%" height="60%" />
+		</button>
 	</div>
 	<div class="contact">
-		<button class="rounded-lg"> contact </button>
+		<button class="grid place-items-center rounded-lg">
+			<IconEmail width="60%" height="60%" />
+		</button>
 	</div>
 	<div class="rec hidden place-items-center md:grid">
 		<button class="rounded-full"> rec </button>
