@@ -1,6 +1,7 @@
 <script lang="ts">
 	import IconEmail from '$lib/icon/IconEmail.svelte';
 	import IconLocation from '$lib/icon/IconLocation.svelte';
+	import ModalAbout from '$lib/modal/ModalAbout.svelte';
 	import ModalMusicStudio from '$lib/modal/ModalMusicStudio.svelte';
 	import ModalOffice from '$lib/modal/ModalOffice.svelte';
 	import ModalOpportunities from '$lib/modal/ModalOpportunities.svelte';
@@ -13,6 +14,7 @@
 
 	let isModalOpen:
 		| null
+		| 'about'
 		| 'studios'
 		| 'offices'
 		| 'stream'
@@ -42,8 +44,9 @@
 <ModalStream {onClose} {onOpenJoin} isOpen={isModalOpen === 'stream'} />
 <ModalOpportunities {onClose} isOpen={isModalOpen === 'opportunities'} />
 <ModalSendEmail {onClose} isOpen={isModalOpen === 'join'} />
-
+<ModalAbout {onClose} isOpen={isModalOpen === 'about'} />
 <Nav
+	onOpenAbout={() => (isModalOpen = 'about')}
 	onOpenStudio={() => (isModalOpen = 'studios')}
 	onOpenAtelier={() => (isModalOpen = 'offices')}
 />
@@ -84,12 +87,14 @@
 		</div>
 	</div>
 	<div class="location">
-		<button class="grid place-items-center rounded-lg">
-			<IconLocation width="60%" height="60%" />
-		</button>
+		<a href="https://maps.app.goo.gl/nkE2XhCBkjkw9suY6" target="_blank">
+			<button class="grid place-items-center rounded-lg">
+				<IconLocation width="60%" height="60%" />
+			</button>
+		</a>
 	</div>
 	<div class="contact">
-		<button class="grid place-items-center rounded-lg">
+		<button class="grid place-items-center rounded-lg" onclick={() => (isModalOpen = 'join')}>
 			<IconEmail width="60%" height="60%" />
 		</button>
 	</div>
