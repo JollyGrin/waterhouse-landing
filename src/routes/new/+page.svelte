@@ -1,7 +1,6 @@
 <script lang="ts">
 	import IconEmail from '$lib/icon/IconEmail.svelte';
 	import IconLocation from '$lib/icon/IconLocation.svelte';
-	import ModalAbout from '$lib/modal/ModalAbout.svelte';
 	import ModalMusicStudio from '$lib/modal/ModalMusicStudio.svelte';
 	import ModalOffice from '$lib/modal/ModalOffice.svelte';
 	import ModalOpportunities from '$lib/modal/ModalOpportunities.svelte';
@@ -10,11 +9,9 @@
 	import ModalStream from '$lib/modal/ModalStream.svelte';
 	import Nav from '$lib/Nav.svelte';
 	import SpeakerGrate from '$lib/SpeakerGrate.svelte';
-	import toast from 'svelte-french-toast';
 
 	let isModalOpen:
 		| null
-		| 'about'
 		| 'studios'
 		| 'offices'
 		| 'stream'
@@ -24,8 +21,6 @@
 		| 'join' = $state(null);
 	const onClose = () => (isModalOpen = null);
 	const onOpenJoin = () => (isModalOpen = 'join');
-
-	const comingSoon = () => toast.success('Coming soon!');
 </script>
 
 {#snippet screen()}
@@ -44,9 +39,8 @@
 <ModalStream {onClose} {onOpenJoin} isOpen={isModalOpen === 'stream'} />
 <ModalOpportunities {onClose} isOpen={isModalOpen === 'opportunities'} />
 <ModalSendEmail {onClose} isOpen={isModalOpen === 'join'} />
-<ModalAbout {onClose} isOpen={isModalOpen === 'about'} />
+
 <Nav
-	onOpenAbout={() => (isModalOpen = 'about')}
 	onOpenStudio={() => (isModalOpen = 'studios')}
 	onOpenAtelier={() => (isModalOpen = 'offices')}
 />
@@ -64,12 +58,8 @@
 		</div>
 	</div>
 	<div class="news grid place-items-center">
-		<!-- svelte-ignore a11y_no_static_element_interactions -->
 		<div
 			class="relative grid h-full w-full place-items-center rounded-full border-2 bg-white shadow-[2px_2px_0_black] md:h-[60%] md:w-[60%]"
-			onkeydown={() => {}}
-			onclick={comingSoon}
-			aria-label="dialog"
 		>
 			news
 		</div>
@@ -87,22 +77,20 @@
 		</div>
 	</div>
 	<div class="location">
-		<a href="https://maps.app.goo.gl/nkE2XhCBkjkw9suY6" target="_blank">
-			<button class="grid place-items-center rounded-lg">
-				<IconLocation width="60%" height="60%" />
-			</button>
-		</a>
+		<button class="grid place-items-center rounded-lg">
+			<IconLocation width="60%" height="60%" />
+		</button>
 	</div>
 	<div class="contact">
-		<button class="grid place-items-center rounded-lg" onclick={() => (isModalOpen = 'join')}>
+		<button class="grid place-items-center rounded-lg">
 			<IconEmail width="60%" height="60%" />
 		</button>
 	</div>
 	<div class="rec hidden place-items-center md:grid">
-		<button class="rounded-full" onclick={comingSoon}> rec </button>
+		<button class="rounded-full"> rec </button>
 	</div>
 	<div class="play hidden md:grid">
-		<button class="rounded-full" onclick={comingSoon}> play </button>
+		<button class="rounded-full"> play </button>
 	</div>
 	<div class="volume hidden place-items-center md:grid">
 		<div class="relative h-20 w-20 rounded-full border-2 bg-white shadow-[2px_2px_0_black]">
@@ -122,13 +110,13 @@
 	<!-- 	<button class="rounded-lg"> s4 </button> -->
 	<!-- </div> -->
 	<div class="special hidden md:grid">
-		<button class="rounded-lg" onclick={comingSoon}> special </button>
+		<button class="rounded-lg"> special </button>
 	</div>
 	<div class="sample hidden md:grid">
-		<button class="rounded-lg" onclick={comingSoon}> sample </button>
+		<button class="rounded-lg"> sample </button>
 	</div>
 	<div class="drum hidden md:grid">
-		<button class="rounded-lg" onclick={comingSoon}> drum </button>
+		<button class="rounded-lg"> drum </button>
 	</div>
 	<div class="speaker">
 		<SpeakerGrate />
