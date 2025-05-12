@@ -6,7 +6,9 @@
 </script>
 
 {#snippet screen()}
-	<div class="min-h-40 w-full rounded bg-black md:min-h-50"></div>
+	<div class="grid min-h-40 w-full place-items-center rounded bg-black md:min-h-50">
+		<video src="/screen.mp4" autoplay muted loop class="h-50 object-cover"></video>
+	</div>
 {/snippet}
 {#snippet mainButtons()}
 	<button class="rounded-lg">studios</button>
@@ -67,13 +69,13 @@
 		</div>
 	</div>
 	<div class="social-1">
-		<button class="rounded-lg"> s1 </button>
+		<button class="rounded-lg"> services </button>
 	</div>
 	<div class="social-2">
-		<button class="rounded-lg"> s2 </button>
+		<button class="rounded-lg text-[1.15rem]"> opportunities </button>
 	</div>
 	<div class="social-3">
-		<button class="rounded-lg"> s3 </button>
+		<button class="rounded-lg"> stream </button>
 	</div>
 	<div class="social-4">
 		<button class="rounded-lg"> s4 </button>
