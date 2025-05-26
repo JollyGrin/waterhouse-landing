@@ -34,8 +34,8 @@
 	</div>
 {/snippet}
 {#snippet mainButtons()}
-	<button class="rounded-lg" onclick={() => (isModalOpen = 'studios')}>studios</button>
-	<button class="rounded-lg" onclick={() => (isModalOpen = 'offices')}>ateliers</button>
+	<button class="rounded-lg text-4xl" onclick={() => (isModalOpen = 'studios')}>studios</button>
+	<button class="rounded-lg text-4xl" onclick={() => (isModalOpen = 'offices')}>ateliers</button>
 {/snippet}
 
 <ModalMusicStudio {onClose} {onOpenJoin} isOpen={isModalOpen === 'studios'} />
