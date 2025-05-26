@@ -6,6 +6,7 @@
 	import ModalSendEmail from '$lib/modal/ModalSendEmail.svelte';
 	import ModalServices from '$lib/modal/ModalServices.svelte';
 	import ModalStream from '$lib/modal/ModalStream.svelte';
+	import Nav from '$lib/Nav.svelte';
 	import SpeakerGrate from '$lib/SpeakerGrate.svelte';
 	import toast from 'svelte-french-toast';
 
