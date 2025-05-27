@@ -20,11 +20,8 @@
 			<div class="grid gap-8 md:grid-cols-2">
 				<Product
 					title="Atelier"
-					memo="Ready for Twitch and YouTube broadcasts, perfect for building your online presence."
-					info={[
-						['Stream Setup', '4K cameras', 'Pro lighting', 'Green screen', 'Stream deck'],
-						['Audio/Visual', 'Audio interface', 'Multiple mics', 'Monitor setup', 'Sound treatment']
-					]}
+					memo="For artist and industry professional, 24.7 access"
+					info={[[], []]}
 				/>
 
 				<div
