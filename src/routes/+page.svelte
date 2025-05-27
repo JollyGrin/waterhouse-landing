@@ -66,7 +66,7 @@
 	<div class="news grid place-items-center">
 		<!-- svelte-ignore a11y_no_static_element_interactions -->
 		<div
-			class="relative grid h-full w-full place-items-center rounded-full border-2 bg-white shadow-[2px_2px_0_black] md:h-[60%] md:w-[60%]"
+			class="relative grid h-full w-full place-items-center rounded-full border-2 bg-white shadow-[3px_3px_0_black] md:h-[60%] md:w-[60%]"
 			onkeydown={() => {}}
 			onclick={comingSoon}
 			aria-label="dialog"
