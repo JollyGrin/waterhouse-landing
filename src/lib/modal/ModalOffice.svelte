@@ -20,7 +20,7 @@
 			<div class="grid gap-8 md:grid-cols-2">
 				<Product
 					title="Atelier"
-					memo="For artist and industry professional, 24.7 access"
+					memo="For artist and industry professional, 24/7 access"
 					info={[[], []]}
 				/>
 
