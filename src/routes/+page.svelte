@@ -34,8 +34,8 @@
 	</div>
 {/snippet}
 {#snippet mainButtons()}
-	<button class="rounded-lg text-4xl" onclick={() => (isModalOpen = 'studios')}>studios</button>
-	<button class="rounded-lg text-4xl" onclick={() => (isModalOpen = 'offices')}>ateliers</button>
+	<button class="rounded-lg" onclick={() => (isModalOpen = 'studios')}>studios</button>
+	<button class="rounded-lg" onclick={() => (isModalOpen = 'offices')}>ateliers</button>
 {/snippet}
 
 <ModalMusicStudio {onClose} {onOpenJoin} isOpen={isModalOpen === 'studios'} />
@@ -59,7 +59,7 @@
 	</div>
 	<div class="screen flex flex-col gap-2">
 		{@render screen()}
-		<div class="hidden h-full grid-cols-2 gap-2 md:grid">
+		<div class="hidden h-full grid-cols-2 gap-2 md:grid md:text-4xl xl:text-7xl">
 			{@render mainButtons()}
 		</div>
 	</div>
