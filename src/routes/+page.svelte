@@ -10,7 +10,26 @@
 	import ModalStream from '$lib/modal/ModalStream.svelte';
 	import Nav from '$lib/Nav.svelte';
 	import SpeakerGrate from '$lib/SpeakerGrate.svelte';
+	import SEOContent from '$lib/SEOContent.svelte';
 	import toast from 'svelte-french-toast';
+	
+	// SEO-specific content extracted from modals
+	const seoAboutContent = `
+		A Space Crafted for Music Creators and Industry Professionals
+		
+		At Waterhouse Studios, everything we offer is tailored specifically to the needs of music creators and the people working in the music industry. Our mission is to provide cutting-edge facilities and foster a collaborative environment where artists and professionals can connect, create, and succeed.
+		
+		Waterhouse Studios offers premium music studios, each custom-designed by industry professionals for optimal acoustics and workflow. Built by creators, for creators, our spaces provide the perfect environment to produce, collaborate, and grow.
+		
+		Why Waterhouse Studios?
+		What sets Waterhouse Studios apart? It's the combination of world-class facilities, comprehensive artist development resources, and a vibrant community—all in one place. We're more than just a studio; we're a partner in your creative journey.
+		
+		A Vibrant Community
+		At the heart of Waterhouse Studios is a thriving community of creatives who share a passion for innovation and artistic excellence. Here, you'll find a supportive network of peers and mentors who are as invested in your success as you are.
+	`;
+	
+	// Combine all SEO content
+	const allSeoContent = seoAboutContent;
 
 	let isModalOpen:
 		| null
@@ -50,6 +69,9 @@
 	onOpenStudio={() => (isModalOpen = 'studios')}
 	onOpenAtelier={() => (isModalOpen = 'offices')}
 />
+
+<!-- Hidden SEO content for search engines -->
+<SEOContent content={allSeoContent} />
 
 <div
 	class="ctrl-container font-jersey container mx-auto w-full overflow-clip rounded-xl border-2 bg-slate-50 p-3 text-xl md:min-h-[300px] md:p-2 xl:text-4xl"
