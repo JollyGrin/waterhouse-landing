@@ -1,10 +1,15 @@
 <script lang="ts">
 	import Modal from './Modal.svelte';
 	let { isOpen = false, onClose }: { isOpen?: boolean; onClose(): void } = $props();
+
+	// Using $derived for reactive values in runes mode
+	const showModal = $derived(isOpen);
 </script>
 
-<Modal {isOpen} {onClose}>
-	<div class="space-y-8">
+<!-- SEO-friendly content that's always in the HTML but visually hidden unless modal is open -->
+<div class="modal-content" class:seo-only={!showModal}>
+	<Modal {isOpen} {onClose}>
+		<div class="space-y-8">
 		<div class="space-y-4">
 			<h2 class="text-4xl">A Space Crafted for Music Creators</h2>
 			<p class="font-mono text-sm text-teal-400">and Industry Professionals</p>
@@ -57,4 +62,20 @@
 			</div>
 		</div>
 	</div>
-</Modal>
+	</Modal>
+</div>
+
+<style>
+	/* Hidden visually but available to search engines when modal is closed */
+	.seo-only {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		padding: 0;
+		margin: -1px;
+		overflow: hidden;
+		clip: rect(0, 0, 0, 0);
+		white-space: nowrap;
+		border: 0;
+	}
+</style>

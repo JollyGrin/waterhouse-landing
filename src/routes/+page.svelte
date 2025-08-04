@@ -12,7 +12,7 @@
 	import SpeakerGrate from '$lib/SpeakerGrate.svelte';
 	import SEOContent from '$lib/SEOContent.svelte';
 	import toast from 'svelte-french-toast';
-	
+
 	// SEO-specific content extracted from modals
 	const seoAboutContent = `
 		A Space Crafted for Music Creators and Industry Professionals
@@ -27,7 +27,7 @@
 		A Vibrant Community
 		At the heart of Waterhouse Studios is a thriving community of creatives who share a passion for innovation and artistic excellence. Here, you'll find a supportive network of peers and mentors who are as invested in your success as you are.
 	`;
-	
+
 	// Combine all SEO content
 	const allSeoContent = seoAboutContent;
 
@@ -53,8 +53,12 @@
 	</div>
 {/snippet}
 {#snippet mainButtons()}
-	<button class="rounded-lg" onclick={() => (isModalOpen = 'studios')}>studios</button>
-	<button class="rounded-lg" onclick={() => (isModalOpen = 'offices')}>ateliers</button>
+	<button class="sm:text-medium rounded-lg text-5xl" onclick={() => (isModalOpen = 'studios')}
+		>studios</button
+	>
+	<button class="sm:text-medium rounded-lg text-5xl" onclick={() => (isModalOpen = 'offices')}
+		>ateliers</button
+	>
 {/snippet}
 
 <ModalMusicStudio {onClose} {onOpenJoin} isOpen={isModalOpen === 'studios'} />
