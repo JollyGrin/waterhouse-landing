@@ -12,6 +12,7 @@
 	import SpeakerGrate from '$lib/SpeakerGrate.svelte';
 	import SEOContent from '$lib/SEOContent.svelte';
 	import toast from 'svelte-french-toast';
+	import IconInstagram from '$lib/icon/IconInstagram.svelte';
 
 	// SEO-specific content extracted from modals
 	const seoAboutContent = `
@@ -91,13 +92,12 @@
 	</div>
 	<div class="news grid place-items-center">
 		<!-- svelte-ignore a11y_no_static_element_interactions -->
-		<div
-			class="relative grid h-full w-full place-items-center rounded-full border-2 bg-white shadow-[3px_3px_0_black] md:h-[60%] md:w-[60%]"
-			onkeydown={() => {}}
-			onclick={comingSoon}
-			aria-label="dialog"
-		>
-			news
+		<div class="relative grid h-full w-full place-items-center sm:h-[50%] sm:w-[50%]">
+			<a href="https://www.instagram.com/waterhousestudiosamsterdam" class="h-full w-full">
+				<button class="grid place-items-center rounded-xl">
+					<IconInstagram w={50} />
+				</button>
+			</a>
 		</div>
 	</div>
 	<div class="slider">
