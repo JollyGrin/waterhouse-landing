@@ -8,6 +8,7 @@
 	import ModalSendEmail from '$lib/modal/ModalSendEmail.svelte';
 	import ModalServices from '$lib/modal/ModalServices.svelte';
 	import ModalStream from '$lib/modal/ModalStream.svelte';
+	import ModalVideo from '$lib/modal/ModalVideo.svelte';
 	import Nav from '$lib/Nav.svelte';
 	import SpeakerGrate from '$lib/SpeakerGrate.svelte';
 	import SEOContent from '$lib/SEOContent.svelte';
@@ -41,7 +42,8 @@
 		| 'services'
 		| 'opportunities'
 		| 'stream'
-		| 'join' = $state(null);
+		| 'join'
+		| 'video' = $state(null);
 	const onClose = () => (isModalOpen = null);
 	const onOpenJoin = () => (isModalOpen = 'join');
 
@@ -69,6 +71,7 @@
 <ModalOpportunities {onClose} isOpen={isModalOpen === 'opportunities'} />
 <ModalSendEmail {onClose} isOpen={isModalOpen === 'join'} />
 <ModalAbout {onClose} isOpen={isModalOpen === 'about'} />
+<ModalVideo {onClose} isOpen={isModalOpen === 'video'} videoSrc="/tour.mp4" />
 <Nav
 	onOpenAbout={() => (isModalOpen = 'about')}
 	onOpenStudio={() => (isModalOpen = 'studios')}
@@ -128,7 +131,7 @@
 		<button class="rounded-full" onclick={comingSoon}> rec </button>
 	</div>
 	<div class="play hidden md:grid">
-		<button class="rounded-full" onclick={comingSoon}> play </button>
+		<button class="rounded-full" onclick={() => (isModalOpen = 'video')}> play </button>
 	</div>
 	<div class="volume hidden place-items-center md:grid">
 		<div class="relative h-20 w-20 rounded-full border-2 bg-white shadow-[2px_2px_0_black]">
