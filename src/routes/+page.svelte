@@ -81,6 +81,28 @@
 <!-- Hidden SEO content for search engines -->
 <SEOContent content={allSeoContent} />
 
+<!-- Mobile-only video banner -->
+<div
+	class="from-highlight text-primary font-jersey mb-1 bg-gradient-to-b to-white px-4 py-3 text-center md:hidden"
+>
+	<button
+		class="flex w-full items-center justify-center gap-2 text-lg text-black"
+		onclick={() => (isModalOpen = 'video')}
+	>
+		<span>What is Waterhouse?</span>
+		<svg
+			xmlns="http://www.w3.org/2000/svg"
+			width="20"
+			height="20"
+			viewBox="0 0 24 24"
+			fill="currentColor"
+		>
+			<polygon points="5 3 19 12 5 21 5 3"></polygon>
+		</svg>
+		<span>Play Video</span>
+	</button>
+</div>
+
 <div
 	class="ctrl-container font-jersey container mx-auto w-full overflow-clip rounded-xl border-2 bg-slate-50 p-3 text-xl md:min-h-[300px] md:p-2 xl:text-4xl"
 >
