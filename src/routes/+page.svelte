@@ -14,6 +14,7 @@
 	import SEOContent from '$lib/SEOContent.svelte';
 	import toast from 'svelte-french-toast';
 	import IconInstagram from '$lib/icon/IconInstagram.svelte';
+	import IconTwitch from '$lib/icon/IconTwitch.svelte';
 
 	// SEO-specific content extracted from modals
 	const seoAboutContent = `
@@ -117,10 +118,15 @@
 	</div>
 	<div class="news grid place-items-center">
 		<!-- svelte-ignore a11y_no_static_element_interactions -->
-		<div class="relative grid h-full w-full place-items-center sm:h-[50%] sm:w-[50%]">
-			<a href="https://www.instagram.com/waterhousestudiosamsterdam" class="h-full w-full">
-				<button class="grid place-items-center rounded-xl">
-					<IconInstagram w={50} />
+		<div class="relative grid h-full w-full grid-cols-2 gap-2 md:h-[50%] md:w-full md:grid-cols-1 md:gap-0">
+			<a href="https://www.instagram.com/waterhousestudiosamsterdam" class="h-full w-full md:h-[50%]">
+				<button class="grid place-items-center rounded-xl h-full">
+					<IconInstagram w={35} />
+				</button>
+			</a>
+			<a href="https://www.twitch.tv/waterhousestudios" class="h-full w-full md:h-[50%]">
+				<button class="grid place-items-center rounded-xl h-full">
+					<IconTwitch w={35} />
 				</button>
 			</a>
 		</div>

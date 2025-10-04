@@ -9,7 +9,13 @@ const config = {
 	preprocess: [vitePreprocess(), mdsvex()],
 
 	kit: {
-		adapter: adapter()
+		adapter: adapter({
+			prerender: {
+				entries: ['*'], // Prerender all routes
+				crawl: true, // Crawl all links to discover routes
+				enabled: true // Ensure prerendering is enabled
+			}
+		})
 	},
 
 	extensions: ['.svelte', '.svx']
