@@ -1,4 +1,5 @@
 <script lang="ts">
+	export const prerender = true;
 	import IconEmail from '$lib/icon/IconEmail.svelte';
 	import IconLocation from '$lib/icon/IconLocation.svelte';
 	import ModalAbout from '$lib/modal/ModalAbout.svelte';
