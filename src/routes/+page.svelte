@@ -195,6 +195,13 @@
 	</div>
 </div>
 
+<!-- Contact info at bottom -->
+<div class="font-jersey mt-8 text-center text-sm opacity-60">
+	Have a question? Contact us at <a href="mailto:info@waterhousestudios.nl">
+		info@waterhousestudios.nl
+	</a>
+</div>
+
 <style>
 	:root {
 		--ctrl-unit: calc(calc(100vw - calc(60 * 2px)) / 89.66);
