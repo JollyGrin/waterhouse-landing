@@ -1,0 +1,113 @@
+// 22nd⬇
+// 18:00-19:00 Denzo
+// 19:00-20:00 Denzo’s friend
+// 20:00-20:21 (N)ARZ
+//
+// 23rd⬇
+// 15:00-16:00 Elemzene
+// 16:00-17:00 L4C4
+// 17:00-18:00 cosmic sub
+// 18:00-20:00 recode rotterdam records
+// 20:00-21:00 Alex Sharp
+// 21:00-22:00 tbc
+//
+// 25th⬇
+//
+// 12:00-13:30 Main identity b2b Althoff
+// 13:30-14:30 Ontold
+// 14:30-15:30 David Bucka
+
+type EventSlot = {
+	artist: string;
+	date: Date;
+	startTime: number;
+	endTime: number;
+	profilePhotoUrl?: string;
+	portfolioUrl?: string;
+	instagram?: string;
+};
+
+const WED22 = new Date('Oct 22 2025 GMT+2');
+const THUR23 = new Date('Oct 23 2025 GMT+2');
+const SAT25 = new Date('Oct 25 2025 GMT+2');
+
+export const LINEUP: EventSlot[] = [
+	// Wednesday 22nd
+	{
+		artist: 'Denzo',
+		date: WED22,
+		startTime: 1800,
+		endTime: 1900,
+		instagram: 'the_denzo',
+		profilePhotoUrl:
+			'https://instagram.frtm1-2.fna.fbcdn.net/v/t51.2885-19/469743144_1382245919420775_2354926854946828729_n.jpg?stp=dst-jpg_s150x150_tt6&efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLmRqYW5nby4xMDgwLmMyIn0&_nc_ht=instagram.frtm1-2.fna.fbcdn.net&_nc_cat=103&_nc_oc=Q6cZ2QHbrMEV87ao-vcovZXtaQ9hnT2ZceAZmyuwK97JBMlnJnOSAhjCQy6AqN1ZbnItuNg&_nc_ohc=or5-kJbrs2sQ7kNvwGkSPif&_nc_gid=ZavnMaJroLnH8n51QXRaWA&edm=AEYEu-QBAAAA&ccb=7-5&oh=00_AfesNeOaA-swJ56L9GrAItE2zggLyMeBwWhu0RrJl4GJQg&oe=68F9C856&_nc_sid=ead929'
+	},
+	{
+		artist: "Denzo's friend",
+		date: WED22,
+		startTime: 1900,
+		endTime: 2000
+	},
+	{
+		artist: '(N)ARZ',
+		date: WED22,
+		startTime: 2000,
+		endTime: 2021
+	},
+	// Thursday 23rd
+	{
+		artist: 'Elemzene',
+		date: THUR23,
+		startTime: 1500,
+		endTime: 1600
+	},
+	{
+		artist: 'L4C4',
+		date: THUR23,
+		startTime: 1600,
+		endTime: 1700
+	},
+	{
+		artist: 'cosmic sub',
+		date: THUR23,
+		startTime: 1700,
+		endTime: 1800
+	},
+	{
+		artist: 'recode rotterdam records',
+		date: THUR23,
+		startTime: 1800,
+		endTime: 2000
+	},
+	{
+		artist: 'Alex Sharp',
+		date: THUR23,
+		startTime: 2000,
+		endTime: 2100
+	},
+	{
+		artist: 'tbc',
+		date: THUR23,
+		startTime: 2100,
+		endTime: 2200
+	},
+	// Saturday 25th
+	{
+		artist: 'Main identity b2b Althoff',
+		date: SAT25,
+		startTime: 1200,
+		endTime: 1330
+	},
+	{
+		artist: 'Ontold',
+		date: SAT25,
+		startTime: 1330,
+		endTime: 1430
+	},
+	{
+		artist: 'David Bucka',
+		date: SAT25,
+		startTime: 1430,
+		endTime: 1530
+	}
+];
