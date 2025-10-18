@@ -38,9 +38,7 @@ export const LINEUP: EventSlot[] = [
 		date: WED22,
 		startTime: 1800,
 		endTime: 1900,
-		instagram: 'the_denzo',
-		profilePhotoUrl:
-			'https://instagram.frtm1-2.fna.fbcdn.net/v/t51.2885-19/469743144_1382245919420775_2354926854946828729_n.jpg?stp=dst-jpg_s150x150_tt6&efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLmRqYW5nby4xMDgwLmMyIn0&_nc_ht=instagram.frtm1-2.fna.fbcdn.net&_nc_cat=103&_nc_oc=Q6cZ2QHbrMEV87ao-vcovZXtaQ9hnT2ZceAZmyuwK97JBMlnJnOSAhjCQy6AqN1ZbnItuNg&_nc_ohc=or5-kJbrs2sQ7kNvwGkSPif&_nc_gid=ZavnMaJroLnH8n51QXRaWA&edm=AEYEu-QBAAAA&ccb=7-5&oh=00_AfesNeOaA-swJ56L9GrAItE2zggLyMeBwWhu0RrJl4GJQg&oe=68F9C856&_nc_sid=ead929'
+		instagram: 'the_denzo'
 	},
 	{
 		artist: "Denzo's friend",

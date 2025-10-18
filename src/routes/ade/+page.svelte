@@ -98,7 +98,7 @@
 <style>
 	.container {
 		min-height: 100vh;
-		background-color: #0a0a0a;
+		background-color: #000000;
 		color: #ffffff;
 		padding: 0;
 		margin: 0;
@@ -107,25 +107,22 @@
 	header {
 		padding: 2rem 1rem;
 		text-align: center;
-		background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
-		border-bottom: 1px solid #333;
+		background: #000000;
+		border-bottom: 2px solid #ffed00;
 	}
 	
 	h1 {
 		font-size: 2.5rem;
 		font-weight: 900;
 		margin: 0;
-		background: linear-gradient(135deg, #ff0080, #ff8c00);
-		-webkit-background-clip: text;
-		-webkit-text-fill-color: transparent;
-		background-clip: text;
+		color: #ffed00;
 		text-transform: uppercase;
 		letter-spacing: 0.1em;
 	}
 	
 	.subtitle {
 		font-size: 1.125rem;
-		color: #888;
+		color: #999;
 		margin: 0.5rem 0 0 0;
 		font-weight: 300;
 	}
@@ -144,7 +141,7 @@
 		font-size: 1.25rem;
 		font-weight: 700;
 		margin: 0 0 1.5rem 0;
-		color: #ff0080;
+		color: #ffed00;
 		text-transform: uppercase;
 		letter-spacing: 0.05em;
 	}
@@ -156,9 +153,9 @@
 	}
 	
 	.event-card {
-		background: #1a1a1a;
-		border: 1px solid #333;
-		border-radius: 12px;
+		background: #0a0a0a;
+		border: 1px solid #222;
+		border-radius: 8px;
 		padding: 1.25rem;
 		display: grid;
 		grid-template-columns: auto 1fr;
@@ -167,10 +164,10 @@
 	}
 	
 	.event-card:hover {
-		background: #222;
-		border-color: #ff0080;
+		background: #111;
+		border-color: #ffed00;
 		transform: translateY(-2px);
-		box-shadow: 0 4px 20px rgba(255, 0, 128, 0.2);
+		box-shadow: 0 4px 20px rgba(255, 237, 0, 0.15);
 	}
 	
 	.time-slot {
@@ -183,14 +180,14 @@
 	.time {
 		font-size: 0.875rem;
 		font-weight: 600;
-		color: #ff8c00;
+		color: #ffed00;
 		font-variant-numeric: tabular-nums;
 	}
 	
 	.duration-line {
 		width: 2px;
 		height: 20px;
-		background: linear-gradient(180deg, #ff8c00, #ff0080);
+		background: #ffed00;
 	}
 	
 	.event-info {
@@ -212,7 +209,7 @@
 		height: 40px;
 		border-radius: 50%;
 		object-fit: cover;
-		border: 2px solid #333;
+		border: 2px solid #222;
 		flex-shrink: 0;
 	}
 	
@@ -234,15 +231,15 @@
 	
 	.link {
 		font-size: 0.875rem;
-		color: #888;
+		color: #999;
 		text-decoration: none;
-		transition: color 0.2s ease;
+		transition: all 0.2s ease;
 		border-bottom: 1px solid transparent;
 	}
 	
 	.link:hover {
-		color: #ff0080;
-		border-bottom-color: #ff0080;
+		color: #ffed00;
+		border-bottom-color: #ffed00;
 	}
 	
 	/* Tablet and larger screens */
