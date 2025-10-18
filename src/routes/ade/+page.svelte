@@ -26,6 +26,19 @@
 			day: 'numeric' 
 		});
 	}
+	
+	// Get Instagram URL from either username or full URL
+	function getInstagramUrl(instagram: string | undefined): string | null {
+		if (!instagram) return null;
+		
+		// If it's already a full URL, return it
+		if (instagram.startsWith('http')) {
+			return instagram;
+		}
+		
+		// Otherwise, construct the URL from username
+		return `https://instagram.com/${instagram}`;
+	}
 </script>
 
 <div class="container">
@@ -49,7 +62,12 @@
 							</div>
 							
 							<div class="event-info">
-								<h3 class="artist-name">{event.artist}</h3>
+								<div class="artist-header">
+									{#if event.profilePhotoUrl}
+										<img src={event.profilePhotoUrl} alt={event.artist} class="profile-photo" />
+									{/if}
+									<h3 class="artist-name">{event.artist}</h3>
+								</div>
 								
 								{#if event.portfolioUrl || event.instagram}
 									<div class="links">
@@ -59,9 +77,12 @@
 											</a>
 										{/if}
 										{#if event.instagram}
-											<a href={`https://instagram.com/${event.instagram}`} target="_blank" rel="noopener noreferrer" class="link">
-												Instagram
-											</a>
+											{@const instagramUrl = getInstagramUrl(event.instagram)}
+											{#if instagramUrl}
+												<a href={instagramUrl} target="_blank" rel="noopener noreferrer" class="link">
+													Instagram
+												</a>
+											{/if}
 										{/if}
 									</div>
 								{/if}
@@ -180,6 +201,21 @@
 		min-width: 0;
 	}
 	
+	.artist-header {
+		display: flex;
+		align-items: center;
+		gap: 0.75rem;
+	}
+	
+	.profile-photo {
+		width: 40px;
+		height: 40px;
+		border-radius: 50%;
+		object-fit: cover;
+		border: 2px solid #333;
+		flex-shrink: 0;
+	}
+	
 	.artist-name {
 		font-size: 1.125rem;
 		font-weight: 700;
@@ -239,6 +275,11 @@
 		
 		.event-card {
 			padding: 1.5rem;
+		}
+		
+		.profile-photo {
+			width: 48px;
+			height: 48px;
 		}
 		
 		.artist-name {

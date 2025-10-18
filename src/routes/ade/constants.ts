@@ -52,7 +52,10 @@ export const LINEUP: EventSlot[] = [
 		artist: '(N)ARZ',
 		date: WED22,
 		startTime: 2000,
-		endTime: 2021
+		endTime: 2100,
+		profilePhotoUrl:
+			'https://geo-media.beatport.com/image_size/590x404/8edcd12c-7345-42a3-99ba-b35497cabaf2.jpg',
+		portfolioUrl: 'https://www.beatport.com/artist/narz/1330744'
 	},
 	// Thursday 23rd
 	{
@@ -108,6 +111,10 @@ export const LINEUP: EventSlot[] = [
 		artist: 'David Bucka',
 		date: SAT25,
 		startTime: 1430,
-		endTime: 1530
+		endTime: 1530,
+		instagram: 'davidbucka_',
+		profilePhotoUrl:
+			'https://imgproxy.ra.co/_/quality:66/h:180/w:180/rt:fill/gravity:sm/aHR0cHM6Ly9zdGF0aWMucmEuY28vaW1hZ2VzL3Byb2ZpbGVzL3NxdWFyZS9kYXZpZGJ1Y2thLmpwZz9kYXRlVXBkYXRlZD0xNTY1MTA1NDg3MDAw',
+		portfolioUrl: 'https://ra.co/dj/davidbucka'
 	}
 ];
