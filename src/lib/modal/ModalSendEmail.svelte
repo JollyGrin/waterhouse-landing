@@ -22,7 +22,6 @@
 			`Name: ${name}\nEmail: ${email}\nPhone: ${phone}\nPortfolio: ${portfolio}\nStudio Type: ${studio}`
 		);
 		const mailtoUrl = `mailto:info@waterhousestudios.nl?subject=${subject}&body=${body}`;
-
 		// Open default email client
 		window.location.href = mailtoUrl;
 
