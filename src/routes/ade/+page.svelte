@@ -90,9 +90,10 @@
 												href={event.portfolioUrl}
 												target="_blank"
 												rel="noopener noreferrer"
-												class="link"
+												class="link link-portfolio"
 											>
-												Portfolio
+												<span class="link-icon">🎵</span>
+												<span>Portfolio</span>
 											</a>
 										{/if}
 										{#if event.instagram}
@@ -102,9 +103,10 @@
 													href={instagramUrl}
 													target="_blank"
 													rel="noopener noreferrer"
-													class="link"
+													class="link link-instagram"
 												>
-													Instagram
+													<span class="link-icon">📸</span>
+													<span>Instagram</span>
 												</a>
 											{/if}
 										{/if}
@@ -120,12 +122,21 @@
 </div>
 
 <style>
+	:global(body) {
+		margin: 0;
+		padding: 0;
+		overflow-x: hidden;
+	}
+	
 	.container {
 		min-height: 100vh;
 		background-color: #000000;
 		color: #ffffff;
 		padding: 0;
 		margin: 0;
+		overflow-x: hidden;
+		width: 100vw;
+		max-width: 100%;
 	}
 
 	.twitch-banner {
@@ -278,21 +289,49 @@
 
 	.links {
 		display: flex;
-		gap: 1rem;
+		gap: 0.75rem;
 		flex-wrap: wrap;
+		margin-top: 0.75rem;
 	}
 
 	.link {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
 		font-size: 0.875rem;
-		color: #999;
+		color: #fff;
+		background: #222;
+		padding: 0.5rem 0.875rem;
+		border-radius: 6px;
 		text-decoration: none;
 		transition: all 0.2s ease;
-		border-bottom: 1px solid transparent;
+		border: 1px solid #333;
+		font-weight: 500;
+		text-transform: uppercase;
+		letter-spacing: 0.03em;
 	}
 
 	.link:hover {
-		color: #ffed00;
-		border-bottom-color: #ffed00;
+		background: #ffed00;
+		color: #000;
+		border-color: #ffed00;
+		transform: translateY(-1px);
+		box-shadow: 0 2px 8px rgba(255, 237, 0, 0.3);
+	}
+
+	.link-icon {
+		font-size: 1rem;
+	}
+
+	.link-portfolio:hover {
+		background: #ffed00;
+		color: #000;
+	}
+
+	.link-instagram:hover {
+		background: linear-gradient(135deg, #833AB4, #FD1D1D, #F77737);
+		color: #fff;
+		border-color: #833AB4;
 	}
 
 	/* Tablet and larger screens */
@@ -340,6 +379,15 @@
 		/* .artist-name { */
 		/* 	font-size: 1.25rem; */
 		/* } */
+		
+		.link {
+			font-size: 0.9375rem;
+			padding: 0.625rem 1rem;
+		}
+		
+		.links {
+			gap: 1rem;
+		}
 	}
 
 	/* Desktop screens */
