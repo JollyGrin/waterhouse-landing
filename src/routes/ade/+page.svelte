@@ -45,6 +45,41 @@
 	}
 </script>
 
+<svelte:head>
+	<title>ADE 2025 - Waterhouse Stream Marathon | Oct 22-25</title>
+	<meta
+		name="description"
+		content="Join Waterhouse Studios for a 3-day Twitch stream marathon during Amsterdam Dance Event 2025. Featuring Denzo, (N)ARZ, cosmic sub, Alex Sharp, Main identity b2b Althoff, and more!"
+	/>
+
+	<!-- Open Graph / Facebook -->
+	<meta property="og:type" content="website" />
+	<meta property="og:title" content="ADE 2025 - Waterhouse Stream Marathon" />
+	<meta
+		property="og:description"
+		content="3-day Twitch stream marathon during Amsterdam Dance Event. Oct 22-25 featuring underground electronic music artists."
+	/>
+	<meta property="og:image" content="/ADE_OG.png" />
+	<meta property="og:url" content="https://waterhousestudios.nl/ade" />
+	<meta property="og:site_name" content="Waterhouse Studios" />
+
+	<!-- Twitter -->
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content="ADE 2025 - Waterhouse Stream Marathon" />
+	<meta
+		name="twitter:description"
+		content="3-day Twitch stream marathon during Amsterdam Dance Event. Oct 22-25 featuring underground electronic music artists."
+	/>
+	<meta name="twitter:image" content="/ADE_OG.png" />
+
+	<!-- Additional Meta -->
+	<meta
+		name="keywords"
+		content="ADE, Amsterdam Dance Event, Waterhouse Studios, Twitch stream, electronic music, techno, house music, livestream"
+	/>
+	<meta name="author" content="Waterhouse Studios" />
+</svelte:head>
+
 <div class="font-jersey container">
 	<a
 		href="https://twitch.tv/waterhousestudios"
@@ -127,14 +162,13 @@
 		padding: 0;
 		overflow-x: hidden;
 	}
-	
+
 	.container {
 		min-height: 100vh;
 		background-color: #000000;
 		color: #ffffff;
 		padding: 0;
 		margin: 0;
-		overflow-x: hidden;
 		width: 100vw;
 		max-width: 100%;
 	}
@@ -329,9 +363,9 @@
 	}
 
 	.link-instagram:hover {
-		background: linear-gradient(135deg, #833AB4, #FD1D1D, #F77737);
+		background: linear-gradient(135deg, #833ab4, #fd1d1d, #f77737);
 		color: #fff;
-		border-color: #833AB4;
+		border-color: #833ab4;
 	}
 
 	/* Tablet and larger screens */
@@ -379,12 +413,12 @@
 		/* .artist-name { */
 		/* 	font-size: 1.25rem; */
 		/* } */
-		
+
 		.link {
 			font-size: 0.9375rem;
 			padding: 0.625rem 1rem;
 		}
-		
+
 		.links {
 			gap: 1rem;
 		}
