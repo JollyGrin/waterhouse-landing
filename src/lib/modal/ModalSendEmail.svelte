@@ -15,17 +15,13 @@
 
 	function handleSubmit(event: Event) {
 		event.preventDefault();
-		if (!name || !email || !phone || !portfolio) {
-			error = 'Please fill out all required fields';
-			return;
-		}
 
 		// Create mailto URL with form data
 		const subject = encodeURIComponent('Studio Space Application');
 		const body = encodeURIComponent(
 			`Name: ${name}\nEmail: ${email}\nPhone: ${phone}\nPortfolio: ${portfolio}\nStudio Type: ${studio}`
 		);
-		const mailtoUrl = `mailto:hello@waterhouse.com?subject=${subject}&body=${body}`;
+		const mailtoUrl = `mailto:info@waterhousestudios.nl?subject=${subject}&body=${body}`;
 
 		// Open default email client
 		window.location.href = mailtoUrl;
