@@ -34,22 +34,23 @@ const SAT25 = new Date('Oct 25 2025 GMT+2');
 
 export const LINEUP: EventSlot[] = [
 	// Wednesday 22nd
-	{
-		artist: 'Denzo',
-		date: WED22,
-		startTime: 1800,
-		endTime: 1900,
-		instagram: 'the_denzo',
-		profilePhotoUrl: 'https://i.imgur.com/nt2wsuD.png'
-	},
+
 	{
 		artist: 'Gill Charleston',
 		date: WED22,
-		startTime: 1900,
-		endTime: 2000,
+		startTime: 1800,
+		endTime: 1900,
 		instagram: 'gillcharleston',
 		portfolioUrl: 'http://gillcharleston.com',
 		profilePhotoUrl: 'https://i.imgur.com/B2321LI.png'
+	},
+	{
+		artist: 'Denzo',
+		date: WED22,
+		startTime: 1900,
+		endTime: 2000,
+		instagram: 'the_denzo',
+		profilePhotoUrl: 'https://i.imgur.com/nt2wsuD.png'
 	},
 	{
 		artist: '(N)ARZ',
