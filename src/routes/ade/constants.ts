@@ -29,6 +29,7 @@ type EventSlot = {
 
 const WED22 = new Date('Oct 22 2025 GMT+2');
 const THUR23 = new Date('Oct 23 2025 GMT+2');
+const FRI24 = new Date('Oct 24 2025 GMT+2');
 const SAT25 = new Date('Oct 25 2025 GMT+2');
 
 export const LINEUP: EventSlot[] = [
@@ -68,7 +69,9 @@ export const LINEUP: EventSlot[] = [
 		artist: 'L4C4',
 		date: THUR23,
 		startTime: 1600,
-		endTime: 1700
+		endTime: 1700,
+		instagram: 'l4c4_music',
+		profilePhotoUrl: 'https://i.imgur.com/xigqfi9.png'
 	},
 	{
 		artist: 'cosmic sub',
@@ -80,7 +83,11 @@ export const LINEUP: EventSlot[] = [
 		artist: 'recode rotterdam records',
 		date: THUR23,
 		startTime: 1800,
-		endTime: 2000
+		endTime: 2000,
+		instagram: 'recoderecords',
+		profilePhotoUrl:
+			'https://cloudinary-cdn.ffm.to/s--mA5bY068--/w_256,h_256,c_lfill/f_webp/https%3A%2F%2Fimagestore.ffm.to%2Flink%2Fad8e7cc58d2ab52a1455e4ebb87641fc.png',
+		portfolioUrl: 'https://ffm.bio/recode'
 	},
 	{
 		artist: 'Alex Sharp',
@@ -93,6 +100,15 @@ export const LINEUP: EventSlot[] = [
 		date: THUR23,
 		startTime: 2100,
 		endTime: 2200
+	},
+	// Friday 24th
+	{
+		artist: 'TRÜm',
+		date: FRI24,
+		startTime: 1830,
+		endTime: 1930,
+		profilePhotoUrl: 'https://i.imgur.com/2UGKBCi.png',
+		portfolioUrl: 'https://soundcloud.com/trumofficial/tracks'
 	},
 	// Saturday 25th
 	{
@@ -116,5 +132,11 @@ export const LINEUP: EventSlot[] = [
 		profilePhotoUrl:
 			'https://imgproxy.ra.co/_/quality:66/h:180/w:180/rt:fill/gravity:sm/aHR0cHM6Ly9zdGF0aWMucmEuY28vaW1hZ2VzL3Byb2ZpbGVzL3NxdWFyZS9kYXZpZGJ1Y2thLmpwZz9kYXRlVXBkYXRlZD0xNTY1MTA1NDg3MDAw',
 		portfolioUrl: 'https://ra.co/dj/davidbucka'
+	},
+	{
+		artist: 'Granular Heat',
+		date: SAT25,
+		startTime: 1530,
+		endTime: 1630
 	}
 ];
