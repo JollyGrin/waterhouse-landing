@@ -61,10 +61,7 @@
 		property="og:description"
 		content="4-day Twitch stream marathon during Amsterdam Dance Event. Oct 22-25 featuring underground electronic music artists at the new Waterhouse Studios in Amsterdam."
 	/>
-	<meta
-		property="og:image"
-		content="https://waterhousestudios.nl/ADE_OG.png"
-	/><!-- Load error, please check URL -->
+	<meta property="og:image" content="https://waterhousestudios.nl/ADE_OG.png" />
 
 	<!-- Twitter Meta Tags -->
 	<meta name="twitter:card" content="summary_large_image" />
