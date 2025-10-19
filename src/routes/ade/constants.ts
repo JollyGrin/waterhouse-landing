@@ -119,6 +119,12 @@ export const LINEUP: EventSlot[] = [
 		portfolioUrl: 'https://stefansoaremusic.net',
 		instagram: 'stefansoaremusic'
 	},
+	{
+		artist: 'WATERHOUSE PARTY',
+		date: FRI24,
+		startTime: 2100,
+		endTime: 400
+	},
 	// Saturday 25th
 	{
 		artist: 'Main identity b2b Althoff',
