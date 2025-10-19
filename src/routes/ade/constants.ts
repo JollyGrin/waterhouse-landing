@@ -110,6 +110,15 @@ export const LINEUP: EventSlot[] = [
 		profilePhotoUrl: 'https://i.imgur.com/2UGKBCi.png',
 		portfolioUrl: 'https://soundcloud.com/trumofficial/tracks'
 	},
+	{
+		artist: 'Stefan Soare',
+		date: FRI24,
+		startTime: 1930,
+		endTime: 2100,
+		profilePhotoUrl: 'https://i.imgur.com/2NrX5JQ.png',
+		portfolioUrl: 'https://stefansoaremusic.net',
+		instagram: 'stefansoaremusic'
+	},
 	// Saturday 25th
 	{
 		artist: 'Main identity b2b Althoff',
