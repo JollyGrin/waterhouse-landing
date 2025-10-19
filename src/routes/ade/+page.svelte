@@ -46,37 +46,36 @@
 </script>
 
 <svelte:head>
-	<title>ADE 2025 - Waterhouse Stream Marathon | Oct 22-25</title>
+	<!-- HTML Meta Tags -->
+	<title>ADE 2025 - Waterhouse Stream Marathon</title>
 	<meta
 		name="description"
-		content="Join Waterhouse Studios for a 3-day Twitch stream marathon during Amsterdam Dance Event 2025. Featuring Denzo, (N)ARZ, cosmic sub, Alex Sharp, Main identity b2b Althoff, and more!"
+		content="4-day Twitch stream marathon during Amsterdam Dance Event. Oct 22-25 featuring underground electronic music artists at the new Waterhouse Studios in Amsterdam."
 	/>
 
-	<!-- Open Graph / Facebook -->
+	<!-- Open Graph Meta Tags -->
+	<meta property="og:url" content="https://waterhousestudios.nl/ade" />
 	<meta property="og:type" content="website" />
 	<meta property="og:title" content="ADE 2025 - Waterhouse Stream Marathon" />
 	<meta
 		property="og:description"
-		content="3-day Twitch stream marathon during Amsterdam Dance Event. Oct 22-25 featuring underground electronic music artists."
+		content="4-day Twitch stream marathon during Amsterdam Dance Event. Oct 22-25 featuring underground electronic music artists at the new Waterhouse Studios in Amsterdam."
 	/>
-	<meta property="og:image" content="/ADE_OG.png" />
-	<meta property="og:url" content="https://waterhousestudios.nl/ade" />
-	<meta property="og:site_name" content="Waterhouse Studios" />
+	<meta
+		property="og:image"
+		content="https://waterhousestudios.nl/ADE_OG.png"
+	/><!-- Load error, please check URL -->
 
-	<!-- Twitter -->
+	<!-- Twitter Meta Tags -->
 	<meta name="twitter:card" content="summary_large_image" />
+	<meta property="twitter:domain" content="waterhousestudios.nl" />
+	<meta property="twitter:url" content="https://waterhousestudios.nl/ade" />
 	<meta name="twitter:title" content="ADE 2025 - Waterhouse Stream Marathon" />
 	<meta
 		name="twitter:description"
-		content="3-day Twitch stream marathon during Amsterdam Dance Event. Oct 22-25 featuring underground electronic music artists."
+		content="4-day Twitch stream marathon during Amsterdam Dance Event. Oct 22-25 featuring underground electronic music artists at the new Waterhouse Studios in Amsterdam."
 	/>
-	<meta name="twitter:image" content="/ADE_OG.png" />
-
-	<!-- Additional Meta -->
-	<meta
-		name="keywords"
-		content="ADE, Amsterdam Dance Event, Waterhouse Studios, Twitch stream, electronic music, techno, house music, livestream"
-	/>
+	<meta name="twitter:image" content="https://waterhousestudios.nl/ADE_OG.png" />
 	<meta name="author" content="Waterhouse Studios" />
 </svelte:head>
 
