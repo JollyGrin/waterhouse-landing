@@ -93,7 +93,10 @@ export const LINEUP: EventSlot[] = [
 		artist: 'Alex Sharp',
 		date: THUR23,
 		startTime: 2000,
-		endTime: 2100
+		endTime: 2100,
+		instagram: 'alexsharpdj',
+		profilePhotoUrl: 'https://i.imgur.com/6icM54s.png',
+		portfolioUrl: 'https://linktr.ee/AlexSharp'
 	},
 	{
 		artist: 'tbc',
@@ -152,6 +155,9 @@ export const LINEUP: EventSlot[] = [
 		artist: 'Granular Heat',
 		date: SAT25,
 		startTime: 1530,
-		endTime: 1630
+		endTime: 1630,
+		instagram: 'granularheat',
+		profilePhotoUrl: 'https://i.imgur.com/Ogx3BZC.png',
+		portfolioUrl: 'https://linktr.ee/granularheat'
 	}
 ];
