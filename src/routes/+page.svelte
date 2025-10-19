@@ -141,7 +141,7 @@
 		>
 			<a href="https://www.instagram.com/waterhousestudiosamsterdam" class="h-full w-full">
 				<button class="grid h-full place-items-center rounded-xl">
-					<IconInstagram w={35} class="md:h-[50px] md:w-[50px]" />
+					<IconInstagram w={35} className="md:h-[50px] md:w-[50px]" />
 				</button>
 			</a>
 			<a href="https://www.twitch.tv/waterhousestudios" class="h-full w-full">
