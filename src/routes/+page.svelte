@@ -17,6 +17,11 @@
 	import IconInstagram from '$lib/icon/IconInstagram.svelte';
 	import IconTwitch from '$lib/icon/IconTwitch.svelte';
 
+	const siteTitle = 'Waterhouse Studios';
+	const siteDescription =
+		'Premium music studios and creative spaces for music creators and industry professionals';
+	const siteUrl = 'https://waterhousestudios.nl';
+
 	// SEO-specific content extracted from modals
 	const seoAboutContent = `
 		A Space Crafted for Music Creators and Industry Professionals
@@ -51,6 +56,18 @@
 
 	const comingSoon = () => toast.success('Coming soon!');
 </script>
+
+<svelte:head>
+	<title>{siteTitle}</title>
+	<meta name="description" content={siteDescription} />
+	<meta property="og:title" content={siteTitle} />
+	<meta property="og:description" content={siteDescription} />
+	<meta property="og:url" content={siteUrl} />
+	<meta property="og:type" content="website" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content={siteTitle} />
+	<meta name="twitter:description" content={siteDescription} />
+</svelte:head>
 
 {#snippet screen()}
 	<div class="grid min-h-40 w-full place-items-center rounded bg-black md:min-h-50">

@@ -60,7 +60,9 @@ export const LINEUP: EventSlot[] = [
 		artist: 'Elemzene',
 		date: THUR23,
 		startTime: 1500,
-		endTime: 1600
+		endTime: 1600,
+		portfolioUrl: 'https://soundcloud.com/elemzene',
+		profilePhotoUrl: 'https://i1.sndcdn.com/artworks-PrkLDC8z2ZNyL5Y2-IVmtHA-t500x500.png'
 	},
 	{
 		artist: 'L4C4',
