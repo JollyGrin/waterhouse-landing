@@ -39,7 +39,8 @@ export const LINEUP: EventSlot[] = [
 		date: WED22,
 		startTime: 1800,
 		endTime: 1900,
-		instagram: 'the_denzo'
+		instagram: 'the_denzo',
+		profilePhotoUrl: 'https://i.imgur.com/nt2wsuD.png'
 	},
 	{
 		artist: 'Gill Charleston',
