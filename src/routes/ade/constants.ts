@@ -23,6 +23,35 @@
 // 15:30-16:30 Granular Heat
 // 16:30-17:30 TRÜm
 // 17:30-18:30 Ides of March
+//
+//
+
+const ARTISTS = {
+	recode: {
+		artist: 'recode rotterdam records',
+		instagram: 'recoderecords',
+		profilePhotoUrl:
+			'https://cloudinary-cdn.ffm.to/s--mA5bY068--/w_256,h_256,c_lfill/f_webp/https%3A%2F%2Fimagestore.ffm.to%2Flink%2Fad8e7cc58d2ab52a1455e4ebb87641fc.png',
+		portfolioUrl: 'https://ffm.bio/recode'
+	},
+	alexSharp: {
+		artist: 'Alex Sharp',
+		instagram: 'alexsharpdj',
+		profilePhotoUrl: 'https://i.imgur.com/6icM54s.png',
+		portfolioUrl: 'https://linktr.ee/AlexSharp'
+	},
+	trum: {
+		artist: 'TRÜm',
+		profilePhotoUrl: 'https://i.imgur.com/2UGKBCi.png',
+		portfolioUrl: 'https://soundcloud.com/trumofficial/tracks'
+	},
+	stefansoare: {
+		artist: 'Stefan Soare',
+		profilePhotoUrl: 'https://i.imgur.com/2NrX5JQ.png',
+		portfolioUrl: 'https://stefansoaremusic.net',
+		instagram: 'stefansoaremusic'
+	}
+};
 
 type EventSlot = {
 	artist: string;
@@ -86,53 +115,43 @@ export const LINEUP: EventSlot[] = [
 		profilePhotoUrl: 'https://i.imgur.com/xigqfi9.png'
 	},
 	{
-		artist: 'cosmic sub',
+		artist: 'SMH',
 		date: THUR23,
 		startTime: 1700,
 		endTime: 1800
 	},
 	{
-		artist: 'recode rotterdam records',
 		date: THUR23,
 		startTime: 1800,
-		endTime: 2000,
-		instagram: 'recoderecords',
-		profilePhotoUrl:
-			'https://cloudinary-cdn.ffm.to/s--mA5bY068--/w_256,h_256,c_lfill/f_webp/https%3A%2F%2Fimagestore.ffm.to%2Flink%2Fad8e7cc58d2ab52a1455e4ebb87641fc.png',
-		portfolioUrl: 'https://ffm.bio/recode'
+		endTime: 1900,
+		artist: 'EagleOne b2b Hakoon'
 	},
 	{
-		artist: 'Alex Sharp',
 		date: THUR23,
-		startTime: 2000,
+		startTime: 1900,
 		endTime: 2100,
-		instagram: 'alexsharpdj',
-		profilePhotoUrl: 'https://i.imgur.com/6icM54s.png',
-		portfolioUrl: 'https://linktr.ee/AlexSharp'
+		artist: 'Br1an'
 	},
 	{
-		artist: 'tbc',
+		...ARTISTS.alexSharp,
 		date: THUR23,
 		startTime: 2100,
 		endTime: 2200
 	},
 	// Friday 24th
 	{
-		artist: 'TRÜm',
 		date: FRI24,
 		startTime: 1830,
 		endTime: 1930,
+		artist: 'TRÜm',
 		profilePhotoUrl: 'https://i.imgur.com/2UGKBCi.png',
 		portfolioUrl: 'https://soundcloud.com/trumofficial/tracks'
 	},
 	{
-		artist: 'Stefan Soare',
 		date: FRI24,
 		startTime: 1930,
 		endTime: 2100,
-		profilePhotoUrl: 'https://i.imgur.com/2NrX5JQ.png',
-		portfolioUrl: 'https://stefansoaremusic.net',
-		instagram: 'stefansoaremusic'
+		...ARTISTS.stefansoare
 	},
 	{
 		artist: 'WATERHOUSE PARTY',
@@ -173,12 +192,10 @@ export const LINEUP: EventSlot[] = [
 		portfolioUrl: 'https://linktr.ee/granularheat'
 	},
 	{
-		artist: 'TRÜm',
 		date: SAT25,
 		startTime: 1630,
 		endTime: 1730,
-		profilePhotoUrl: 'https://i.imgur.com/2UGKBCi.png',
-		portfolioUrl: 'https://soundcloud.com/trumofficial/tracks'
+		...ARTISTS.trum
 	},
 	{
 		artist: 'Ides of March',
