@@ -141,14 +141,6 @@ export const LINEUP: EventSlot[] = [
 	// Friday 24th
 	{
 		date: FRI24,
-		startTime: 1830,
-		endTime: 1930,
-		artist: 'TRÜm',
-		profilePhotoUrl: 'https://i.imgur.com/2UGKBCi.png',
-		portfolioUrl: 'https://soundcloud.com/trumofficial/tracks'
-	},
-	{
-		date: FRI24,
 		startTime: 1930,
 		endTime: 2100,
 		...ARTISTS.stefansoare
