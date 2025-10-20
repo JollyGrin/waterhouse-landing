@@ -111,14 +111,24 @@
 	let showConfetti = $state(false);
 	let confettiConfig = $state({});
 	let confettiPosition = $state({ x: 0, y: 0 });
+	let confettiTimeout = null;
 
 	function triggerConfetti(event) {
-		// Get button position in pixels
-		const rect = event.target.getBoundingClientRect();
-		confettiPosition = {
-			x: rect.left + rect.width / 2,
-			y: rect.top + rect.height / 2
-		};
+		// Immediately stop any existing confetti
+		if (confettiTimeout) {
+			clearTimeout(confettiTimeout);
+			confettiTimeout = null;
+		}
+		showConfetti = false;
+		
+		// Small delay to ensure component unmounts before remounting
+		setTimeout(() => {
+			// Get button position in pixels
+			const rect = event.target.getBoundingClientRect();
+			confettiPosition = {
+				x: rect.left + rect.width / 2,
+				y: rect.top + rect.height / 2
+			};
 		// Random dramatic effects
 		const effects = [
 			{
@@ -155,14 +165,17 @@
 			}
 		];
 
-		// Pick random effect
-		const randomEffect = effects[Math.floor(Math.random() * effects.length)];
-		confettiConfig = randomEffect;
-		
-		showConfetti = true;
-		setTimeout(() => {
-			showConfetti = false;
-		}, randomEffect.duration);
+			// Pick random effect
+			const randomEffect = effects[Math.floor(Math.random() * effects.length)];
+			confettiConfig = randomEffect;
+			
+			// Start new confetti
+			showConfetti = true;
+			confettiTimeout = setTimeout(() => {
+				showConfetti = false;
+				confettiTimeout = null;
+			}, randomEffect.duration);
+		}, 10);
 	}
 </script>
 
