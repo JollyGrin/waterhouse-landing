@@ -1,7 +1,7 @@
 // 22nd⬇
-// 18:00-19:00 Denzo
-// 19:00-20:00 Denzo’s friend
-// 20:00-20:21 (N)ARZ
+// 18:00-19:00 Gil Charleston
+// 19:00-20:00 Denzo
+// 20:00-21:00 (N)ARZ
 //
 // 23rd⬇
 // 15:00-16:00 Elemzene
@@ -11,11 +11,18 @@
 // 20:00-21:00 Alex Sharp
 // 21:00-22:00 tbc
 //
-// 25th⬇
+// 24th⬇
+// 18:30-19:30 TRÜm
+// 19:30-21:00 Stefan Soare
+// 21:00-04:00 WATERHOUSE PARTY
 //
+// 25th⬇
 // 12:00-13:30 Main identity b2b Althoff
 // 13:30-14:30 Ontold
 // 14:30-15:30 David Bucka
+// 15:30-16:30 Granular Heat
+// 16:30-17:30 TRÜm
+// 17:30-18:30 Ides of March
 
 type EventSlot = {
 	artist: string;
@@ -164,5 +171,19 @@ export const LINEUP: EventSlot[] = [
 		instagram: 'granularheat',
 		profilePhotoUrl: 'https://i.imgur.com/Ogx3BZC.png',
 		portfolioUrl: 'https://linktr.ee/granularheat'
+	},
+	{
+		artist: 'TRÜm',
+		date: SAT25,
+		startTime: 1630,
+		endTime: 1730,
+		profilePhotoUrl: 'https://i.imgur.com/2UGKBCi.png',
+		portfolioUrl: 'https://soundcloud.com/trumofficial/tracks'
+	},
+	{
+		artist: 'Ides of March',
+		date: SAT25,
+		startTime: 1730,
+		endTime: 1830
 	}
 ];
