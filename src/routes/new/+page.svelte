@@ -21,6 +21,57 @@
 		| 'join' = $state(null);
 	const onClose = () => (isModalOpen = null);
 	const onOpenJoin = () => (isModalOpen = 'join');
+
+	const drumSounds = [
+		'MM Snare 1 copy.wav',
+		'MM Tom 5.wav',
+		'Untitled 10-3-Audio 2.wav',
+		'Untitled 3-Audio.wav',
+		'Untitled 4-3-Audio 2.wav',
+		'Untitled 5-3-Audio 2.wav',
+		'Untitled 6-3-Audio 2.wav',
+		'Untitled 7-3-Audio 2.wav',
+		'Untitled 8-3-Audio 2.wav',
+		'Untitled 9-3-Audio 2.wav'
+	];
+
+	const sampleSounds = [
+		'MM Boss Fall 2.wav',
+		'MM Boss Fire 1.wav',
+		'MM Boss Fire 4.wav',
+		'MM Brick Smash 1.wav',
+		'MM Bridge Collapse 1.wav',
+		'MM Bridge Collapse 4.wav',
+		'MM Bump 3.wav',
+		'MM Coin 1.wav',
+		'MM Dying 1.wav',
+		'MM Fireball 1.wav',
+		'MM Firework 1.wav',
+		'MM Flagpole 2.wav',
+		'MM Item Appears 5.wav',
+		'MM Jump Big 1.wav',
+		'MM Jump Small 1.wav',
+		'MM Pause Game 1.wav',
+		'MM Power Down & Pipe 1.wav',
+		'MM Power Up 1.wav',
+		'MM Squish Stomp 1.wav',
+		'MM Vine Grow 4.wav'
+	];
+
+	function playRandomSound(sounds: string[], directory: string) {
+		const randomIndex = Math.floor(Math.random() * sounds.length);
+		const soundFile = sounds[randomIndex];
+		const audio = new Audio(`/${directory}/${soundFile}`);
+		audio.play();
+	}
+
+	function playDrum() {
+		playRandomSound(drumSounds, 'drum');
+	}
+
+	function playSample() {
+		playRandomSound(sampleSounds, 'sample');
+	}
 </script>
 
 {#snippet screen()}
@@ -113,10 +164,10 @@
 		<button class="rounded-lg"> special </button>
 	</div>
 	<div class="sample hidden md:grid">
-		<button class="rounded-lg"> sample </button>
+		<button class="rounded-lg" onclick={playSample}> sample </button>
 	</div>
 	<div class="drum hidden md:grid">
-		<button class="rounded-lg"> drum </button>
+		<button class="rounded-lg" onclick={playDrum}> drum </button>
 	</div>
 	<div class="speaker">
 		<SpeakerGrate />
