@@ -16,6 +16,7 @@
 	import toast from 'svelte-french-toast';
 	import IconInstagram from '$lib/icon/IconInstagram.svelte';
 	import IconTwitch from '$lib/icon/IconTwitch.svelte';
+	import { Confetti } from 'svelte-confetti';
 
 	const siteTitle = 'Waterhouse Studios';
 	const siteDescription =
@@ -105,6 +106,63 @@
 
 	function playSample() {
 		playRandomSound(sampleSounds, 'sample');
+	}
+
+	let showConfetti = $state(false);
+	let confettiConfig = $state({});
+	let confettiPosition = $state({ x: 0, y: 0 });
+
+	function triggerConfetti(event) {
+		// Get button position in pixels
+		const rect = event.target.getBoundingClientRect();
+		confettiPosition = {
+			x: rect.left + rect.width / 2,
+			y: rect.top + rect.height / 2
+		};
+		// Random dramatic effects
+		const effects = [
+			{
+				amount: 200,
+				duration: 4000,
+				colorArray: ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff'],
+				infinite: false,
+				cone: true,
+				noGravity: false
+			},
+			{
+				amount: 150,
+				duration: 3500,
+				colorArray: ['#ffd700', '#ff6347', '#9370db', '#20b2aa', '#ff69b4'],
+				infinite: false,
+				cone: false,
+				noGravity: true
+			},
+			{
+				amount: 300,
+				duration: 5000,
+				colorArray: ['#ff4500', '#32cd32', '#1e90ff', '#ff1493', '#ffa500'],
+				infinite: false,
+				cone: true,
+				noGravity: false
+			},
+			{
+				amount: 250,
+				duration: 4500,
+				colorArray: ['#8a2be2', '#dc143c', '#00ced1', '#ffd700', '#adff2f'],
+				infinite: false,
+				cone: false,
+				noGravity: false
+			}
+		];
+
+		// Pick random effect
+		const randomEffect = effects[Math.floor(Math.random() * effects.length)];
+		confettiConfig = randomEffect;
+		
+		showConfetti = true;
+		setTimeout(() => {
+			showConfetti = false;
+		}, randomEffect.duration);
 	}
 </script>
 
@@ -250,7 +308,7 @@
 	<!-- 	<button class="rounded-lg"> s4 </button> -->
 	<!-- </div> -->
 	<div class="special hidden md:grid">
-		<button class="rounded-lg" onclick={comingSoon}> special </button>
+		<button class="rounded-lg" onclick={triggerConfetti}> special </button>
 	</div>
 	<div class="sample hidden md:grid">
 		<button class="rounded-lg" onclick={playSample}> sample </button>
@@ -262,6 +320,12 @@
 		<SpeakerGrate />
 	</div>
 </div>
+
+{#if showConfetti}
+	<div style="position: fixed; left: {confettiPosition.x}px; top: {confettiPosition.y}px; pointer-events: none; z-index: 1000;">
+		<Confetti {...confettiConfig} />
+	</div>
+{/if}
 
 <!-- Contact info at bottom -->
 <div class="font-jersey mt-8 text-center text-sm opacity-60">

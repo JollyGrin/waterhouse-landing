@@ -9,6 +9,7 @@
 	import ModalStream from '$lib/modal/ModalStream.svelte';
 	import Nav from '$lib/Nav.svelte';
 	import SpeakerGrate from '$lib/SpeakerGrate.svelte';
+	import { confetti } from 'svelte-confetti';
 
 	let isModalOpen:
 		| null
@@ -71,6 +72,14 @@
 
 	function playSample() {
 		playRandomSound(sampleSounds, 'sample');
+	}
+
+	function triggerConfetti() {
+		confetti({
+			particleCount: 100,
+			spread: 70,
+			origin: { y: 0.6 }
+		});
 	}
 </script>
 
@@ -161,7 +170,7 @@
 	<!-- 	<button class="rounded-lg"> s4 </button> -->
 	<!-- </div> -->
 	<div class="special hidden md:grid">
-		<button class="rounded-lg"> special </button>
+		<button class="rounded-lg" onclick={triggerConfetti}> special </button>
 	</div>
 	<div class="sample hidden md:grid">
 		<button class="rounded-lg" onclick={playSample}> sample </button>
