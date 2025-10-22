@@ -77,7 +77,6 @@ export const LINEUP: EventSlot[] = [
 		startTime: 1800,
 		endTime: 1900,
 		instagram: 'gillcharleston',
-		portfolioUrl: 'http://gillcharleston.com',
 		profilePhotoUrl: 'https://i.imgur.com/B2321LI.png'
 	},
 	{
