@@ -12,7 +12,7 @@
 	const studioOptions = [
 		{ name: 'Shared Studio', price: 30, hours: 1, type: 'shared' },
 		{ name: 'Shared Studio', price: 150, hours: 10, type: 'shared' },
-		{ name: 'Shared Studio', price: 200, hours: 200, type: 'shared' },
+		{ name: 'Shared Studio', price: 200, hours: 20, type: 'shared' },
 		{ name: 'Shared Studio', price: 250, hours: 40, type: 'shared' },
 		{ name: 'Shared Studio', price: 300, hours: 60, type: 'shared' },
 		{ name: 'Solo Studio', price: 1100, hours: '24/7 private access', type: 'solo' }
