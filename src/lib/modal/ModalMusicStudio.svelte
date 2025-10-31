@@ -2,11 +2,23 @@
 	import { PRICES } from '$lib/constants-price';
 	import Modal from './Modal.svelte';
 	import { fade, fly } from 'svelte/transition';
+
 	let {
 		isOpen = false,
 		onClose,
 		onOpenJoin
 	}: { isOpen?: boolean; onClose(): void; onOpenJoin(): void } = $props();
+
+	const studioOptions = [
+		{ name: 'Shared Studio', price: 30, hours: 1, type: 'shared' },
+		{ name: 'Shared Studio', price: 150, hours: 10, type: 'shared' },
+		{ name: 'Shared Studio', price: 200, hours: 200, type: 'shared' },
+		{ name: 'Shared Studio', price: 250, hours: 40, type: 'shared' },
+		{ name: 'Shared Studio', price: 300, hours: 60, type: 'shared' },
+		{ name: 'Solo Studio', price: 1100, hours: '24/7 private access', type: 'solo' }
+	];
+
+	let selectedOption = $state(1); // Default to Standard Studio (index 1)
 </script>
 
 {#if isOpen}
@@ -85,40 +97,62 @@
 				</div>
 
 				<div
-					class="text-primary bg-highlight shadow-flat hover:shadow-hover font-jersey flex flex-col justify-around rounded-lg border-2 border-black transition-all hover:translate-y-1"
+					class="text-primary bg-highlight shadow-flat hover:shadow-hover font-jersey flex flex-col rounded-lg border-2 border-black transition-all hover:translate-y-1"
 					in:fly={{ y: 20, duration: 300, delay: 300 }}
 				>
-					<div class="flex h-full flex-col bg-white/10 p-6 transition-all hover:bg-white/5">
-						<h2 class="text-2xl">Shared Studio</h2>
-						<div class="flex items-center gap-2">
-							<span class="text-6xl"> €{PRICES.SHARED} </span>
+					<div class="flex h-full flex-col bg-white/10 p-6">
+						<h2 class="mb-4 text-2xl">{studioOptions[selectedOption].name}</h2>
+						<div class="mb-6 flex items-center gap-2">
+							<span class="text-6xl"> €{studioOptions[selectedOption].price} </span>
 							<div class="flex flex-col text-sm">
 								<span class=""> /month </span>
-								<!-- <span class=" opacity-50"> (not including utilities) </span> -->
 							</div>
 						</div>
-						<div class="flex flex-wrap gap-2 tracking-tight text-white/80">
-							<span>80 hours per month</span>
-							<span>Shared workspace</span>
-							<span>Basic equipment</span>
-							<span>Stream room access</span>
-						</div>
-					</div>
 
-					<div class="flex h-full flex-col bg-white/10 p-6 transition-all hover:bg-white/5">
-						<h2 class="text-2xl">Solo Studio</h2>
-						<div class="flex items-center gap-2">
-							<span class="text-6xl"> €{PRICES.SOLO} </span>
-							<div class="flex flex-col text-sm">
-								<span class=""> /month </span>
-								<!-- <span class=" opacity-50"> (not including utilities) </span> -->
+						<!-- Slider -->
+						<div class="mb-6">
+							<div class="mb-2 flex justify-between text-sm">
+								{#each studioOptions as option, index}
+									<span
+										class="text-center text-xs {selectedOption === index
+											? 'text-white'
+											: 'text-white/60'}"
+									>
+										€{option.price}
+									</span>
+								{/each}
+							</div>
+							<input
+								type="range"
+								min="0"
+								max={studioOptions.length - 1}
+								step="1"
+								bind:value={selectedOption}
+								class="slider h-2 w-full cursor-pointer appearance-none rounded-lg bg-white/20"
+							/>
+							<div class="mt-1 flex justify-between text-xs">
+								{#each studioOptions as option, index}
+									<span
+										class="text-center {selectedOption === index ? 'text-white' : 'text-white/60'}"
+									>
+										{typeof option.hours === 'string' ? option.hours : `${option.hours}h`}
+									</span>
+								{/each}
 							</div>
 						</div>
+
 						<div class="flex flex-wrap gap-2 tracking-tight text-white/80">
-							<span>24/7 private access</span>
-							<span>Storage space</span>
-							<span>Premium equipment</span>
-							<span>Stream room access</span>
+							{#if studioOptions[selectedOption].type === 'shared'}
+								<span>{studioOptions[selectedOption].hours} hours per month</span>
+								<span>Shared workspace</span>
+								<span>Basic equipment</span>
+								<span>Stream room access</span>
+							{:else}
+								<span>24/7 private access</span>
+								<span>Storage space</span>
+								<span>Premium equipment</span>
+								<span>Stream room access</span>
+							{/if}
 						</div>
 					</div>
 				</div>
@@ -169,5 +203,26 @@
 
 	:global(.hover\:translate-y-1:hover) {
 		transform: translateY(4px);
+	}
+
+	.slider::-webkit-slider-thumb {
+		appearance: none;
+		width: 24px;
+		height: 24px;
+		background: white;
+		border-radius: 50%;
+		cursor: pointer;
+		border: 2px solid #000;
+		box-shadow: 2px 2px 0 black;
+	}
+
+	.slider::-moz-range-thumb {
+		width: 24px;
+		height: 24px;
+		background: white;
+		border-radius: 50%;
+		cursor: pointer;
+		border: 2px solid #000;
+		box-shadow: 2px 2px 0 black;
 	}
 </style>
