@@ -142,8 +142,8 @@
 						</div>
 
 						<div class="flex flex-wrap gap-2 tracking-tight text-white/80">
-							{#if studioOptions[selectedOption].type === 'shared'}
-								<span>{studioOptions[selectedOption].hours} hours per month</span>
+							{#if studioOptions[selectedOption]?.type === 'shared'}
+								<span>{studioOptions[selectedOption]?.hours} hours per month</span>
 								<span>Shared workspace</span>
 								<span>Basic equipment</span>
 								<span>Stream room access</span>
