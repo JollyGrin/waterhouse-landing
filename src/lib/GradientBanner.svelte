@@ -1,5 +1,5 @@
 <script lang="ts">
-	let { text = 'Wish to apply for Waterhouse Sessions - Weekly Streams?' } = $props();
+	let { text = 'Are you a DJ in AMS? Apply for Waterhouse Radio - Weekly Streams' } = $props();
 </script>
 
 <a href="https://tally.so/r/gDDekK" target="_blank" class="gradient-banner">
