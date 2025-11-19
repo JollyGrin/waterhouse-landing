@@ -13,7 +13,8 @@
 	class="font-jersey container mx-auto hidden h-12 items-center justify-between text-xl md:mb-10 md:flex"
 >
 	<button class="w-16 transition-all hover:scale-110" onclick={onOpenAbout}>
-		<MaskedLogoShader shader={shaderConfigRainbow} />
+		<!-- <MaskedLogoShader shader={shaderConfigRainbow} /> -->
+		<img src="/logo.svg" width="100px" alt="logo" />
 	</button>
 	<div class="flex items-center gap-2">
 		<button class="cursor-pointer transition-all hover:scale-110" onclick={onOpenStudio}
