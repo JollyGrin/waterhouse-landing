@@ -2,8 +2,8 @@
 	let { text = 'Are you a DJ in AMS? Apply for Waterhouse Radio - Weekly Streams' } = $props();
 </script>
 
-<a href="https://tally.so/r/gDDekK" target="_blank" class="gradient-banner mb-2">
-	<div class="banner-content font-jersey">
+<a href="https://tally.so/r/gDDekK" target="_blank" class="gradient-banner mb-0 sm:mb-2">
+	<div class="banner-content">
 		{text}
 	</div>
 </a>
