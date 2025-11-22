@@ -3,7 +3,7 @@
 </script>
 
 <a href="https://tally.so/r/gDDekK" target="_blank" class="gradient-banner mb-0 sm:mb-2">
-	<div class="banner-content">
+	<div class="banner-content animate-pulse">
 		{text}
 	</div>
 </a>
