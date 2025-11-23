@@ -10,7 +10,7 @@
 </script>
 
 <div
-	class="font-jersey container mx-auto hidden h-12 items-center justify-between text-xl md:mb-10 md:flex"
+	class="font-jersey container mx-auto hidden h-12 items-center justify-between px-4 text-xl md:mb-10 md:flex"
 >
 	<button class="w-16 transition-all hover:scale-110" onclick={onOpenAbout}>
 		<!-- <MaskedLogoShader shader={shaderConfigRainbow} /> -->
