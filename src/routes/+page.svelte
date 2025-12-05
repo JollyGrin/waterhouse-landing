@@ -24,6 +24,17 @@
 		'Premium music studios and creative spaces for music creators and industry professionals';
 	const siteUrl = 'https://waterhousestudios.nl';
 
+	const galleryImages = [
+		'event_1.jpg',
+		'event_2.jpg',
+		'event_3.jpg',
+		'gallery_1.jpg',
+		'gallery_2.jpg',
+		'studio_1.jpg',
+		'studio_back.jpg',
+		'studio_front.jpg'
+	];
+
 	// SEO-specific content extracted from modals
 	const seoAboutContent = `
 		A Space Crafted for Music Creators and Industry Professionals
@@ -351,6 +362,22 @@
 	</a>
 </div>
 
+<!-- Gallery Masonry Grid -->
+<div class="font-jersey mt-8 bg-black px-3 py-4 text-slate-100">
+	<div class="masonry-grid">
+		{#each galleryImages as image, i}
+			<div class="masonry-item">
+				<img
+					src="/gallery/{image}"
+					alt="Waterhouse Studios gallery image {i + 1}"
+					class="h-auto w-full rounded-lg object-cover shadow-lg transition-transform hover:scale-105 hover:saturate-150"
+					loading="lazy"
+				/>
+			</div>
+		{/each}
+	</div>
+</div>
+
 <style>
 	:root {
 		--ctrl-unit: calc(calc(100vw - calc(60 * 2px)) / 89.66);
@@ -479,5 +506,32 @@
 
 	.speaker {
 		grid-area: speaker;
+	}
+
+	.masonry-grid {
+		column-count: 2;
+		column-gap: 1rem;
+		margin: 0;
+	}
+
+	.masonry-item {
+		break-inside: avoid;
+		margin-bottom: 1rem;
+		display: inline-block;
+		width: 100%;
+	}
+
+	@media (min-width: 768px) {
+		.masonry-grid {
+			column-count: 3;
+			column-gap: 1.5rem;
+		}
+	}
+
+	@media (min-width: 1024px) {
+		.masonry-grid {
+			column-count: 4;
+			column-gap: 2rem;
+		}
 	}
 </style>
