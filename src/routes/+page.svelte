@@ -215,8 +215,6 @@
 <ModalAbout {onClose} isOpen={isModalOpen === 'about'} />
 <ModalVideo {onClose} isOpen={isModalOpen === 'video'} videoSrc="/tour.mp4" />
 
-<GradientBanner text="Sign up for Waterhouse Radio Weekly Streams" />
-
 <Nav
 	onOpenAbout={() => (isModalOpen = 'about')}
 	onOpenStudio={() => (isModalOpen = 'studios')}
