@@ -18,6 +18,8 @@
 	import IconInstagram from '$lib/icon/IconInstagram.svelte';
 	import IconTwitch from '$lib/icon/IconTwitch.svelte';
 	import { Confetti } from 'svelte-confetti';
+	import { scale } from 'svelte/transition';
+	import { quintOut } from 'svelte/easing';
 
 	const siteTitle = 'Waterhouse Studios';
 	const siteDescription =
@@ -375,15 +377,16 @@
 
 <!-- Fullscreen Image Modal -->
 {#if selectedImage}
-	<div 
-		class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-90 p-4"
+	<div
+		class="bg-opacity-90 fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4 backdrop-blur-lg"
 		onclick={closeImageModal}
 	>
-		<img 
+		<img
 			src="/gallery/{selectedImage}"
 			alt="Fullscreen gallery image"
-			class="max-h-full max-w-full object-contain"
+			class="max-h-full max-w-full rounded-xl object-contain"
 			onclick={(e) => e.stopPropagation()}
+			transition:scale={{ duration: 400, easing: quintOut, start: 0.8 }}
 		/>
 	</div>
 {/if}
