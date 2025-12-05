@@ -125,6 +125,8 @@
 	let confettiPosition = $state({ x: 0, y: 0 });
 	let confettiTimeout = null;
 
+	let selectedImage = $state(null);
+
 	function triggerConfetti(event) {
 		// Immediately stop any existing confetti
 		if (confettiTimeout) {
@@ -189,6 +191,20 @@
 			}, randomEffect.duration);
 		}, 10);
 	}
+
+	function openImageModal(image) {
+		selectedImage = image;
+	}
+
+	function closeImageModal() {
+		selectedImage = null;
+	}
+
+	function handleKeydown(event) {
+		if (event.key === 'Escape' && selectedImage) {
+			closeImageModal();
+		}
+	}
 </script>
 
 <svelte:head>
@@ -202,6 +218,8 @@
 	<meta name="twitter:title" content={siteTitle} />
 	<meta name="twitter:description" content={siteDescription} />
 </svelte:head>
+
+<svelte:window onkeydown={handleKeydown} />
 
 {#snippet screen()}
 	<div class="grid min-h-40 w-full place-items-center rounded bg-black md:min-h-50">
@@ -355,6 +373,21 @@
 	</div>
 {/if}
 
+<!-- Fullscreen Image Modal -->
+{#if selectedImage}
+	<div 
+		class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-90 p-4"
+		onclick={closeImageModal}
+	>
+		<img 
+			src="/gallery/{selectedImage}"
+			alt="Fullscreen gallery image"
+			class="max-h-full max-w-full object-contain"
+			onclick={(e) => e.stopPropagation()}
+		/>
+	</div>
+{/if}
+
 <!-- Contact info at bottom -->
 <div class="font-jersey mt-8 text-center text-sm opacity-60">
 	Have a question? Contact us at <a href="mailto:info@waterhousestudios.nl">
@@ -370,8 +403,9 @@
 				<img
 					src="/gallery/{image}"
 					alt="Waterhouse Studios gallery image {i + 1}"
-					class="h-auto w-full rounded-lg object-cover shadow-lg transition-transform hover:scale-105 hover:saturate-150"
+					class="h-auto w-full cursor-pointer rounded-lg object-cover shadow-lg transition-transform hover:scale-105 hover:saturate-150"
 					loading="lazy"
+					onclick={() => openImageModal(image)}
 				/>
 			</div>
 		{/each}
