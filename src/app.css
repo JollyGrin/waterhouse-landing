@@ -2,12 +2,12 @@
 
 html,
 body {
-	/* background-color: #37392e; */
-	/* cursor: url('/favicon.ico'), auto; */
+	background-color: #0a0a0a;
+	overflow-x: hidden;
 }
 
 @theme {
-	--color-primary: #faf6f6; /* RGB format */
+	--color-primary: #faf6f6;
 	--color-secondary: black;
 	--color-back: #19647e;
 	--color-highlight: #696969;
@@ -21,6 +21,69 @@ body {
 	--font-sigmar: 'Sigmar', cursive;
 }
 
-.midi {
-	@apply shadow-flat hover:shadow-hover hover:translate-reset translate-adjust active:shadow-hover active:translate-reset rounded border-2 border-black transition-all;
+@keyframes boot-in {
+	from {
+		opacity: 0;
+		transform: scale(0.95);
+	}
+	to {
+		opacity: 1;
+		transform: scale(1);
+	}
+}
+
+@keyframes pad-boot {
+	0% {
+		opacity: 0;
+		transform: scale(0.92);
+	}
+	70% {
+		opacity: 1;
+		transform: scale(1.03);
+	}
+	100% {
+		opacity: 1;
+		transform: scale(1);
+	}
+}
+
+@keyframes rec-pulse {
+	0%,
+	100% {
+		box-shadow:
+			0 2px 4px rgba(0, 0, 0, 0.5),
+			inset 0 2px 4px rgba(0, 0, 0, 0.3),
+			0 0 12px rgba(255, 0, 0, 0.4);
+	}
+	50% {
+		box-shadow:
+			0 2px 4px rgba(0, 0, 0, 0.5),
+			inset 0 2px 4px rgba(0, 0, 0, 0.3),
+			0 0 20px rgba(255, 0, 0, 0.7),
+			0 0 40px rgba(255, 0, 0, 0.3);
+	}
+}
+
+@keyframes screen-glow {
+	0%,
+	100% {
+		box-shadow:
+			inset 0 0 30px rgba(100, 180, 255, 0.1),
+			0 0 15px rgba(100, 180, 255, 0.05);
+	}
+	50% {
+		box-shadow:
+			inset 0 0 30px rgba(100, 180, 255, 0.2),
+			0 0 25px rgba(100, 180, 255, 0.1);
+	}
+}
+
+@keyframes bass-pulse {
+	0%,
+	100% {
+		transform: scale(1);
+	}
+	50% {
+		transform: scale(1.02);
+	}
 }
