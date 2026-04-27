@@ -244,7 +244,7 @@
 <ModalOpportunities {onClose} isOpen={isModalOpen === 'opportunities'} />
 <ModalSendEmail {onClose} isOpen={isModalOpen === 'join'} />
 <ModalAbout {onClose} isOpen={isModalOpen === 'about'} />
-<ModalVideo {onClose} isOpen={isModalOpen === 'video'} videoSrc="/tour.mp4" />
+<ModalVideo {onClose} isOpen={isModalOpen === 'video'} youtubeId="uZip-SKOwF4" />
 
 <Nav
 	onOpenAbout={() => (isModalOpen = 'about')}

@@ -5,8 +5,15 @@
 		isOpen = false,
 		onClose,
 		videoSrc = '',
+		youtubeId = '',
 		title = 'Tour'
-	}: { isOpen?: boolean; onClose(): void; videoSrc?: string; title?: string } = $props();
+	}: {
+		isOpen?: boolean;
+		onClose(): void;
+		videoSrc?: string;
+		youtubeId?: string;
+		title?: string;
+	} = $props();
 </script>
 
 {#if isOpen}
@@ -41,16 +48,28 @@
 					<path d="m6 6 12 12" />
 				</svg>
 			</button>
-			<video
-				src={videoSrc}
-				controls
-				autoplay
-				class="rounded-lg shadow-2xl max-h-[90vh] max-w-full object-contain"
-				onclick={(e) => e.stopPropagation()}
-			>
-				<track kind="captions" />
-				Your browser does not support the video tag.
-			</video>
+			{#if youtubeId}
+				<iframe
+					src={`https://www.youtube.com/embed/${youtubeId}?autoplay=1&playsinline=1&rel=0`}
+					{title}
+					allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+					allowfullscreen
+					referrerpolicy="strict-origin-when-cross-origin"
+					class="rounded-lg shadow-2xl aspect-[9/16] h-[90vh] max-h-[90vh] max-w-full"
+					onclick={(e) => e.stopPropagation()}
+				></iframe>
+			{:else}
+				<video
+					src={videoSrc}
+					controls
+					autoplay
+					class="rounded-lg shadow-2xl max-h-[90vh] max-w-full object-contain"
+					onclick={(e) => e.stopPropagation()}
+				>
+					<track kind="captions" />
+					Your browser does not support the video tag.
+				</video>
+			{/if}
 		</div>
 	</div>
 {/if}
