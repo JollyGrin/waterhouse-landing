@@ -19,10 +19,10 @@
 			<div class="grid gap-8 md:grid-cols-2">
 				<Product
 					title="Stream Room"
-					memo="Ready for Twitch and YouTube broadcasts, perfect for building your online presence."
+					memo="Host live Twitch broadcasts with a full DJ rig — your audience sees the show and shapes it in real time."
 					info={[
-						['Stream Setup', '4K cameras', 'Pro lighting', 'Green screen', 'Stream deck'],
-						['Audio/Visual', 'Audio interface', 'Multiple mics', 'Monitor setup', 'Sound treatment']
+						['Stream Setup', 'Twitch broadcast', 'HD camera', 'Audio reactive lights', 'Live chat projector'],
+						['Audio/Visual', '2x CDJs + mixer', 'Festival speakers', 'Studio monitors', 'Broadcast mic']
 					]}
 				/>
 
