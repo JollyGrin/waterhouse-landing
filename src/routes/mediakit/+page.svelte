@@ -38,12 +38,20 @@
 							class="h-auto w-full max-w-[200px]"
 						/>
 					</div>
-					<button
-						onclick={() => downloadAsset('logo.svg')}
-						class="w-full rounded-lg bg-white px-6 py-3 font-medium text-black transition-colors hover:bg-gray-200"
-					>
-						Download SVG
-					</button>
+					<div class="flex gap-3">
+						<button
+							onclick={() => downloadAsset('logo.svg')}
+							class="w-full rounded-lg bg-white px-6 py-3 font-medium text-black transition-colors hover:bg-gray-200"
+						>
+							Download SVG
+						</button>
+						<button
+							onclick={() => downloadAsset('logo.png')}
+							class="w-full rounded-lg bg-white px-6 py-3 font-medium text-black transition-colors hover:bg-gray-200"
+						>
+							Download PNG
+						</button>
+					</div>
 				</div>
 
 				<!-- Banner Section -->
