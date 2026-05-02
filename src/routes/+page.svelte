@@ -331,7 +331,14 @@
 		</button>
 	</div>
 	<div class="rec hidden place-items-center md:grid">
-		<button class="rounded-full" onclick={comingSoon}> rec </button>
+		<a
+			href="https://hours.waterhousestudios.nl"
+			target="_blank"
+			rel="noopener noreferrer"
+			class="grid h-full w-full place-items-center"
+		>
+			<button class="rounded-full"> loop </button>
+		</a>
 	</div>
 	<div class="play hidden md:grid">
 		<button class="rounded-full" onclick={() => (isModalOpen = 'video')}> play </button>
