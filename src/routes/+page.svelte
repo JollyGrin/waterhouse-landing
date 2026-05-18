@@ -301,8 +301,9 @@
 	</button>
 </div>
 
+<div class="machine-cabinet font-jersey container relative mx-auto">
 <div
-	class="machine font-jersey container relative mx-auto w-full overflow-hidden rounded-xl border-2 bg-slate-50"
+	class="machine relative w-full overflow-hidden rounded-xl border-2 bg-slate-50"
 >
 	<!-- Hardware corner rivets -->
 	<span class="rivet rivet-tl" aria-hidden="true"></span>
@@ -361,28 +362,38 @@
 			</div>
 		</div>
 		<div class="slider">
-			<div class="relative grid h-full w-full place-items-center rounded-lg border-2">
-				<input
-					type="range"
-					min="0"
-					max="100"
-					value="0"
-					class="range-slider h-[calc(100%-20px)]"
-					id="color-slider"
-				/>
-				<div class="slider-scale pointer-events-none absolute inset-y-3 right-1 hidden flex-col justify-between md:flex">
-					<span class="scale-tick"></span>
-					<span class="scale-tick"></span>
-					<span class="scale-tick"></span>
-					<span class="scale-tick"></span>
-					<span class="scale-tick"></span>
-					<span class="scale-tick"></span>
-					<span class="scale-tick"></span>
-					<span class="scale-tick"></span>
-					<span class="scale-tick"></span>
+			<div class="slider-panel">
+				<div class="neve-fader" aria-label="NEVE 1073 channel fader">
+					<span class="fader-marque">1073</span>
+					<div class="fader-body">
+						<div class="fader-scale">
+							<span class="major">+10</span>
+							<span></span>
+							<span class="major">+5</span>
+							<span></span>
+							<span class="major">0</span>
+							<span></span>
+							<span class="major">−5</span>
+							<span></span>
+							<span class="major">−10</span>
+							<span></span>
+							<span class="major">−20</span>
+							<span></span>
+							<span class="major">−∞</span>
+						</div>
+						<div class="fader-track">
+							<div class="fader-slot"></div>
+							<div class="fader-cap">
+								<span class="ridge"></span>
+								<span class="ridge"></span>
+								<span class="ridge"></span>
+								<span class="ridge"></span>
+								<span class="ridge"></span>
+							</div>
+						</div>
+					</div>
+					<span class="fader-label">LVL</span>
 				</div>
-				<span class="slider-label pointer-events-none absolute top-1 left-1 hidden md:block">LVL</span>
-				<span class="slider-value pointer-events-none absolute bottom-1 left-1 hidden md:block">000</span>
 			</div>
 		</div>
 		<div class="location">
@@ -497,6 +508,116 @@
 	</div>
 </div>
 
+<!-- Audio cables draping out the back -->
+<svg
+	class="cables-svg pointer-events-none hidden md:block"
+	viewBox="0 0 1200 240"
+	preserveAspectRatio="xMidYMin meet"
+	aria-hidden="true"
+>
+	<defs>
+		<filter id="cable-shadow" x="-10%" y="-10%" width="120%" height="120%">
+			<feDropShadow dx="3" dy="4" stdDeviation="3" flood-opacity="0.35" />
+		</filter>
+	</defs>
+
+	<!-- Cable 1: black 1/4" instrument -->
+	<g filter="url(#cable-shadow)">
+		<rect x="192" y="-4" width="14" height="14" rx="2.5" fill="#0a0a0a" />
+		<path
+			d="M 199 8 C 199 70 130 150 90 240"
+			stroke="#1a1a1a"
+			stroke-width="11"
+			fill="none"
+			stroke-linecap="round"
+		/>
+		<path
+			d="M 199 8 C 199 70 130 150 90 240"
+			stroke="#3c3c3c"
+			stroke-width="4"
+			fill="none"
+			stroke-linecap="round"
+		/>
+	</g>
+
+	<!-- Cable 2: red XLR -->
+	<g filter="url(#cable-shadow)">
+		<rect x="370" y="-4" width="16" height="14" rx="2.5" fill="#0a0a0a" />
+		<path
+			d="M 378 8 C 378 80 350 165 320 240"
+			stroke="#921818"
+			stroke-width="13"
+			fill="none"
+			stroke-linecap="round"
+		/>
+		<path
+			d="M 378 8 C 378 80 350 165 320 240"
+			stroke="#e23a3a"
+			stroke-width="6"
+			fill="none"
+			stroke-linecap="round"
+		/>
+	</g>
+
+	<!-- Cable 3: yellow RCA -->
+	<g filter="url(#cable-shadow)">
+		<rect x="554" y="-4" width="12" height="14" rx="2.5" fill="#0a0a0a" />
+		<path
+			d="M 560 8 C 560 85 580 165 605 240"
+			stroke="#9a6a08"
+			stroke-width="9"
+			fill="none"
+			stroke-linecap="round"
+		/>
+		<path
+			d="M 560 8 C 560 85 580 165 605 240"
+			stroke="#f0c828"
+			stroke-width="4"
+			fill="none"
+			stroke-linecap="round"
+		/>
+	</g>
+
+	<!-- Cable 4: blue XLR -->
+	<g filter="url(#cable-shadow)">
+		<rect x="740" y="-4" width="16" height="14" rx="2.5" fill="#0a0a0a" />
+		<path
+			d="M 748 8 C 748 80 820 165 890 240"
+			stroke="#143f78"
+			stroke-width="13"
+			fill="none"
+			stroke-linecap="round"
+		/>
+		<path
+			d="M 748 8 C 748 80 820 165 890 240"
+			stroke="#3a8ad8"
+			stroke-width="6"
+			fill="none"
+			stroke-linecap="round"
+		/>
+	</g>
+
+	<!-- Cable 5: black short coiled -->
+	<g filter="url(#cable-shadow)">
+		<rect x="945" y="-4" width="14" height="14" rx="2.5" fill="#0a0a0a" />
+		<path
+			d="M 952 8 C 952 80 1010 160 1090 240"
+			stroke="#1a1a1a"
+			stroke-width="11"
+			fill="none"
+			stroke-linecap="round"
+		/>
+		<path
+			d="M 952 8 C 952 80 1010 160 1090 240"
+			stroke="#3c3c3c"
+			stroke-width="4"
+			fill="none"
+			stroke-linecap="round"
+		/>
+	</g>
+</svg>
+</div>
+
 {#if showConfetti}
 	<div
 		style="position: fixed; left: {confettiPosition.x}px; top: {confettiPosition.y}px; pointer-events: none; z-index: 1000;"
@@ -529,7 +650,7 @@
 </div>
 
 <!-- Gallery Masonry Grid -->
-<div class="font-jersey mt-8 bg-black px-3 py-4 text-slate-100">
+<div class="gallery-section font-jersey mt-8 bg-black px-3 py-4 text-slate-100">
 	<div class="masonry-grid">
 		{#each galleryImages as image, i}
 			<div class="masonry-item">
@@ -925,7 +1046,34 @@
 		white-space: nowrap;
 	}
 
-	/* Volume knob with tick marks */
+	/* Machine cabinet (wrapper for machine + cables) */
+	.machine-cabinet {
+		position: relative;
+	}
+	.machine {
+		position: relative;
+		z-index: 2;
+	}
+
+	/* Audio cables draping behind/below the machine */
+	.cables-svg {
+		position: absolute;
+		top: calc(100% - 8px);
+		left: 0;
+		right: 0;
+		width: 100%;
+		height: auto;
+		z-index: 0;
+		pointer-events: none;
+	}
+
+	/* Gallery sits in front so cables disappear behind black bg */
+	:global(.gallery-section) {
+		position: relative;
+		z-index: 1;
+	}
+
+	/* Volume knob */
 	.knob-wrap {
 		position: relative;
 		width: 110px;
@@ -934,8 +1082,7 @@
 		place-items: center;
 	}
 	.knob {
-		background:
-			radial-gradient(circle at 30% 25%, #ffffff 0%, #f3eee3 60%, #d8d1c3 100%);
+		background: radial-gradient(circle at 30% 25%, #ffffff 0%, #f3eee3 60%, #d8d1c3 100%);
 		box-shadow:
 			2px 2px 0 black,
 			inset 0 2px 4px rgba(255, 255, 255, 0.9),
@@ -955,10 +1102,7 @@
 		background: rgba(0, 0, 0, 0.55);
 		border-radius: 1px;
 		transform-origin: center center;
-		transform:
-			translate(-50%, -50%)
-			rotate(calc(-135deg + (var(--i) * 27deg)))
-			translateY(-52px);
+		transform: translate(-50%, -50%) rotate(calc(-135deg + (var(--i) * 27deg))) translateY(-52px);
 	}
 	.knob-ticks .tick-major {
 		height: 8px;
@@ -975,6 +1119,149 @@
 		letter-spacing: 0.25em;
 		opacity: 0.55;
 		font-family: var(--font-jersey);
+	}
+
+	/* NEVE 1073 channel fader — full-height in the slider cell */
+	.slider-panel {
+		position: relative;
+		height: 100%;
+		width: 100%;
+		border: 2px solid black;
+		border-radius: 8px;
+		background: linear-gradient(180deg, #ededed 0%, #d4d4d4 100%);
+		box-shadow:
+			3px 3px 0 black,
+			inset 0 2px 4px rgba(255, 255, 255, 0.8),
+			inset 0 -6px 12px rgba(0, 0, 0, 0.1);
+		display: flex;
+		align-items: stretch;
+		justify-content: center;
+		padding: 8px 4px;
+	}
+	.neve-fader {
+		position: relative;
+		width: 100%;
+		height: 100%;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: space-between;
+		gap: 4px;
+	}
+	.fader-marque {
+		font-size: 0.55rem;
+		letter-spacing: 0.18em;
+		color: var(--amber);
+		font-family: var(--font-jersey);
+		text-shadow: 0 0 4px rgba(255, 140, 26, 0.4);
+		flex-shrink: 0;
+	}
+	.fader-body {
+		display: flex;
+		flex: 1;
+		gap: 6px;
+		align-items: stretch;
+		justify-content: center;
+		min-height: 0;
+		width: 100%;
+		padding: 0 2px;
+	}
+	.fader-scale {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		text-align: right;
+		font-family: var(--font-jersey);
+		font-size: 0.5rem;
+		letter-spacing: 0.05em;
+		color: rgba(0, 0, 0, 0.55);
+		line-height: 1;
+		min-width: 24px;
+		padding: 4px 0;
+	}
+	.fader-scale span {
+		display: block;
+		height: 1px;
+	}
+	.fader-scale span.major {
+		font-weight: bold;
+		color: rgba(0, 0, 0, 0.85);
+		font-size: 0.58rem;
+		height: auto;
+	}
+	.fader-track {
+		position: relative;
+		width: 18px;
+		height: 100%;
+		background: linear-gradient(180deg, #050505 0%, #1f1f1f 50%, #050505 100%);
+		border-radius: 3px;
+		border: 1.5px solid #000;
+		box-shadow:
+			inset 0 0 0 1px rgba(0, 0, 0, 0.6),
+			inset 0 10px 14px rgba(0, 0, 0, 0.65),
+			inset 0 -10px 14px rgba(0, 0, 0, 0.65),
+			1px 1px 0 rgba(0, 0, 0, 0.3),
+			0 0 0 1px rgba(255, 255, 255, 0.15);
+	}
+	.fader-slot {
+		position: absolute;
+		top: 6px;
+		bottom: 6px;
+		left: 50%;
+		transform: translateX(-50%);
+		width: 2.5px;
+		background: #000;
+		box-shadow: inset 0 0 2px rgba(255, 255, 255, 0.06);
+	}
+	.fader-cap {
+		position: absolute;
+		left: 50%;
+		transform: translateX(-50%);
+		bottom: 32%;
+		width: 46px;
+		height: 32px;
+		background: linear-gradient(180deg, #f0584a 0%, #d23222 35%, #a01a10 75%, #7a0e08 100%);
+		border-radius: 3px;
+		border: 1.5px solid #200505;
+		box-shadow:
+			0 5px 6px rgba(0, 0, 0, 0.5),
+			0 1px 0 rgba(0, 0, 0, 0.6),
+			inset 0 1px 0 rgba(255, 255, 255, 0.42),
+			inset 0 -1px 0 rgba(0, 0, 0, 0.4),
+			inset 1.5px 0 0 rgba(255, 255, 255, 0.12),
+			inset -1.5px 0 0 rgba(0, 0, 0, 0.25);
+		display: flex;
+		flex-direction: column;
+		justify-content: space-around;
+		padding: 5px 6px;
+	}
+	.fader-cap::before {
+		content: '';
+		position: absolute;
+		top: -6px;
+		left: 50%;
+		transform: translateX(-50%);
+		width: 9px;
+		height: 7px;
+		background: linear-gradient(180deg, #200505, #000);
+		border-radius: 1px 1px 0 0;
+		box-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+	}
+	.fader-cap .ridge {
+		display: block;
+		height: 2px;
+		background: rgba(0, 0, 0, 0.55);
+		box-shadow:
+			0 1px 0 rgba(255, 255, 255, 0.22),
+			inset 0 0 1px rgba(0, 0, 0, 0.8);
+		border-radius: 1px;
+	}
+	.fader-label {
+		font-size: 0.7rem;
+		letter-spacing: 0.32em;
+		color: rgba(0, 0, 0, 0.6);
+		font-family: var(--font-jersey);
+		flex-shrink: 0;
 	}
 
 	/* Slider scale */
