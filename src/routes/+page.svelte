@@ -207,6 +207,149 @@
 			closeImageModal();
 		}
 	}
+
+	// Draggable GAIN knob: -135° (min) to +135° (max), 0° = unity
+	let knobAngle = $state(0);
+	let isDraggingKnob = $state(false);
+	let dragStartY = 0;
+	let dragStartAngle = 0;
+
+	function startKnobDrag(event: MouseEvent) {
+		isDraggingKnob = true;
+		dragStartY = event.clientY;
+		dragStartAngle = knobAngle;
+		event.preventDefault();
+	}
+
+	function moveKnobDrag(event: MouseEvent) {
+		if (!isDraggingKnob) return;
+		const deltaY = dragStartY - event.clientY;
+		const sensitivity = event.shiftKey ? 0.3 : 1.2;
+		knobAngle = Math.max(-135, Math.min(135, dragStartAngle + deltaY * sensitivity));
+	}
+
+	function endKnobDrag() {
+		isDraggingKnob = false;
+	}
+
+	function knobWheel(event: WheelEvent) {
+		event.preventDefault();
+		const step = event.shiftKey ? 1 : 4;
+		const delta = event.deltaY > 0 ? -step : step;
+		knobAngle = Math.max(-135, Math.min(135, knobAngle + delta));
+	}
+
+	function knobKeydown(event: KeyboardEvent) {
+		const step = event.shiftKey ? 1 : 5;
+		if (event.key === 'ArrowUp' || event.key === 'ArrowRight') {
+			knobAngle = Math.min(135, knobAngle + step);
+			event.preventDefault();
+		} else if (event.key === 'ArrowDown' || event.key === 'ArrowLeft') {
+			knobAngle = Math.max(-135, knobAngle - step);
+			event.preventDefault();
+		} else if (event.key === 'Home' || event.key === '0') {
+			knobAngle = 0;
+			event.preventDefault();
+		}
+	}
+
+	function resetKnob() {
+		knobAngle = 0;
+	}
+
+	// Map angle (-135..+135) to a NEVE-style dB readout
+	let knobDb = $derived.by(() => {
+		if (knobAngle <= -132) return '−∞';
+		if (knobAngle < 0) {
+			const v = (knobAngle / 135) * 40;
+			return v.toFixed(1);
+		}
+		const v = (knobAngle / 135) * 12;
+		return '+' + v.toFixed(1);
+	});
+
+	// NEVE 1073 channel fader: 0 (bottom = −∞) to 100 (top = +10 dB)
+	let faderValue = $state(40);
+	let isDraggingFader = $state(false);
+	let faderDragStartY = 0;
+	let faderDragStartValue = 0;
+	let faderTrackEl: HTMLDivElement | undefined = $state();
+	let faderTrackHeight = 0;
+
+	function startFaderDrag(event: MouseEvent) {
+		isDraggingFader = true;
+		faderDragStartY = event.clientY;
+		faderDragStartValue = faderValue;
+		if (faderTrackEl) {
+			faderTrackHeight = faderTrackEl.getBoundingClientRect().height;
+		}
+		event.preventDefault();
+		event.stopPropagation();
+	}
+
+	function moveFaderDrag(event: MouseEvent) {
+		if (!isDraggingFader || !faderTrackHeight) return;
+		const deltaY = faderDragStartY - event.clientY;
+		const sensitivity = event.shiftKey ? 0.3 : 1;
+		const deltaPct = (deltaY / faderTrackHeight) * 100 * sensitivity;
+		faderValue = Math.max(0, Math.min(100, faderDragStartValue + deltaPct));
+	}
+
+	function endFaderDrag() {
+		isDraggingFader = false;
+	}
+
+	function faderWheel(event: WheelEvent) {
+		event.preventDefault();
+		const step = event.shiftKey ? 0.5 : 2;
+		const delta = event.deltaY > 0 ? -step : step;
+		faderValue = Math.max(0, Math.min(100, faderValue + delta));
+	}
+
+	function faderKeydown(event: KeyboardEvent) {
+		const step = event.shiftKey ? 0.5 : 2;
+		if (event.key === 'ArrowUp' || event.key === 'ArrowRight') {
+			faderValue = Math.min(100, faderValue + step);
+			event.preventDefault();
+		} else if (event.key === 'ArrowDown' || event.key === 'ArrowLeft') {
+			faderValue = Math.max(0, faderValue - step);
+			event.preventDefault();
+		} else if (event.key === 'Home' || event.key === '0') {
+			faderValue = 67; // 0 dB unity
+			event.preventDefault();
+		} else if (event.key === 'End') {
+			faderValue = 0;
+			event.preventDefault();
+		}
+	}
+
+	function resetFader() {
+		faderValue = 67; // 0 dB unity
+	}
+
+	// Piecewise linear mapping fader % → dB matching the scale on the panel
+	let faderDb = $derived.by(() => {
+		const v = faderValue;
+		if (v < 1) return '−∞';
+		if (v >= 67) {
+			const db = ((v - 67) / 33) * 10;
+			return '+' + db.toFixed(1);
+		}
+		if (v >= 50) {
+			const db = -(((67 - v) / 17) * 5);
+			return db.toFixed(1);
+		}
+		if (v >= 33) {
+			const db = -5 - ((50 - v) / 17) * 5;
+			return db.toFixed(1);
+		}
+		if (v >= 17) {
+			const db = -10 - ((33 - v) / 16) * 10;
+			return db.toFixed(1);
+		}
+		const db = -20 - ((17 - v) / 17) * 40;
+		return db.toFixed(1);
+	});
 </script>
 
 <svelte:head>
@@ -221,11 +364,49 @@
 	<meta name="twitter:description" content={siteDescription} />
 </svelte:head>
 
-<svelte:window onkeydown={handleKeydown} />
+<svelte:window
+	onkeydown={handleKeydown}
+	onmousemove={(e) => {
+		moveKnobDrag(e);
+		moveFaderDrag(e);
+	}}
+	onmouseup={() => {
+		endKnobDrag();
+		endFaderDrag();
+	}}
+	onmouseleave={() => {
+		endKnobDrag();
+		endFaderDrag();
+	}}
+/>
 
 {#snippet screen()}
-	<div class="grid min-h-40 w-full place-items-center rounded bg-black md:min-h-50">
-		<video src="/screen.mp4" autoplay muted loop class="h-50 object-cover"></video>
+	<div class="lcd relative grid min-h-40 w-full place-items-center overflow-hidden rounded md:min-h-50">
+		<video src="/screen.mp4" autoplay muted loop class="lcd-video relative z-0 h-50 object-cover"
+		></video>
+		<div class="lcd-scanlines pointer-events-none absolute inset-0 z-10"></div>
+		<div class="lcd-hud pointer-events-none absolute inset-0 z-20 flex flex-col justify-between p-2 md:p-3">
+			<div class="lcd-row flex items-center justify-between text-[0.6rem] tracking-[0.18em] md:text-xs">
+				<span class="flex items-center gap-1.5">
+					<span class="led-rec"></span>
+					<span>REC</span>
+				</span>
+				<span class="hidden md:inline">WH—08 · DRUM SAMPLER</span>
+				<span class="md:hidden">WH—08</span>
+				<span>90.00 BPM</span>
+			</div>
+			<div class="lcd-steps flex items-end gap-1.5">
+				<span class="step"></span>
+				<span class="step"></span>
+				<span class="step"></span>
+				<span class="step"></span>
+				<span class="step"></span>
+				<span class="step"></span>
+				<span class="step"></span>
+				<span class="step"></span>
+			</div>
+		</div>
+		<div class="lcd-glow pointer-events-none absolute inset-0 z-30 rounded"></div>
 	</div>
 {/snippet}
 {#snippet mainButtons()}
@@ -277,101 +458,351 @@
 	</button>
 </div>
 
+<div class="machine-cabinet font-jersey container relative mx-auto">
 <div
-	class="ctrl-container font-jersey container mx-auto w-full overflow-clip rounded-xl border-2 bg-slate-50 p-3 text-xl md:min-h-[300px] md:p-2 xl:text-4xl"
+	class="machine relative w-full overflow-hidden rounded-xl border-2 bg-slate-50"
 >
-	<div class="buttons flex flex-col gap-2 md:hidden">
-		{@render mainButtons()}
+	<!-- Hardware corner rivets -->
+	<span class="rivet rivet-tl" aria-hidden="true"></span>
+	<span class="rivet rivet-tr" aria-hidden="true"></span>
+	<span class="rivet rivet-bl" aria-hidden="true"></span>
+	<span class="rivet rivet-br" aria-hidden="true"></span>
+
+	<!-- Top brand strip (desktop only) -->
+	<div class="machine-strip strip-top hidden md:flex">
+		<div class="strip-cell strip-left">
+			<span class="led led-power" aria-hidden="true"></span>
+			<span>POWER</span>
+		</div>
+		<div class="strip-cell strip-center">
+			<span class="strip-brand">WATERHOUSE</span>
+			<span class="strip-sep">·</span>
+			<span>WH—08</span>
+			<span class="strip-sep">·</span>
+			<span>DRUM SAMPLER</span>
+			<span class="strip-sep">·</span>
+			<span>AMSTERDAM</span>
+		</div>
+		<div class="strip-cell strip-right">
+			<span>MIDI IN</span>
+			<span class="jack" aria-hidden="true"></span>
+			<span>OUT</span>
+			<span class="jack" aria-hidden="true"></span>
+		</div>
 	</div>
-	<div class="screen flex flex-col gap-2">
-		{@render screen()}
-		<div class="hidden h-full grid-cols-2 gap-2 md:grid md:text-4xl xl:text-7xl">
+
+	<div class="ctrl-container p-3 text-xl md:min-h-[300px] md:p-3 xl:text-4xl">
+		<div class="buttons flex flex-col gap-2 md:hidden">
 			{@render mainButtons()}
 		</div>
-	</div>
-	<div class="news grid place-items-center">
-		<!-- svelte-ignore a11y_no_static_element_interactions -->
-		<div
-			class="relative grid h-full w-full grid-cols-2 gap-2 md:h-[50%] md:w-full md:grid-cols-1 md:gap-0"
-		>
-			<a href="https://www.instagram.com/waterhousestudiosamsterdam" class="h-full w-full">
-				<button class="grid h-full place-items-center rounded-xl">
-					<IconInstagram w={35} className="md:h-[50px] md:w-[50px]" />
-				</button>
-			</a>
-			<a href="https://www.twitch.tv/waterhousestudios" class="h-full w-full">
-				<button class="grid h-full place-items-center rounded-xl">
-					<IconTwitch w={35} class="md:h-[50px] md:w-[50px]" />
+		<div class="screen flex flex-col gap-2">
+			{@render screen()}
+			<div class="hidden h-full grid-cols-2 gap-2 md:grid md:text-4xl xl:text-7xl">
+				{@render mainButtons()}
+			</div>
+		</div>
+		<div class="news grid place-items-center">
+			<!-- svelte-ignore a11y_no_static_element_interactions -->
+			<div
+				class="relative grid h-full w-full grid-cols-2 gap-2 md:h-[50%] md:w-full md:grid-cols-1 md:gap-0"
+			>
+				<a href="https://www.instagram.com/waterhousestudiosamsterdam" class="h-full w-full">
+					<button class="grid h-full place-items-center rounded-xl">
+						<IconInstagram w={35} className="md:h-[50px] md:w-[50px]" />
+					</button>
+				</a>
+				<a href="https://www.twitch.tv/waterhousestudios" class="h-full w-full">
+					<button class="grid h-full place-items-center rounded-xl">
+						<IconTwitch w={35} class="md:h-[50px] md:w-[50px]" />
+					</button>
+				</a>
+			</div>
+		</div>
+		<div class="slider">
+			<div class="slider-panel">
+				<div class="neve-fader" aria-label="NEVE 1073 channel fader">
+					<span class="fader-marque">1073</span>
+					<div class="fader-body">
+						<div class="fader-scale">
+							<span class="major">+10</span>
+							<span></span>
+							<span class="major">+5</span>
+							<span></span>
+							<span class="major">0</span>
+							<span></span>
+							<span class="major">−5</span>
+							<span></span>
+							<span class="major">−10</span>
+							<span></span>
+							<span class="major">−20</span>
+							<span></span>
+							<span class="major">−∞</span>
+						</div>
+						<div class="fader-track" bind:this={faderTrackEl}>
+							<div class="fader-slot"></div>
+							<div
+								class="fader-cap"
+								class:dragging={isDraggingFader}
+								style="bottom: calc({faderValue}% - {(faderValue * 0.32).toFixed(2)}px);"
+								onmousedown={startFaderDrag}
+								onwheel={faderWheel}
+								ondblclick={resetFader}
+								onkeydown={faderKeydown}
+								role="slider"
+								tabindex="0"
+								aria-label="Channel level"
+								aria-valuemin={0}
+								aria-valuemax={100}
+								aria-valuenow={Math.round(faderValue)}
+							>
+								<span class="ridge"></span>
+								<span class="ridge"></span>
+								<span class="ridge"></span>
+								<span class="ridge"></span>
+								<span class="ridge"></span>
+							</div>
+						</div>
+					</div>
+					<span class="fader-label">LVL</span>
+					<span class="fader-value" class:active={isDraggingFader}>{faderDb} dB</span>
+				</div>
+			</div>
+		</div>
+		<div class="location">
+			<a href="https://maps.app.goo.gl/nkE2XhCBkjkw9suY6" target="_blank">
+				<button class="grid place-items-center rounded-lg">
+					<span class="micro-label">LOC</span>
+					<IconLocation width="60%" height="60%" />
 				</button>
 			</a>
 		</div>
-	</div>
-	<div class="slider">
-		<div class="relative grid h-full w-full place-items-center rounded-lg border-2">
-			<input
-				type="range"
-				min="0"
-				max="100"
-				value="0"
-				class="range-slider h-[calc(100%-20px)]"
-				id="color-slider"
-			/>
-		</div>
-	</div>
-	<div class="location">
-		<a href="https://maps.app.goo.gl/nkE2XhCBkjkw9suY6" target="_blank">
-			<button class="grid place-items-center rounded-lg">
-				<IconLocation width="60%" height="60%" />
+		<div class="contact">
+			<button class="grid place-items-center rounded-lg" onclick={() => (isModalOpen = 'join')}>
+				<span class="micro-label">MSG</span>
+				<IconEmail width="60%" height="60%" />
 			</button>
-		</a>
-	</div>
-	<div class="contact">
-		<button class="grid place-items-center rounded-lg" onclick={() => (isModalOpen = 'join')}>
-			<IconEmail width="60%" height="60%" />
-		</button>
-	</div>
-	<div class="rec hidden place-items-center md:grid">
-		<a
-			href="https://hours.waterhousestudios.nl"
-			target="_blank"
-			rel="noopener noreferrer"
-			class="grid h-full w-full place-items-center"
-		>
-			<button class="rounded-full"> loop </button>
-		</a>
-	</div>
-	<div class="play hidden md:grid">
-		<button class="rounded-full" onclick={() => (isModalOpen = 'video')}> play </button>
-	</div>
-	<div class="volume hidden place-items-center md:grid">
-		<div class="relative h-20 w-20 rounded-full border-2 bg-white shadow-[2px_2px_0_black]">
-			<div class="absolute left-[49%] h-10 w-1 rounded-b-full border-l-4"></div>
+		</div>
+		<div class="rec hidden place-items-center md:grid">
+			<a
+				href="https://hours.waterhousestudios.nl"
+				target="_blank"
+				rel="noopener noreferrer"
+				class="grid h-full w-full place-items-center"
+			>
+				<button class="round-btn rounded-full">
+					<span class="round-led round-led-amber" aria-hidden="true"></span>
+					loop
+					<span class="round-sub">/ 8 BAR</span>
+				</button>
+			</a>
+		</div>
+		<div class="play hidden md:grid">
+			<button class="round-btn rounded-full" onclick={() => (isModalOpen = 'video')}>
+				<span class="round-led round-led-rec" aria-hidden="true"></span>
+				play
+				<span class="round-sub">▶ DEMO</span>
+			</button>
+		</div>
+		<div class="volume hidden place-items-center md:grid">
+			<div class="knob-wrap">
+				<div class="knob-ticks" aria-hidden="true">
+					<span class="tick" style="--i: 0"></span>
+					<span class="tick" style="--i: 1"></span>
+					<span class="tick" style="--i: 2"></span>
+					<span class="tick" style="--i: 3"></span>
+					<span class="tick tick-major" style="--i: 4"></span>
+					<span class="tick" style="--i: 5"></span>
+					<span class="tick" style="--i: 6"></span>
+					<span class="tick" style="--i: 7"></span>
+					<span class="tick" style="--i: 8"></span>
+					<span class="tick" style="--i: 9"></span>
+					<span class="tick" style="--i: 10"></span>
+				</div>
+				<div
+					class="knob relative h-20 w-20 rounded-full border-2 bg-white shadow-[2px_2px_0_black]"
+					class:dragging={isDraggingKnob}
+					style="transform: rotate({knobAngle}deg);"
+					onmousedown={startKnobDrag}
+					onwheel={knobWheel}
+					ondblclick={resetKnob}
+					onkeydown={knobKeydown}
+					role="slider"
+					tabindex="0"
+					aria-label="Gain"
+					aria-valuemin={-135}
+					aria-valuemax={135}
+					aria-valuenow={Math.round(knobAngle)}
+				>
+					<div class="absolute left-[49%] h-10 w-1 rounded-b-full border-l-4"></div>
+				</div>
+				<span class="knob-label">GAIN</span>
+				<span class="knob-value" class:active={isDraggingKnob}>{knobDb} dB</span>
+			</div>
+		</div>
+		<div class="social-1">
+			<button class="rounded-lg" onclick={() => (isModalOpen = 'services')}>
+				<span class="micro-label">FX A</span>
+				services
+			</button>
+		</div>
+		<div class="social-2">
+			<button class="rounded-lg" onclick={() => (isModalOpen = 'opportunities')}>
+				<span class="micro-label">FX B</span>
+				benefits
+			</button>
+		</div>
+		<div class="social-3">
+			<button class="rounded-lg" onclick={() => (isModalOpen = 'stream')}>
+				<span class="micro-label micro-label-live">
+					<span class="dot-live" aria-hidden="true"></span>
+					LIVE
+				</span>
+				stream
+			</button>
+		</div>
+		<div class="special hidden md:grid">
+			<button class="rounded-lg" onclick={triggerConfetti}>
+				<span class="micro-label">FX</span>
+				special
+			</button>
+		</div>
+		<div class="sample hidden md:grid">
+			<button class="rounded-lg" onclick={playSample}>
+				<span class="micro-label">02</span>
+				sample
+			</button>
+		</div>
+		<div class="drum hidden md:grid">
+			<button class="rounded-lg" onclick={playDrum}>
+				<span class="micro-label">01</span>
+				drum
+			</button>
+		</div>
+		<div class="speaker">
+			<SpeakerGrate />
 		</div>
 	</div>
-	<div class="social-1">
-		<button class="rounded-lg" onclick={() => (isModalOpen = 'services')}> services </button>
+
+	<!-- Bottom serial strip (desktop only) -->
+	<div class="machine-strip strip-bottom hidden md:flex">
+		<span>SERIAL 24·09·NL</span>
+		<span class="strip-sep">—</span>
+		<span>MADE IN AMSTERDAM</span>
+		<span class="strip-sep">—</span>
+		<span>24·BIT · 96·kHz</span>
+		<span class="strip-sep">—</span>
+		<span>© WATERHOUSE STUDIOS</span>
 	</div>
-	<div class="social-2">
-		<button class="rounded-lg" onclick={() => (isModalOpen = 'opportunities')}> benefits </button>
-	</div>
-	<div class="social-3">
-		<button class="rounded-lg" onclick={() => (isModalOpen = 'stream')}> stream </button>
-	</div>
-	<!-- <div class="social-4"> -->
-	<!-- 	<button class="rounded-lg"> s4 </button> -->
-	<!-- </div> -->
-	<div class="special hidden md:grid">
-		<button class="rounded-lg" onclick={triggerConfetti}> special </button>
-	</div>
-	<div class="sample hidden md:grid">
-		<button class="rounded-lg" onclick={playSample}> sample </button>
-	</div>
-	<div class="drum hidden md:grid">
-		<button class="rounded-lg" onclick={playDrum}> drum </button>
-	</div>
-	<div class="speaker">
-		<SpeakerGrate />
-	</div>
+</div>
+
+<!-- Audio cables draping out the back -->
+<svg
+	class="cables-svg pointer-events-none hidden md:block"
+	viewBox="0 0 1200 240"
+	preserveAspectRatio="xMidYMin meet"
+	aria-hidden="true"
+>
+	<defs>
+		<filter id="cable-shadow" x="-10%" y="-10%" width="120%" height="120%">
+			<feDropShadow dx="3" dy="4" stdDeviation="3" flood-opacity="0.35" />
+		</filter>
+	</defs>
+
+	<!-- Cable 1: black 1/4" instrument -->
+	<g filter="url(#cable-shadow)">
+		<rect x="192" y="-4" width="14" height="14" rx="2.5" fill="#0a0a0a" />
+		<path
+			d="M 199 8 C 199 70 130 150 90 240"
+			stroke="#1a1a1a"
+			stroke-width="11"
+			fill="none"
+			stroke-linecap="round"
+		/>
+		<path
+			d="M 199 8 C 199 70 130 150 90 240"
+			stroke="#3c3c3c"
+			stroke-width="4"
+			fill="none"
+			stroke-linecap="round"
+		/>
+	</g>
+
+	<!-- Cable 2: red XLR -->
+	<g filter="url(#cable-shadow)">
+		<rect x="370" y="-4" width="16" height="14" rx="2.5" fill="#0a0a0a" />
+		<path
+			d="M 378 8 C 378 80 350 165 320 240"
+			stroke="#921818"
+			stroke-width="13"
+			fill="none"
+			stroke-linecap="round"
+		/>
+		<path
+			d="M 378 8 C 378 80 350 165 320 240"
+			stroke="#e23a3a"
+			stroke-width="6"
+			fill="none"
+			stroke-linecap="round"
+		/>
+	</g>
+
+	<!-- Cable 3: yellow RCA -->
+	<g filter="url(#cable-shadow)">
+		<rect x="554" y="-4" width="12" height="14" rx="2.5" fill="#0a0a0a" />
+		<path
+			d="M 560 8 C 560 85 580 165 605 240"
+			stroke="#9a6a08"
+			stroke-width="9"
+			fill="none"
+			stroke-linecap="round"
+		/>
+		<path
+			d="M 560 8 C 560 85 580 165 605 240"
+			stroke="#f0c828"
+			stroke-width="4"
+			fill="none"
+			stroke-linecap="round"
+		/>
+	</g>
+
+	<!-- Cable 4: blue XLR -->
+	<g filter="url(#cable-shadow)">
+		<rect x="740" y="-4" width="16" height="14" rx="2.5" fill="#0a0a0a" />
+		<path
+			d="M 748 8 C 748 80 820 165 890 240"
+			stroke="#143f78"
+			stroke-width="13"
+			fill="none"
+			stroke-linecap="round"
+		/>
+		<path
+			d="M 748 8 C 748 80 820 165 890 240"
+			stroke="#3a8ad8"
+			stroke-width="6"
+			fill="none"
+			stroke-linecap="round"
+		/>
+	</g>
+
+	<!-- Cable 5: black short coiled -->
+	<g filter="url(#cable-shadow)">
+		<rect x="945" y="-4" width="14" height="14" rx="2.5" fill="#0a0a0a" />
+		<path
+			d="M 952 8 C 952 80 1010 160 1090 240"
+			stroke="#1a1a1a"
+			stroke-width="11"
+			fill="none"
+			stroke-linecap="round"
+		/>
+		<path
+			d="M 952 8 C 952 80 1010 160 1090 240"
+			stroke="#3c3c3c"
+			stroke-width="4"
+			fill="none"
+			stroke-linecap="round"
+		/>
+	</g>
+</svg>
 </div>
 
 {#if showConfetti}
@@ -406,7 +837,7 @@
 </div>
 
 <!-- Gallery Masonry Grid -->
-<div class="font-jersey mt-8 bg-black px-3 py-4 text-slate-100">
+<div class="gallery-section font-jersey mt-8 bg-black px-3 py-4 text-slate-100">
 	<div class="masonry-grid">
 		{#each galleryImages as image, i}
 			<div class="masonry-item">
@@ -426,6 +857,10 @@
 	:root {
 		--ctrl-unit: calc(calc(100vw - calc(60 * 2px)) / 89.66);
 		--ctrl-grid-height: calc(var(--ctrl-unit) * 10);
+		--amber: #ff8c1a;
+		--amber-glow: rgba(255, 140, 26, 0.75);
+		--amber-dim: rgba(255, 140, 26, 0.18);
+		--led-rec: #ff3838;
 	}
 	input[type='range'] {
 		writing-mode: vertical-lr;
@@ -437,26 +872,52 @@
 	input[type='range']::-webkit-slider-thumb {
 		-webkit-appearance: none;
 		appearance: none;
-		width: 25px;
-		height: 25px;
+		width: 22px;
+		height: 22px;
 		border-radius: 50%;
-		background: #04aa6d;
+		background: radial-gradient(circle at 35% 30%, #ffd699 0%, var(--amber) 55%, #c46a08 100%);
+		box-shadow:
+			0 0 8px var(--amber-glow),
+			inset 0 1px 1px rgba(255, 255, 255, 0.7),
+			0 0 0 1.5px #000;
 		cursor: pointer;
 	}
 	button {
+		position: relative;
 		width: 100%;
 		height: 100%;
 		border: solid 2px black;
-		box-shadow: 3px 3px 0 black;
-		transition: all 0.25s ease;
-		background-color: var(--color-white);
+		box-shadow:
+			3px 3px 0 black,
+			inset 0 1px 0 rgba(255, 255, 255, 0.95),
+			inset 0 -8px 12px -8px rgba(0, 0, 0, 0.18);
+		transition: all 0.18s ease;
+		background: linear-gradient(180deg, #ffffff 0%, #efece6 100%);
 	}
 	button:hover {
 		transform: translate(2px, 2px);
-		box-shadow: 1px 1px 0px black;
+		box-shadow:
+			1px 1px 0px black,
+			inset 0 1px 0 rgba(255, 255, 255, 0.95),
+			inset 0 -8px 12px -8px rgba(0, 0, 0, 0.18);
+	}
+	button:active {
+		transform: translate(3px, 3px);
+		box-shadow:
+			0 0 0 black,
+			inset 0 2px 6px rgba(0, 0, 0, 0.18);
 	}
 
+	/* ----- Machine chrome ----- */
+	.machine {
+		box-shadow:
+			0 1px 0 rgba(255, 255, 255, 1) inset,
+			0 -1px 0 rgba(0, 0, 0, 0.05) inset,
+			0 20px 40px -24px rgba(0, 0, 0, 0.25),
+			0 2px 0 rgba(0, 0, 0, 0.08);
+	}
 	.ctrl-container {
+		position: relative;
 		display: grid;
 		grid-template-columns: repeat(8, 1fr);
 		grid-template-rows: repeat(4, var(--ctrl-grid-height));
@@ -467,6 +928,655 @@
 			'slider rec screen screen screen screen sample drum'
 			'slider play screen screen screen screen news news'
 			'slider volume social-1 social-3 social-3 social-2 news news';
+	}
+	.ctrl-container::before {
+		content: '';
+		position: absolute;
+		inset: -6px;
+		pointer-events: none;
+		background: radial-gradient(
+			ellipse at top,
+			rgba(0, 0, 0, 0.03) 0%,
+			transparent 60%
+		);
+		z-index: 0;
+	}
+
+	/* Corner rivets */
+	.rivet {
+		position: absolute;
+		width: 9px;
+		height: 9px;
+		border-radius: 50%;
+		background:
+			radial-gradient(circle at 35% 30%, #888 0%, #3a3a3a 50%, #181818 100%);
+		box-shadow:
+			0 1px 1px rgba(255, 255, 255, 0.7),
+			inset 0 -1px 1px rgba(0, 0, 0, 0.6),
+			inset 0 1px 0 rgba(255, 255, 255, 0.15);
+		z-index: 4;
+	}
+	.rivet::after {
+		content: '';
+		position: absolute;
+		inset: 2.5px;
+		border-radius: 50%;
+		background: linear-gradient(135deg, transparent 35%, rgba(255, 255, 255, 0.18) 50%, transparent 65%);
+	}
+	.rivet-tl {
+		top: 7px;
+		left: 7px;
+	}
+	.rivet-tr {
+		top: 7px;
+		right: 7px;
+	}
+	.rivet-bl {
+		bottom: 7px;
+		left: 7px;
+	}
+	.rivet-br {
+		bottom: 7px;
+		right: 7px;
+	}
+
+	/* Top + bottom strips */
+	.machine-strip {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 12px;
+		padding: 6px 32px;
+		font-size: 0.65rem;
+		letter-spacing: 0.22em;
+		text-transform: uppercase;
+		color: rgba(0, 0, 0, 0.55);
+		font-family: var(--font-jersey);
+	}
+	.strip-top {
+		border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+		background: linear-gradient(180deg, rgba(0, 0, 0, 0.04), transparent);
+	}
+	.strip-bottom {
+		justify-content: center;
+		border-top: 1px solid rgba(0, 0, 0, 0.08);
+		background: linear-gradient(0deg, rgba(0, 0, 0, 0.04), transparent);
+		gap: 16px;
+		font-size: 0.6rem;
+	}
+	.strip-cell {
+		display: flex;
+		align-items: center;
+		gap: 8px;
+	}
+	.strip-brand {
+		font-weight: bold;
+		letter-spacing: 0.32em;
+		color: #000;
+	}
+	.strip-sep {
+		opacity: 0.35;
+	}
+	.jack {
+		width: 11px;
+		height: 11px;
+		border-radius: 50%;
+		background: radial-gradient(circle at 35% 35%, #555 0%, #1a1a1a 60%, #000 100%);
+		box-shadow:
+			inset 0 0 0 1px rgba(0, 0, 0, 0.7),
+			inset 0 1px 2px rgba(255, 255, 255, 0.12),
+			0 1px 0 rgba(255, 255, 255, 0.5);
+		display: inline-block;
+	}
+
+	/* LEDs */
+	.led {
+		display: inline-block;
+		width: 8px;
+		height: 8px;
+		border-radius: 50%;
+	}
+	.led-power {
+		background: radial-gradient(circle at 30% 30%, #fff2c8 0%, var(--amber) 55%, #b85800 100%);
+		box-shadow:
+			0 0 6px var(--amber-glow),
+			inset 0 -1px 1px rgba(0, 0, 0, 0.3);
+		animation: heartbeat 0.667s ease-in-out infinite;
+	}
+	@keyframes heartbeat {
+		0%,
+		60%,
+		100% {
+			box-shadow:
+				0 0 4px rgba(255, 140, 26, 0.4),
+				inset 0 -1px 1px rgba(0, 0, 0, 0.3);
+			opacity: 0.55;
+		}
+		8%,
+		20% {
+			box-shadow:
+				0 0 10px var(--amber-glow),
+				0 0 16px rgba(255, 140, 26, 0.4),
+				inset 0 -1px 1px rgba(0, 0, 0, 0.3);
+			opacity: 1;
+		}
+	}
+
+	/* LCD treatment */
+	.lcd {
+		background:
+			radial-gradient(ellipse at center, #11161d 0%, #060809 100%);
+		border: 1.5px solid #000;
+		box-shadow:
+			inset 0 0 0 1px rgba(255, 154, 60, 0.05),
+			inset 0 0 24px rgba(255, 140, 26, 0.18),
+			inset 0 0 80px rgba(0, 0, 0, 0.8),
+			0 0 0 2px rgba(0, 0, 0, 0.1);
+	}
+	.lcd-video {
+		filter: contrast(1.05) brightness(0.95);
+	}
+	.lcd-scanlines {
+		background-image: repeating-linear-gradient(
+			0deg,
+			rgba(0, 0, 0, 0.32) 0px,
+			rgba(0, 0, 0, 0.32) 1px,
+			transparent 1px,
+			transparent 3px
+		);
+		mix-blend-mode: multiply;
+		opacity: 0.85;
+	}
+	.lcd-glow {
+		box-shadow:
+			inset 0 0 30px rgba(255, 154, 60, 0.2),
+			inset 0 0 120px rgba(0, 0, 0, 0.45);
+	}
+	.lcd-hud {
+		color: #ffa340;
+		font-family: var(--font-jersey);
+		text-shadow:
+			0 0 4px rgba(255, 140, 26, 0.7),
+			0 0 8px rgba(255, 140, 26, 0.3);
+	}
+	.led-rec {
+		display: inline-block;
+		width: 8px;
+		height: 8px;
+		border-radius: 50%;
+		background: var(--led-rec);
+		box-shadow: 0 0 6px var(--led-rec);
+		animation: rec-blink 1.334s ease-in-out infinite;
+	}
+	@keyframes rec-blink {
+		0%,
+		45%,
+		100% {
+			opacity: 1;
+			box-shadow: 0 0 8px var(--led-rec);
+		}
+		50%,
+		95% {
+			opacity: 0.25;
+			box-shadow: 0 0 3px rgba(255, 56, 56, 0.4);
+		}
+	}
+	.lcd-steps {
+		height: 5px;
+	}
+	.lcd-steps .step {
+		flex: 1;
+		height: 5px;
+		background: var(--amber-dim);
+		border-radius: 1px;
+		animation: step-pulse 2.667s linear infinite;
+	}
+	@keyframes step-pulse {
+		0%,
+		11% {
+			background: var(--amber);
+			box-shadow: 0 0 6px var(--amber-glow);
+		}
+		12%,
+		100% {
+			background: var(--amber-dim);
+			box-shadow: none;
+		}
+	}
+	.lcd-steps .step:nth-child(1) {
+		animation-delay: 0s;
+	}
+	.lcd-steps .step:nth-child(2) {
+		animation-delay: 0.333s;
+	}
+	.lcd-steps .step:nth-child(3) {
+		animation-delay: 0.667s;
+	}
+	.lcd-steps .step:nth-child(4) {
+		animation-delay: 1s;
+	}
+	.lcd-steps .step:nth-child(5) {
+		animation-delay: 1.333s;
+	}
+	.lcd-steps .step:nth-child(6) {
+		animation-delay: 1.667s;
+	}
+	.lcd-steps .step:nth-child(7) {
+		animation-delay: 2s;
+	}
+	.lcd-steps .step:nth-child(8) {
+		animation-delay: 2.333s;
+	}
+
+	/* Micro-labels on buttons */
+	.micro-label {
+		position: absolute;
+		top: 6px;
+		left: 8px;
+		font-size: 0.55rem;
+		letter-spacing: 0.2em;
+		text-transform: uppercase;
+		opacity: 0.5;
+		font-family: var(--font-jersey);
+		line-height: 1;
+		pointer-events: none;
+	}
+	.micro-label-live {
+		display: flex;
+		align-items: center;
+		gap: 4px;
+		opacity: 1;
+		color: var(--led-rec);
+		font-weight: bold;
+	}
+	.dot-live {
+		display: inline-block;
+		width: 6px;
+		height: 6px;
+		border-radius: 50%;
+		background: var(--led-rec);
+		box-shadow: 0 0 4px var(--led-rec);
+		animation: rec-blink 1.334s ease-in-out infinite;
+	}
+
+	/* Round buttons (play, loop) — LED + sub label */
+	.round-btn {
+		position: relative;
+	}
+	.round-led {
+		position: absolute;
+		top: 12px;
+		left: 50%;
+		transform: translateX(-50%);
+		width: 6px;
+		height: 6px;
+		border-radius: 50%;
+	}
+	.round-led-amber {
+		background: var(--amber);
+		box-shadow: 0 0 5px var(--amber-glow);
+		animation: heartbeat 0.667s ease-in-out infinite;
+	}
+	.round-led-rec {
+		background: var(--led-rec);
+		box-shadow: 0 0 5px var(--led-rec);
+		animation: rec-blink 1.334s ease-in-out infinite;
+	}
+	.round-sub {
+		position: absolute;
+		bottom: 10px;
+		left: 50%;
+		transform: translateX(-50%);
+		font-size: 0.55rem;
+		letter-spacing: 0.15em;
+		opacity: 0.5;
+		white-space: nowrap;
+	}
+
+	/* Machine cabinet (wrapper for machine + cables) */
+	.machine-cabinet {
+		position: relative;
+	}
+	.machine {
+		position: relative;
+		z-index: 2;
+	}
+
+	/* Audio cables draping behind/below the machine */
+	.cables-svg {
+		position: absolute;
+		top: calc(100% - 8px);
+		left: 0;
+		right: 0;
+		width: 100%;
+		height: auto;
+		z-index: 0;
+		pointer-events: none;
+	}
+
+	/* Gallery sits in front so cables disappear behind black bg */
+	:global(.gallery-section) {
+		position: relative;
+		z-index: 1;
+	}
+
+	/* Volume knob */
+	.knob-wrap {
+		position: relative;
+		width: 110px;
+		height: 110px;
+		display: grid;
+		place-items: center;
+	}
+	.knob {
+		background: radial-gradient(circle at 30% 25%, #ffffff 0%, #f3eee3 60%, #d8d1c3 100%);
+		box-shadow:
+			2px 2px 0 black,
+			inset 0 2px 4px rgba(255, 255, 255, 0.9),
+			inset 0 -4px 6px rgba(0, 0, 0, 0.08);
+		cursor: grab;
+		user-select: none;
+		touch-action: none;
+		transition: transform 0.06s ease-out, box-shadow 0.18s ease;
+		will-change: transform;
+	}
+	.knob:hover {
+		box-shadow:
+			2px 2px 0 black,
+			0 0 0 3px rgba(255, 140, 26, 0.18),
+			inset 0 2px 4px rgba(255, 255, 255, 0.9),
+			inset 0 -4px 6px rgba(0, 0, 0, 0.08);
+	}
+	.knob:focus-visible {
+		outline: none;
+		box-shadow:
+			2px 2px 0 black,
+			0 0 0 3px var(--amber-glow),
+			inset 0 2px 4px rgba(255, 255, 255, 0.9),
+			inset 0 -4px 6px rgba(0, 0, 0, 0.08);
+	}
+	.knob.dragging {
+		cursor: grabbing;
+		transition: none;
+		box-shadow:
+			2px 2px 0 black,
+			0 0 0 4px rgba(255, 140, 26, 0.28),
+			inset 0 2px 4px rgba(255, 255, 255, 0.9),
+			inset 0 -4px 6px rgba(0, 0, 0, 0.12);
+	}
+	.knob-ticks {
+		position: absolute;
+		inset: 0;
+		pointer-events: none;
+	}
+	.knob-ticks .tick {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		width: 2px;
+		height: 5px;
+		background: rgba(0, 0, 0, 0.55);
+		border-radius: 1px;
+		transform-origin: center center;
+		transform: translate(-50%, -50%) rotate(calc(-135deg + (var(--i) * 27deg))) translateY(-52px);
+	}
+	.knob-ticks .tick-major {
+		height: 8px;
+		width: 2.5px;
+		background: var(--amber);
+		box-shadow: 0 0 4px var(--amber-glow);
+	}
+	.knob-label {
+		position: absolute;
+		bottom: -6px;
+		left: 50%;
+		transform: translateX(-50%);
+		font-size: 0.55rem;
+		letter-spacing: 0.25em;
+		opacity: 0.55;
+		font-family: var(--font-jersey);
+	}
+	.knob-value {
+		position: absolute;
+		bottom: -20px;
+		left: 50%;
+		transform: translateX(-50%);
+		font-size: 0.55rem;
+		letter-spacing: 0.12em;
+		color: var(--amber);
+		font-family: var(--font-jersey);
+		text-shadow: 0 0 4px rgba(255, 140, 26, 0.4);
+		white-space: nowrap;
+		pointer-events: none;
+		opacity: 0.55;
+		transition: opacity 0.2s ease;
+	}
+	.knob-value.active {
+		opacity: 1;
+		text-shadow:
+			0 0 6px rgba(255, 140, 26, 0.7),
+			0 0 12px rgba(255, 140, 26, 0.3);
+	}
+
+	/* NEVE 1073 channel fader — full-height in the slider cell */
+	.slider-panel {
+		position: relative;
+		height: 100%;
+		width: 100%;
+		border: 2px solid black;
+		border-radius: 8px;
+		background: linear-gradient(180deg, #ededed 0%, #d4d4d4 100%);
+		box-shadow:
+			3px 3px 0 black,
+			inset 0 2px 4px rgba(255, 255, 255, 0.8),
+			inset 0 -6px 12px rgba(0, 0, 0, 0.1);
+		display: flex;
+		align-items: stretch;
+		justify-content: center;
+		padding: 8px 4px;
+	}
+	.neve-fader {
+		position: relative;
+		width: 100%;
+		height: 100%;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: space-between;
+		gap: 4px;
+	}
+	.fader-marque {
+		font-size: 0.55rem;
+		letter-spacing: 0.18em;
+		color: var(--amber);
+		font-family: var(--font-jersey);
+		text-shadow: 0 0 4px rgba(255, 140, 26, 0.4);
+		flex-shrink: 0;
+	}
+	.fader-body {
+		display: flex;
+		flex: 1;
+		gap: 6px;
+		align-items: stretch;
+		justify-content: center;
+		min-height: 0;
+		width: 100%;
+		padding: 0 2px;
+	}
+	.fader-scale {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		text-align: right;
+		font-family: var(--font-jersey);
+		font-size: 0.5rem;
+		letter-spacing: 0.05em;
+		color: rgba(0, 0, 0, 0.55);
+		line-height: 1;
+		min-width: 24px;
+		padding: 4px 0;
+	}
+	.fader-scale span {
+		display: block;
+		height: 1px;
+	}
+	.fader-scale span.major {
+		font-weight: bold;
+		color: rgba(0, 0, 0, 0.85);
+		font-size: 0.58rem;
+		height: auto;
+	}
+	.fader-track {
+		position: relative;
+		width: 18px;
+		height: 100%;
+		background: linear-gradient(180deg, #050505 0%, #1f1f1f 50%, #050505 100%);
+		border-radius: 3px;
+		border: 1.5px solid #000;
+		box-shadow:
+			inset 0 0 0 1px rgba(0, 0, 0, 0.6),
+			inset 0 10px 14px rgba(0, 0, 0, 0.65),
+			inset 0 -10px 14px rgba(0, 0, 0, 0.65),
+			1px 1px 0 rgba(0, 0, 0, 0.3),
+			0 0 0 1px rgba(255, 255, 255, 0.15);
+	}
+	.fader-slot {
+		position: absolute;
+		top: 6px;
+		bottom: 6px;
+		left: 50%;
+		transform: translateX(-50%);
+		width: 2.5px;
+		background: #000;
+		box-shadow: inset 0 0 2px rgba(255, 255, 255, 0.06);
+	}
+	.fader-cap {
+		position: absolute;
+		left: 50%;
+		transform: translateX(-50%);
+		bottom: 32%;
+		width: 46px;
+		height: 32px;
+		background: linear-gradient(180deg, #f0584a 0%, #d23222 35%, #a01a10 75%, #7a0e08 100%);
+		border-radius: 3px;
+		border: 1.5px solid #200505;
+		box-shadow:
+			0 5px 6px rgba(0, 0, 0, 0.5),
+			0 1px 0 rgba(0, 0, 0, 0.6),
+			inset 0 1px 0 rgba(255, 255, 255, 0.42),
+			inset 0 -1px 0 rgba(0, 0, 0, 0.4),
+			inset 1.5px 0 0 rgba(255, 255, 255, 0.12),
+			inset -1.5px 0 0 rgba(0, 0, 0, 0.25);
+		display: flex;
+		flex-direction: column;
+		justify-content: space-around;
+		padding: 5px 6px;
+		cursor: grab;
+		user-select: none;
+		touch-action: none;
+		transition: bottom 0.05s linear, box-shadow 0.18s ease;
+		will-change: bottom;
+	}
+	.fader-cap:hover {
+		box-shadow:
+			0 5px 6px rgba(0, 0, 0, 0.5),
+			0 1px 0 rgba(0, 0, 0, 0.6),
+			0 0 0 3px rgba(255, 140, 26, 0.2),
+			inset 0 1px 0 rgba(255, 255, 255, 0.42),
+			inset 0 -1px 0 rgba(0, 0, 0, 0.4),
+			inset 1.5px 0 0 rgba(255, 255, 255, 0.12),
+			inset -1.5px 0 0 rgba(0, 0, 0, 0.25);
+	}
+	.fader-cap:focus-visible {
+		outline: none;
+		box-shadow:
+			0 5px 6px rgba(0, 0, 0, 0.5),
+			0 1px 0 rgba(0, 0, 0, 0.6),
+			0 0 0 3px var(--amber-glow),
+			inset 0 1px 0 rgba(255, 255, 255, 0.42),
+			inset 0 -1px 0 rgba(0, 0, 0, 0.4);
+	}
+	.fader-cap.dragging {
+		cursor: grabbing;
+		transition: none;
+		box-shadow:
+			0 6px 8px rgba(0, 0, 0, 0.55),
+			0 1px 0 rgba(0, 0, 0, 0.6),
+			0 0 0 4px rgba(255, 140, 26, 0.3),
+			inset 0 1px 0 rgba(255, 255, 255, 0.42),
+			inset 0 -1px 0 rgba(0, 0, 0, 0.4);
+	}
+	.fader-cap::before {
+		content: '';
+		position: absolute;
+		top: -6px;
+		left: 50%;
+		transform: translateX(-50%);
+		width: 9px;
+		height: 7px;
+		background: linear-gradient(180deg, #200505, #000);
+		border-radius: 1px 1px 0 0;
+		box-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+	}
+	.fader-cap .ridge {
+		display: block;
+		height: 2px;
+		background: rgba(0, 0, 0, 0.55);
+		box-shadow:
+			0 1px 0 rgba(255, 255, 255, 0.22),
+			inset 0 0 1px rgba(0, 0, 0, 0.8);
+		border-radius: 1px;
+	}
+	.fader-label {
+		font-size: 0.7rem;
+		letter-spacing: 0.32em;
+		color: rgba(0, 0, 0, 0.6);
+		font-family: var(--font-jersey);
+		flex-shrink: 0;
+	}
+	.fader-value {
+		font-size: 0.6rem;
+		letter-spacing: 0.12em;
+		color: var(--amber);
+		font-family: var(--font-jersey);
+		text-shadow: 0 0 4px rgba(255, 140, 26, 0.4);
+		white-space: nowrap;
+		opacity: 0.55;
+		transition: opacity 0.2s ease;
+		flex-shrink: 0;
+	}
+	.fader-value.active {
+		opacity: 1;
+		text-shadow:
+			0 0 6px rgba(255, 140, 26, 0.7),
+			0 0 12px rgba(255, 140, 26, 0.3);
+	}
+
+	/* Slider scale */
+	.slider-scale {
+		width: 6px;
+	}
+	.slider-scale .scale-tick {
+		display: block;
+		width: 6px;
+		height: 1px;
+		background: rgba(0, 0, 0, 0.45);
+	}
+	.slider-scale .scale-tick:nth-child(2n + 1) {
+		width: 8px;
+		background: rgba(0, 0, 0, 0.7);
+	}
+	.slider-label,
+	.slider-value {
+		font-size: 0.5rem;
+		letter-spacing: 0.2em;
+		opacity: 0.55;
+		font-family: var(--font-jersey);
+	}
+	.slider-value {
+		color: var(--amber);
+		opacity: 0.85;
+		text-shadow: 0 0 4px rgba(255, 140, 26, 0.4);
 	}
 
 	@media (max-width: 767px) {
