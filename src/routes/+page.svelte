@@ -267,6 +267,89 @@
 		const v = (knobAngle / 135) * 12;
 		return '+' + v.toFixed(1);
 	});
+
+	// NEVE 1073 channel fader: 0 (bottom = −∞) to 100 (top = +10 dB)
+	let faderValue = $state(40);
+	let isDraggingFader = $state(false);
+	let faderDragStartY = 0;
+	let faderDragStartValue = 0;
+	let faderTrackEl: HTMLDivElement | undefined = $state();
+	let faderTrackHeight = 0;
+
+	function startFaderDrag(event: MouseEvent) {
+		isDraggingFader = true;
+		faderDragStartY = event.clientY;
+		faderDragStartValue = faderValue;
+		if (faderTrackEl) {
+			faderTrackHeight = faderTrackEl.getBoundingClientRect().height;
+		}
+		event.preventDefault();
+		event.stopPropagation();
+	}
+
+	function moveFaderDrag(event: MouseEvent) {
+		if (!isDraggingFader || !faderTrackHeight) return;
+		const deltaY = faderDragStartY - event.clientY;
+		const sensitivity = event.shiftKey ? 0.3 : 1;
+		const deltaPct = (deltaY / faderTrackHeight) * 100 * sensitivity;
+		faderValue = Math.max(0, Math.min(100, faderDragStartValue + deltaPct));
+	}
+
+	function endFaderDrag() {
+		isDraggingFader = false;
+	}
+
+	function faderWheel(event: WheelEvent) {
+		event.preventDefault();
+		const step = event.shiftKey ? 0.5 : 2;
+		const delta = event.deltaY > 0 ? -step : step;
+		faderValue = Math.max(0, Math.min(100, faderValue + delta));
+	}
+
+	function faderKeydown(event: KeyboardEvent) {
+		const step = event.shiftKey ? 0.5 : 2;
+		if (event.key === 'ArrowUp' || event.key === 'ArrowRight') {
+			faderValue = Math.min(100, faderValue + step);
+			event.preventDefault();
+		} else if (event.key === 'ArrowDown' || event.key === 'ArrowLeft') {
+			faderValue = Math.max(0, faderValue - step);
+			event.preventDefault();
+		} else if (event.key === 'Home' || event.key === '0') {
+			faderValue = 67; // 0 dB unity
+			event.preventDefault();
+		} else if (event.key === 'End') {
+			faderValue = 0;
+			event.preventDefault();
+		}
+	}
+
+	function resetFader() {
+		faderValue = 67; // 0 dB unity
+	}
+
+	// Piecewise linear mapping fader % → dB matching the scale on the panel
+	let faderDb = $derived.by(() => {
+		const v = faderValue;
+		if (v < 1) return '−∞';
+		if (v >= 67) {
+			const db = ((v - 67) / 33) * 10;
+			return '+' + db.toFixed(1);
+		}
+		if (v >= 50) {
+			const db = -(((67 - v) / 17) * 5);
+			return db.toFixed(1);
+		}
+		if (v >= 33) {
+			const db = -5 - ((50 - v) / 17) * 5;
+			return db.toFixed(1);
+		}
+		if (v >= 17) {
+			const db = -10 - ((33 - v) / 16) * 10;
+			return db.toFixed(1);
+		}
+		const db = -20 - ((17 - v) / 17) * 40;
+		return db.toFixed(1);
+	});
 </script>
 
 <svelte:head>
@@ -283,9 +366,18 @@
 
 <svelte:window
 	onkeydown={handleKeydown}
-	onmousemove={moveKnobDrag}
-	onmouseup={endKnobDrag}
-	onmouseleave={endKnobDrag}
+	onmousemove={(e) => {
+		moveKnobDrag(e);
+		moveFaderDrag(e);
+	}}
+	onmouseup={() => {
+		endKnobDrag();
+		endFaderDrag();
+	}}
+	onmouseleave={() => {
+		endKnobDrag();
+		endFaderDrag();
+	}}
 />
 
 {#snippet screen()}
@@ -446,9 +538,23 @@
 							<span></span>
 							<span class="major">−∞</span>
 						</div>
-						<div class="fader-track">
+						<div class="fader-track" bind:this={faderTrackEl}>
 							<div class="fader-slot"></div>
-							<div class="fader-cap">
+							<div
+								class="fader-cap"
+								class:dragging={isDraggingFader}
+								style="bottom: calc({faderValue}% - {(faderValue * 0.32).toFixed(2)}px);"
+								onmousedown={startFaderDrag}
+								onwheel={faderWheel}
+								ondblclick={resetFader}
+								onkeydown={faderKeydown}
+								role="slider"
+								tabindex="0"
+								aria-label="Channel level"
+								aria-valuemin={0}
+								aria-valuemax={100}
+								aria-valuenow={Math.round(faderValue)}
+							>
 								<span class="ridge"></span>
 								<span class="ridge"></span>
 								<span class="ridge"></span>
@@ -458,6 +564,7 @@
 						</div>
 					</div>
 					<span class="fader-label">LVL</span>
+					<span class="fader-value" class:active={isDraggingFader}>{faderDb} dB</span>
 				</div>
 			</div>
 		</div>
@@ -1364,6 +1471,40 @@
 		flex-direction: column;
 		justify-content: space-around;
 		padding: 5px 6px;
+		cursor: grab;
+		user-select: none;
+		touch-action: none;
+		transition: bottom 0.05s linear, box-shadow 0.18s ease;
+		will-change: bottom;
+	}
+	.fader-cap:hover {
+		box-shadow:
+			0 5px 6px rgba(0, 0, 0, 0.5),
+			0 1px 0 rgba(0, 0, 0, 0.6),
+			0 0 0 3px rgba(255, 140, 26, 0.2),
+			inset 0 1px 0 rgba(255, 255, 255, 0.42),
+			inset 0 -1px 0 rgba(0, 0, 0, 0.4),
+			inset 1.5px 0 0 rgba(255, 255, 255, 0.12),
+			inset -1.5px 0 0 rgba(0, 0, 0, 0.25);
+	}
+	.fader-cap:focus-visible {
+		outline: none;
+		box-shadow:
+			0 5px 6px rgba(0, 0, 0, 0.5),
+			0 1px 0 rgba(0, 0, 0, 0.6),
+			0 0 0 3px var(--amber-glow),
+			inset 0 1px 0 rgba(255, 255, 255, 0.42),
+			inset 0 -1px 0 rgba(0, 0, 0, 0.4);
+	}
+	.fader-cap.dragging {
+		cursor: grabbing;
+		transition: none;
+		box-shadow:
+			0 6px 8px rgba(0, 0, 0, 0.55),
+			0 1px 0 rgba(0, 0, 0, 0.6),
+			0 0 0 4px rgba(255, 140, 26, 0.3),
+			inset 0 1px 0 rgba(255, 255, 255, 0.42),
+			inset 0 -1px 0 rgba(0, 0, 0, 0.4);
 	}
 	.fader-cap::before {
 		content: '';
@@ -1392,6 +1533,23 @@
 		color: rgba(0, 0, 0, 0.6);
 		font-family: var(--font-jersey);
 		flex-shrink: 0;
+	}
+	.fader-value {
+		font-size: 0.6rem;
+		letter-spacing: 0.12em;
+		color: var(--amber);
+		font-family: var(--font-jersey);
+		text-shadow: 0 0 4px rgba(255, 140, 26, 0.4);
+		white-space: nowrap;
+		opacity: 0.55;
+		transition: opacity 0.2s ease;
+		flex-shrink: 0;
+	}
+	.fader-value.active {
+		opacity: 1;
+		text-shadow:
+			0 0 6px rgba(255, 140, 26, 0.7),
+			0 0 12px rgba(255, 140, 26, 0.3);
 	}
 
 	/* Slider scale */
