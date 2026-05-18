@@ -12,6 +12,13 @@ body {
 	--color-back: #19647e;
 	--color-highlight: #696969;
 
+	/* Drum-machine chrome */
+	--color-amber: #ff8c1a;
+	--color-amber-glow: #ffb55a;
+	--color-amber-dim: rgba(255, 140, 26, 0.18);
+	--color-led-rec: #ff3838;
+	--color-lcd-bg: #0a0d12;
+
 	--shadow-flat: 8px 8px 0px black;
 	--shadow-hover: 0px 0px 0px black;
 	--translate-adjust: -8px;
