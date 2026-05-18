@@ -207,6 +207,66 @@
 			closeImageModal();
 		}
 	}
+
+	// Draggable GAIN knob: -135° (min) to +135° (max), 0° = unity
+	let knobAngle = $state(0);
+	let isDraggingKnob = $state(false);
+	let dragStartY = 0;
+	let dragStartAngle = 0;
+
+	function startKnobDrag(event: MouseEvent) {
+		isDraggingKnob = true;
+		dragStartY = event.clientY;
+		dragStartAngle = knobAngle;
+		event.preventDefault();
+	}
+
+	function moveKnobDrag(event: MouseEvent) {
+		if (!isDraggingKnob) return;
+		const deltaY = dragStartY - event.clientY;
+		const sensitivity = event.shiftKey ? 0.3 : 1.2;
+		knobAngle = Math.max(-135, Math.min(135, dragStartAngle + deltaY * sensitivity));
+	}
+
+	function endKnobDrag() {
+		isDraggingKnob = false;
+	}
+
+	function knobWheel(event: WheelEvent) {
+		event.preventDefault();
+		const step = event.shiftKey ? 1 : 4;
+		const delta = event.deltaY > 0 ? -step : step;
+		knobAngle = Math.max(-135, Math.min(135, knobAngle + delta));
+	}
+
+	function knobKeydown(event: KeyboardEvent) {
+		const step = event.shiftKey ? 1 : 5;
+		if (event.key === 'ArrowUp' || event.key === 'ArrowRight') {
+			knobAngle = Math.min(135, knobAngle + step);
+			event.preventDefault();
+		} else if (event.key === 'ArrowDown' || event.key === 'ArrowLeft') {
+			knobAngle = Math.max(-135, knobAngle - step);
+			event.preventDefault();
+		} else if (event.key === 'Home' || event.key === '0') {
+			knobAngle = 0;
+			event.preventDefault();
+		}
+	}
+
+	function resetKnob() {
+		knobAngle = 0;
+	}
+
+	// Map angle (-135..+135) to a NEVE-style dB readout
+	let knobDb = $derived.by(() => {
+		if (knobAngle <= -132) return '−∞';
+		if (knobAngle < 0) {
+			const v = (knobAngle / 135) * 40;
+			return v.toFixed(1);
+		}
+		const v = (knobAngle / 135) * 12;
+		return '+' + v.toFixed(1);
+	});
 </script>
 
 <svelte:head>
@@ -221,7 +281,12 @@
 	<meta name="twitter:description" content={siteDescription} />
 </svelte:head>
 
-<svelte:window onkeydown={handleKeydown} />
+<svelte:window
+	onkeydown={handleKeydown}
+	onmousemove={moveKnobDrag}
+	onmouseup={endKnobDrag}
+	onmouseleave={endKnobDrag}
+/>
 
 {#snippet screen()}
 	<div class="lcd relative grid min-h-40 w-full place-items-center overflow-hidden rounded md:min-h-50">
@@ -446,10 +511,25 @@
 					<span class="tick" style="--i: 9"></span>
 					<span class="tick" style="--i: 10"></span>
 				</div>
-				<div class="knob relative h-20 w-20 rounded-full border-2 bg-white shadow-[2px_2px_0_black]">
+				<div
+					class="knob relative h-20 w-20 rounded-full border-2 bg-white shadow-[2px_2px_0_black]"
+					class:dragging={isDraggingKnob}
+					style="transform: rotate({knobAngle}deg);"
+					onmousedown={startKnobDrag}
+					onwheel={knobWheel}
+					ondblclick={resetKnob}
+					onkeydown={knobKeydown}
+					role="slider"
+					tabindex="0"
+					aria-label="Gain"
+					aria-valuemin={-135}
+					aria-valuemax={135}
+					aria-valuenow={Math.round(knobAngle)}
+				>
 					<div class="absolute left-[49%] h-10 w-1 rounded-b-full border-l-4"></div>
 				</div>
 				<span class="knob-label">GAIN</span>
+				<span class="knob-value" class:active={isDraggingKnob}>{knobDb} dB</span>
 			</div>
 		</div>
 		<div class="social-1">
@@ -1087,6 +1167,35 @@
 			2px 2px 0 black,
 			inset 0 2px 4px rgba(255, 255, 255, 0.9),
 			inset 0 -4px 6px rgba(0, 0, 0, 0.08);
+		cursor: grab;
+		user-select: none;
+		touch-action: none;
+		transition: transform 0.06s ease-out, box-shadow 0.18s ease;
+		will-change: transform;
+	}
+	.knob:hover {
+		box-shadow:
+			2px 2px 0 black,
+			0 0 0 3px rgba(255, 140, 26, 0.18),
+			inset 0 2px 4px rgba(255, 255, 255, 0.9),
+			inset 0 -4px 6px rgba(0, 0, 0, 0.08);
+	}
+	.knob:focus-visible {
+		outline: none;
+		box-shadow:
+			2px 2px 0 black,
+			0 0 0 3px var(--amber-glow),
+			inset 0 2px 4px rgba(255, 255, 255, 0.9),
+			inset 0 -4px 6px rgba(0, 0, 0, 0.08);
+	}
+	.knob.dragging {
+		cursor: grabbing;
+		transition: none;
+		box-shadow:
+			2px 2px 0 black,
+			0 0 0 4px rgba(255, 140, 26, 0.28),
+			inset 0 2px 4px rgba(255, 255, 255, 0.9),
+			inset 0 -4px 6px rgba(0, 0, 0, 0.12);
 	}
 	.knob-ticks {
 		position: absolute;
@@ -1119,6 +1228,27 @@
 		letter-spacing: 0.25em;
 		opacity: 0.55;
 		font-family: var(--font-jersey);
+	}
+	.knob-value {
+		position: absolute;
+		bottom: -20px;
+		left: 50%;
+		transform: translateX(-50%);
+		font-size: 0.55rem;
+		letter-spacing: 0.12em;
+		color: var(--amber);
+		font-family: var(--font-jersey);
+		text-shadow: 0 0 4px rgba(255, 140, 26, 0.4);
+		white-space: nowrap;
+		pointer-events: none;
+		opacity: 0.55;
+		transition: opacity 0.2s ease;
+	}
+	.knob-value.active {
+		opacity: 1;
+		text-shadow:
+			0 0 6px rgba(255, 140, 26, 0.7),
+			0 0 12px rgba(255, 140, 26, 0.3);
 	}
 
 	/* NEVE 1073 channel fader — full-height in the slider cell */
