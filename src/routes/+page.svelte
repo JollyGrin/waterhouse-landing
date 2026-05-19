@@ -695,11 +695,11 @@
 	</div>
 </div>
 
-<!-- Audio cables draping out the back -->
+<!-- Audio cables draping over the top -->
 <svg
 	class="cables-svg pointer-events-none hidden md:block"
 	viewBox="0 0 1200 240"
-	preserveAspectRatio="xMidYMin meet"
+	preserveAspectRatio="xMidYMax meet"
 	aria-hidden="true"
 >
 	<defs>
@@ -710,16 +710,16 @@
 
 	<!-- Cable 1: black 1/4" instrument -->
 	<g filter="url(#cable-shadow)">
-		<rect x="192" y="-4" width="14" height="14" rx="2.5" fill="#0a0a0a" />
+		<rect x="192" y="230" width="14" height="14" rx="2.5" fill="#0a0a0a" />
 		<path
-			d="M 199 8 C 199 70 130 150 90 240"
+			d="M 199 232 C 199 170 130 90 90 0"
 			stroke="#1a1a1a"
 			stroke-width="11"
 			fill="none"
 			stroke-linecap="round"
 		/>
 		<path
-			d="M 199 8 C 199 70 130 150 90 240"
+			d="M 199 232 C 199 170 130 90 90 0"
 			stroke="#3c3c3c"
 			stroke-width="4"
 			fill="none"
@@ -729,16 +729,16 @@
 
 	<!-- Cable 2: red XLR -->
 	<g filter="url(#cable-shadow)">
-		<rect x="370" y="-4" width="16" height="14" rx="2.5" fill="#0a0a0a" />
+		<rect x="370" y="230" width="16" height="14" rx="2.5" fill="#0a0a0a" />
 		<path
-			d="M 378 8 C 378 80 350 165 320 240"
+			d="M 378 232 C 378 160 350 75 320 0"
 			stroke="#921818"
 			stroke-width="13"
 			fill="none"
 			stroke-linecap="round"
 		/>
 		<path
-			d="M 378 8 C 378 80 350 165 320 240"
+			d="M 378 232 C 378 160 350 75 320 0"
 			stroke="#e23a3a"
 			stroke-width="6"
 			fill="none"
@@ -748,16 +748,16 @@
 
 	<!-- Cable 3: yellow RCA -->
 	<g filter="url(#cable-shadow)">
-		<rect x="554" y="-4" width="12" height="14" rx="2.5" fill="#0a0a0a" />
+		<rect x="554" y="230" width="12" height="14" rx="2.5" fill="#0a0a0a" />
 		<path
-			d="M 560 8 C 560 85 580 165 605 240"
+			d="M 560 232 C 560 155 580 75 605 0"
 			stroke="#9a6a08"
 			stroke-width="9"
 			fill="none"
 			stroke-linecap="round"
 		/>
 		<path
-			d="M 560 8 C 560 85 580 165 605 240"
+			d="M 560 232 C 560 155 580 75 605 0"
 			stroke="#f0c828"
 			stroke-width="4"
 			fill="none"
@@ -767,16 +767,16 @@
 
 	<!-- Cable 4: blue XLR -->
 	<g filter="url(#cable-shadow)">
-		<rect x="740" y="-4" width="16" height="14" rx="2.5" fill="#0a0a0a" />
+		<rect x="740" y="230" width="16" height="14" rx="2.5" fill="#0a0a0a" />
 		<path
-			d="M 748 8 C 748 80 820 165 890 240"
+			d="M 748 232 C 748 160 820 75 890 0"
 			stroke="#143f78"
 			stroke-width="13"
 			fill="none"
 			stroke-linecap="round"
 		/>
 		<path
-			d="M 748 8 C 748 80 820 165 890 240"
+			d="M 748 232 C 748 160 820 75 890 0"
 			stroke="#3a8ad8"
 			stroke-width="6"
 			fill="none"
@@ -786,16 +786,16 @@
 
 	<!-- Cable 5: black short coiled -->
 	<g filter="url(#cable-shadow)">
-		<rect x="945" y="-4" width="14" height="14" rx="2.5" fill="#0a0a0a" />
+		<rect x="945" y="230" width="14" height="14" rx="2.5" fill="#0a0a0a" />
 		<path
-			d="M 952 8 C 952 80 1010 160 1090 240"
+			d="M 952 232 C 952 160 1010 80 1090 0"
 			stroke="#1a1a1a"
 			stroke-width="11"
 			fill="none"
 			stroke-linecap="round"
 		/>
 		<path
-			d="M 952 8 C 952 80 1010 160 1090 240"
+			d="M 952 232 C 952 160 1010 80 1090 0"
 			stroke="#3c3c3c"
 			stroke-width="4"
 			fill="none"
@@ -1242,10 +1242,10 @@
 		z-index: 2;
 	}
 
-	/* Audio cables draping behind/below the machine */
+	/* Audio cables draping over the top of the machine */
 	.cables-svg {
 		position: absolute;
-		top: calc(100% - 8px);
+		bottom: calc(100% - 8px);
 		left: 0;
 		right: 0;
 		width: 100%;
