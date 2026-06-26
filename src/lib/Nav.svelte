@@ -24,5 +24,11 @@
 		<button class="cursor-pointer transition-all hover:scale-110" onclick={onOpenAtelier}
 			>rent an atelier</button
 		>
+		<span>|</span>
+		<a
+			href="https://app.waterhousestudios.nl"
+			class="cursor-pointer text-sm opacity-40 transition-all hover:opacity-100"
+			>login</a
+		>
 	</div>
 </div>

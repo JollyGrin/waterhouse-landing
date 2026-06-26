@@ -834,6 +834,9 @@
 	Have a question? Contact us at <a href="mailto:info@waterhousestudios.nl">
 		info@waterhousestudios.nl
 	</a>
+	<span class="md:hidden">
+		· <a href="https://app.waterhousestudios.nl">login</a>
+	</span>
 </div>
 
 <!-- Gallery Masonry Grid -->
