@@ -698,7 +698,7 @@
 <!-- Audio cables draping over the top -->
 <svg
 	class="cables-svg pointer-events-none hidden md:block"
-	viewBox="0 0 1200 240"
+	viewBox="0 -1500 1200 1740"
 	preserveAspectRatio="xMidYMax meet"
 	aria-hidden="true"
 >
@@ -712,14 +712,14 @@
 	<g filter="url(#cable-shadow)">
 		<rect x="192" y="230" width="14" height="14" rx="2.5" fill="#0a0a0a" />
 		<path
-			d="M 199 232 C 199 170 130 90 90 0"
+			d="M 199 232 C 199 170 130 90 90 0 C 70 -130 40 -260 20 -400 C 0 -700 -10 -1100 -20 -1500"
 			stroke="#1a1a1a"
 			stroke-width="11"
 			fill="none"
 			stroke-linecap="round"
 		/>
 		<path
-			d="M 199 232 C 199 170 130 90 90 0"
+			d="M 199 232 C 199 170 130 90 90 0 C 70 -130 40 -260 20 -400 C 0 -700 -10 -1100 -20 -1500"
 			stroke="#3c3c3c"
 			stroke-width="4"
 			fill="none"
@@ -731,14 +731,14 @@
 	<g filter="url(#cable-shadow)">
 		<rect x="370" y="230" width="16" height="14" rx="2.5" fill="#0a0a0a" />
 		<path
-			d="M 378 232 C 378 160 350 75 320 0"
+			d="M 378 232 C 378 160 350 75 320 0 C 290 -130 240 -270 210 -400 C 190 -700 180 -1100 175 -1500"
 			stroke="#921818"
 			stroke-width="13"
 			fill="none"
 			stroke-linecap="round"
 		/>
 		<path
-			d="M 378 232 C 378 160 350 75 320 0"
+			d="M 378 232 C 378 160 350 75 320 0 C 290 -130 240 -270 210 -400 C 190 -700 180 -1100 175 -1500"
 			stroke="#e23a3a"
 			stroke-width="6"
 			fill="none"
@@ -750,14 +750,14 @@
 	<g filter="url(#cable-shadow)">
 		<rect x="554" y="230" width="12" height="14" rx="2.5" fill="#0a0a0a" />
 		<path
-			d="M 560 232 C 560 155 580 75 605 0"
+			d="M 560 232 C 560 155 580 75 605 0 C 625 -130 670 -270 700 -400 C 720 -700 730 -1100 735 -1500"
 			stroke="#9a6a08"
 			stroke-width="9"
 			fill="none"
 			stroke-linecap="round"
 		/>
 		<path
-			d="M 560 232 C 560 155 580 75 605 0"
+			d="M 560 232 C 560 155 580 75 605 0 C 625 -130 670 -270 700 -400 C 720 -700 730 -1100 735 -1500"
 			stroke="#f0c828"
 			stroke-width="4"
 			fill="none"
@@ -769,14 +769,14 @@
 	<g filter="url(#cable-shadow)">
 		<rect x="740" y="230" width="16" height="14" rx="2.5" fill="#0a0a0a" />
 		<path
-			d="M 748 232 C 748 160 820 75 890 0"
+			d="M 748 232 C 748 160 820 75 890 0 C 950 -130 1030 -270 1080 -400 C 1110 -700 1120 -1100 1125 -1500"
 			stroke="#143f78"
 			stroke-width="13"
 			fill="none"
 			stroke-linecap="round"
 		/>
 		<path
-			d="M 748 232 C 748 160 820 75 890 0"
+			d="M 748 232 C 748 160 820 75 890 0 C 950 -130 1030 -270 1080 -400 C 1110 -700 1120 -1100 1125 -1500"
 			stroke="#3a8ad8"
 			stroke-width="6"
 			fill="none"
@@ -788,14 +788,14 @@
 	<g filter="url(#cable-shadow)">
 		<rect x="945" y="230" width="14" height="14" rx="2.5" fill="#0a0a0a" />
 		<path
-			d="M 952 232 C 952 160 1010 80 1090 0"
+			d="M 952 232 C 952 160 1010 80 1090 0 C 1130 -130 1170 -270 1180 -400 C 1200 -700 1210 -1100 1215 -1500"
 			stroke="#1a1a1a"
 			stroke-width="11"
 			fill="none"
 			stroke-linecap="round"
 		/>
 		<path
-			d="M 952 232 C 952 160 1010 80 1090 0"
+			d="M 952 232 C 952 160 1010 80 1090 0 C 1130 -130 1170 -270 1180 -400 C 1200 -700 1210 -1100 1215 -1500"
 			stroke="#3c3c3c"
 			stroke-width="4"
 			fill="none"
@@ -1250,6 +1250,7 @@
 		right: 0;
 		width: 100%;
 		height: auto;
+		aspect-ratio: 1200 / 1740;
 		z-index: 0;
 		pointer-events: none;
 	}
