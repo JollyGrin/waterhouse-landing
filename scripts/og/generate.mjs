@@ -38,6 +38,10 @@ const CREAM = '#faf6f6';
 const AMBER = '#ff8c1a';
 const INK = '#111111';
 
+// Brand logo mark, inlined as a data URI (2000x1332, ~3:2).
+const logoUri =
+	'data:image/png;base64,' + readFileSync(resolve(root, 'static/logo.png')).toString('base64');
+
 // Minimal hyperscript for Satori: every node is a <div>. Satori requires any div
 // with multiple children to declare display:flex, so we default it when missing.
 const h = (style, children) => ({
@@ -47,6 +51,7 @@ const h = (style, children) => ({
 		children
 	}
 });
+const img = (src, width, height) => ({ type: 'img', props: { src, width, height } });
 
 const STRIP = {
 	display: 'flex',
@@ -83,13 +88,16 @@ function card({ title, sub }) {
 					boxShadow: '18px 18px 0 #000'
 				},
 				[
-					// Top brand strip: amber power LED + WATERHOUSE · WH—08 · AMSTERDAM
+					// Top brand strip: logo mark + WATERHOUSE · WH—08 · AMSTERDAM + amber power LED
 					h({ ...STRIP, borderBottom: '2px solid rgba(0,0,0,0.14)' }, [
-						h({ display: 'flex', alignItems: 'center', gap: 14 }, [
-							h({ width: 15, height: 15, borderRadius: 999, backgroundColor: AMBER, boxShadow: `0 0 14px ${AMBER}` }, []),
+						h({ display: 'flex', alignItems: 'center', gap: 16 }, [
+							img(logoUri, 52, 35),
 							h({ display: 'flex' }, 'WATERHOUSE · WH—08')
 						]),
-						h({ display: 'flex' }, 'AMSTERDAM')
+						h({ display: 'flex', alignItems: 'center', gap: 12 }, [
+							h({ display: 'flex' }, 'AMSTERDAM'),
+							h({ width: 15, height: 15, borderRadius: 999, backgroundColor: AMBER, boxShadow: `0 0 14px ${AMBER}` }, [])
+						])
 					]),
 					// Body: title + subtitle
 					h(
@@ -123,11 +131,11 @@ function card({ title, sub }) {
 
 // One card per output file. `out` is relative to the static/ directory.
 const CARDS = [
-	{ out: 'og.png', title: 'Music studios, events & online radio in Amsterdam', sub: 'Rent a studio · 24/7 online radio · live events' },
+	{ out: 'og.png', title: 'Music studios, events & online radio in Amsterdam', sub: 'Rent a studio · weekly online radio · live events' },
 	{ out: 'og/studios.png', title: 'Music studio rental in Amsterdam', sub: 'Shared from €30/hr · private 24/7 from €1,100/mo' },
 	{ out: 'og/ateliers.png', title: 'Ateliers for artists & music professionals', sub: 'Creative office space · €500 / month' },
 	{ out: 'og/residency.png', title: 'Artist residency in Amsterdam', sub: 'Workshops · mentorship · performances' },
-	{ out: 'og/radio.png', title: 'Waterhouse Radio — live from Amsterdam', sub: '24/7 online DJ streams from the stream room' },
+	{ out: 'og/radio.png', title: 'Waterhouse Radio — live from Amsterdam', sub: 'Weekly online DJ streams from the stream room' },
 	{ out: 'og/events.png', title: 'Events at Waterhouse Studios', sub: 'Club nights & showcases · up to 120 people' },
 	{ out: 'og/about.png', title: 'A space crafted for music creators', sub: 'Built by DJs & musicians, for creators' },
 	{ out: 'og/faq.png', title: 'Frequently asked questions', sub: 'Pricing · location · equipment · streaming' },

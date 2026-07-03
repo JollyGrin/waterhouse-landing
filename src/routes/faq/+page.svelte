@@ -22,7 +22,7 @@
 		},
 		{
 			q: 'Can I livestream from Waterhouse Studios?',
-			a: 'Yes. Every studio and atelier membership includes access to the stream room, a full DJ rig built for broadcasting live to Twitch and YouTube. We run Waterhouse Radio, a 24/7 online stream of Amsterdam DJs and artists.'
+			a: 'Yes. Every studio and atelier membership includes access to the stream room, a full DJ rig built for broadcasting live to Twitch and YouTube. We run Waterhouse Radio, a weekly online stream of Amsterdam DJs and artists.'
 		},
 		{
 			q: 'What is the Waterhouse artist residency?',

@@ -28,7 +28,7 @@
 			Waterhouse Studios is a launchpad built by DJs and musicians for creators in Amsterdam's
 			Houthaven. Everything we offer is tailored to the needs of music creators and the people working
 			in the music industry: {SITE.facts.studioCount} acoustically designed studios, ateliers, an
-			artist residency, an event space for up to {SITE.facts.eventCapacity} people, and a 24/7 online
+			artist residency, an event space for up to {SITE.facts.eventCapacity} people, and a weekly online
 			radio stream — all in one place.
 		</p>
 

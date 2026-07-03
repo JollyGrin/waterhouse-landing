@@ -119,7 +119,7 @@ export function radioStationSchema() {
 		name: 'Waterhouse Radio',
 		broadcastDisplayName: 'Waterhouse Studios Live',
 		description:
-			'A 24/7 online radio stream broadcasting live DJ sets and shows from Amsterdam artists, streamed from the Waterhouse Studios stream room on Twitch.',
+			'A weekly online radio stream broadcasting live DJ sets and shows from Amsterdam artists, streamed from the Waterhouse Studios stream room on Twitch.',
 		url: `${SITE.url}/radio`,
 		provider: { '@id': VENUE_ID },
 		broadcaster: { '@id': VENUE_ID },
