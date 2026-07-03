@@ -12,7 +12,11 @@
 	import ModalVideo from '$lib/modal/ModalVideo.svelte';
 	import Nav from '$lib/Nav.svelte';
 	import SpeakerGrate from '$lib/SpeakerGrate.svelte';
-	import SEOContent from '$lib/SEOContent.svelte';
+	import Seo from '$lib/seo/Seo.svelte';
+	import JsonLd from '$lib/seo/JsonLd.svelte';
+	import SiteFooter from '$lib/SiteFooter.svelte';
+	import { graph, studioServiceSchema } from '$lib/seo/schema';
+	import { SITE } from '$lib/site';
 	import GradientBanner from '$lib/GradientBanner.svelte';
 	import toast from 'svelte-french-toast';
 	import IconInstagram from '$lib/icon/IconInstagram.svelte';
@@ -20,11 +24,6 @@
 	import { Confetti } from 'svelte-confetti';
 	import { scale } from 'svelte/transition';
 	import { quintOut } from 'svelte/easing';
-
-	const siteTitle = 'Waterhouse Studios';
-	const siteDescription =
-		'Premium music studios and creative spaces for music creators and industry professionals';
-	const siteUrl = 'https://waterhousestudios.nl';
 
 	const galleryImages = [
 		'event_1.jpg',
@@ -36,24 +35,6 @@
 		'studio_back.jpg',
 		'studio_front.jpg'
 	];
-
-	// SEO-specific content extracted from modals
-	const seoAboutContent = `
-		A Space Crafted for Music Creators and Industry Professionals
-		
-		At Waterhouse Studios, everything we offer is tailored specifically to the needs of music creators and the people working in the music industry. Our mission is to provide cutting-edge facilities and foster a collaborative environment where artists and professionals can connect, create, and succeed.
-		
-		Waterhouse Studios offers premium music studios, each custom-designed by industry professionals for optimal acoustics and workflow. Built by creators, for creators, our spaces provide the perfect environment to produce, collaborate, and grow.
-		
-		Why Waterhouse Studios?
-		What sets Waterhouse Studios apart? It's the combination of world-class facilities, comprehensive artist development resources, and a vibrant community—all in one place. We're more than just a studio; we're a partner in your creative journey.
-		
-		A Vibrant Community
-		At the heart of Waterhouse Studios is a thriving community of creatives who share a passion for innovation and artistic excellence. Here, you'll find a supportive network of peers and mentors who are as invested in your success as you are.
-	`;
-
-	// Combine all SEO content
-	const allSeoContent = seoAboutContent;
 
 	let isModalOpen:
 		| null
@@ -352,17 +333,11 @@
 	});
 </script>
 
-<svelte:head>
-	<title>{siteTitle}</title>
-	<meta name="description" content={siteDescription} />
-	<meta property="og:title" content={siteTitle} />
-	<meta property="og:description" content={siteDescription} />
-	<meta property="og:url" content={siteUrl} />
-	<meta property="og:type" content="website" />
-	<meta name="twitter:card" content="summary_large_image" />
-	<meta name="twitter:title" content={siteTitle} />
-	<meta name="twitter:description" content={siteDescription} />
-</svelte:head>
+<Seo
+	title="Waterhouse Studios — Music Studio Rental, Events & Online Radio in Amsterdam"
+	description={SITE.description}
+/>
+<JsonLd schema={graph(studioServiceSchema())} />
 
 <svelte:window
 	onkeydown={handleKeydown}
@@ -433,8 +408,17 @@
 	onOpenAtelier={() => (isModalOpen = 'offices')}
 />
 
-<!-- Hidden SEO content for search engines -->
-<SEOContent content={allSeoContent} />
+<header class="font-jersey text-secondary container mx-auto px-4 text-center">
+	<h1 class="text-2xl leading-tight md:text-3xl">
+		Waterhouse Studios — music studio rental, events &amp; online radio in Amsterdam
+	</h1>
+	<p class="mt-1 text-base opacity-60">
+		{SITE.facts.studioCount} acoustically designed studios in the Houthaven ·
+		<a href="/studios" class="hover:text-amber underline">rent a studio</a> ·
+		<a href="/radio" class="hover:text-amber underline">live radio</a> ·
+		<a href="/events" class="hover:text-amber underline">events</a>
+	</p>
+</header>
 
 <!-- Mobile-only video banner -->
 <div
@@ -841,12 +825,17 @@
 
 <!-- Gallery Masonry Grid -->
 <div class="gallery-section font-jersey mt-8 bg-black px-3 py-4 text-slate-100">
+	<h2 class="sr-only">Inside Waterhouse Studios</h2>
 	<div class="masonry-grid">
 		{#each galleryImages as image, i}
 			<div class="masonry-item">
 				<img
 					src="/gallery/{image}"
-					alt="Waterhouse Studios gallery image {i + 1}"
+					alt={image.includes('studio')
+						? 'Music studio at Waterhouse Studios Amsterdam'
+						: image.includes('event')
+							? 'Live event at Waterhouse Studios Amsterdam'
+							: 'Inside Waterhouse Studios Amsterdam'}
 					class="h-auto w-full cursor-pointer rounded-lg object-cover shadow-lg transition-transform hover:scale-105 hover:saturate-150"
 					loading="lazy"
 					onclick={() => openImageModal(image)}
@@ -855,6 +844,8 @@
 		{/each}
 	</div>
 </div>
+
+<SiteFooter />
 
 <style>
 	:root {

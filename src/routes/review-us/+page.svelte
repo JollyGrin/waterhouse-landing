@@ -10,6 +10,7 @@
 
 <svelte:head>
 	<title>Redirecting to Google Reviews...</title>
+	<meta name="robots" content="noindex, follow" />
 	<meta http-equiv="refresh" content="0; url={GOOGLE_REVIEW_LINK}">
 </svelte:head>
 
