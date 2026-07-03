@@ -1,5 +1,6 @@
 <script lang="ts">
 	import ModalSendEmail from '$lib/modal/ModalSendEmail.svelte';
+	import Seo from '$lib/seo/Seo.svelte';
 	import { onMount } from 'svelte';
 
 	let isModalOpen = $state(true);
@@ -10,6 +11,11 @@
 		// window.location.href = '/';
 	}
 </script>
+
+<Seo
+	title="Book a Studio"
+	description="Reserve your spot at Waterhouse Studios Amsterdam. Book a shared or private music studio, atelier or stream session in the Houthaven."
+/>
 
 <div class="bg-primary flex min-h-screen items-center justify-center">
 	<div class="text-center">
