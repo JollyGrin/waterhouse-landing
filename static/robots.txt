@@ -1,0 +1,7 @@
+# Waterhouse Studios — allow all crawlers, including AI search & retrieval bots.
+# We want maximum visibility in Google, Bing/Copilot, ChatGPT, Perplexity, Claude,
+# Gemini and Apple Intelligence, so no AI user-agents are disallowed.
+User-agent: *
+Allow: /
+
+Sitemap: https://waterhousestudios.nl/sitemap.xml
