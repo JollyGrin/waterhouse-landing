@@ -43,7 +43,10 @@ const INK = '#111111';
 const h = (style, children) => ({
 	type: 'div',
 	props: {
-		style: Array.isArray(children) && style.display === undefined ? { display: 'flex', ...style } : style,
+		style:
+			Array.isArray(children) && style.display === undefined
+				? { display: 'flex', ...style }
+				: style,
 		children
 	}
 });
@@ -86,7 +89,16 @@ function card({ title, sub }) {
 					// Top brand strip: amber power LED + WATERHOUSE · WH—08 · AMSTERDAM
 					h({ ...STRIP, borderBottom: '2px solid rgba(0,0,0,0.14)' }, [
 						h({ display: 'flex', alignItems: 'center', gap: 14 }, [
-							h({ width: 15, height: 15, borderRadius: 999, backgroundColor: AMBER, boxShadow: `0 0 14px ${AMBER}` }, []),
+							h(
+								{
+									width: 15,
+									height: 15,
+									borderRadius: 999,
+									backgroundColor: AMBER,
+									boxShadow: `0 0 14px ${AMBER}`
+								},
+								[]
+							),
 							h({ display: 'flex' }, 'WATERHOUSE · WH—08')
 						]),
 						h({ display: 'flex' }, 'AMSTERDAM')
@@ -123,15 +135,52 @@ function card({ title, sub }) {
 
 // One card per output file. `out` is relative to the static/ directory.
 const CARDS = [
-	{ out: 'og.png', title: 'Music studios, events & online radio in Amsterdam', sub: 'Rent a studio · 24/7 online radio · live events' },
-	{ out: 'og/studios.png', title: 'Music studio rental in Amsterdam', sub: 'Shared from €30/hr · private 24/7 from €1,100/mo' },
-	{ out: 'og/ateliers.png', title: 'Ateliers for artists & music professionals', sub: 'Creative office space · €500 / month' },
-	{ out: 'og/residency.png', title: 'Artist residency in Amsterdam', sub: 'Workshops · mentorship · performances' },
-	{ out: 'og/radio.png', title: 'Waterhouse Radio — live from Amsterdam', sub: '24/7 online DJ streams from the stream room' },
-	{ out: 'og/events.png', title: 'Events at Waterhouse Studios', sub: 'Club nights & showcases · up to 120 people' },
-	{ out: 'og/about.png', title: 'A space crafted for music creators', sub: 'Built by DJs & musicians, for creators' },
-	{ out: 'og/faq.png', title: 'Frequently asked questions', sub: 'Pricing · location · equipment · streaming' },
-	{ out: 'og/contact.png', title: 'Contact & location', sub: 'Danzigerkade 1, 1013 AP Amsterdam' }
+	{
+		out: 'og.png',
+		title: 'Music studios, events & online radio in Amsterdam',
+		sub: 'Rent a studio · 24/7 online radio · live events'
+	},
+	{
+		out: 'og/studios.png',
+		title: 'Music studio rental in Amsterdam',
+		sub: 'Shared from €30/hr · private 24/7 from €1,100/mo'
+	},
+	{
+		out: 'og/ateliers.png',
+		title: 'Ateliers for artists & music professionals',
+		sub: 'Creative office space · €500 / month'
+	},
+	{
+		out: 'og/residency.png',
+		title: 'Artist residency in Amsterdam',
+		sub: 'Workshops · mentorship · performances'
+	},
+	{
+		out: 'og/radio.png',
+		title: 'Waterhouse Radio — live from Amsterdam',
+		sub: '24/7 online DJ streams from the stream room'
+	},
+	{
+		out: 'og/events.png',
+		title: 'Events at Waterhouse Studios',
+		sub: 'Club nights & showcases · up to 120 people'
+	},
+	{
+		out: 'og/about.png',
+		title: 'A space crafted for music creators',
+		sub: 'Built by DJs & musicians, for creators'
+	},
+	{
+		out: 'og/faq.png',
+		title: 'Frequently asked questions',
+		sub: 'Pricing · location · equipment · streaming'
+	},
+	{ out: 'og/contact.png', title: 'Contact & location', sub: 'Danzigerkade 1, 1013 AP Amsterdam' },
+	{
+		out: 'og/mediakit.png',
+		title: 'Media kit & brand assets',
+		sub: 'Logos · covers · colors · typography'
+	}
 ];
 
 for (const c of CARDS) {
