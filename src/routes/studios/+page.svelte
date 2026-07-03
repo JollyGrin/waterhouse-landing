@@ -24,6 +24,7 @@
 
 <Seo
 	title="Music Studio Rental in Amsterdam — Waterhouse Studios"
+	image="/og/studios.png"
 	description="Rent a music studio in Amsterdam. {SITE.facts.studioCount} acoustically designed studios in the Houthaven — shared sessions from €{PRICING.sharedHourly}/hour, private 24/7 solo studios €{PRICING.soloMonthly}/month. Recording, production and streaming, {SITE.facts.audio}."
 />
 <JsonLd schema={graph(studioServiceSchema(), breadcrumb([{ name: 'Studios', path: '/studios' }]))} />

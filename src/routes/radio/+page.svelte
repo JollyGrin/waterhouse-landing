@@ -16,6 +16,7 @@
 
 <Seo
 	title="Waterhouse Radio — Live Online DJ Streams from Amsterdam"
+	image="/og/radio.png"
 	description="Waterhouse Radio broadcasts live DJ sets and shows from Amsterdam artists 24/7. Watch the stream from the Waterhouse Studios stream room on Twitch."
 />
 <JsonLd schema={graph(radioStationSchema(), breadcrumb([{ name: 'Radio', path: '/radio' }]))} />

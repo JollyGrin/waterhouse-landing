@@ -9,6 +9,7 @@
 
 <Seo
 	title="Atelier & Creative Office Rental in Amsterdam"
+	image="/og/ateliers.png"
 	description="Rent an atelier at Waterhouse Studios Amsterdam — a creative office for artists and music-industry professionals. €{PRICING.atelierMonthly}/month with 24/7 access, meeting rooms, business amenities and stream-room access."
 />
 <JsonLd schema={graph(atelierServiceSchema(), breadcrumb([{ name: 'Ateliers', path: '/ateliers' }]))} />

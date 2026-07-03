@@ -9,6 +9,7 @@
 
 <Seo
 	title="Contact & Location"
+	image="/og/contact.png"
 	description="Contact Waterhouse Studios Amsterdam. Find us at Danzigerkade 1, 1013 AP Amsterdam (Houthaven), email info@waterhousestudios.nl, or book a studio online."
 />
 <JsonLd schema={graph(breadcrumb([{ name: 'Contact', path: '/contact' }]))} />

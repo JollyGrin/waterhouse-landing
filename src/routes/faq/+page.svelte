@@ -41,6 +41,7 @@
 
 <Seo
 	title="Frequently Asked Questions"
+	image="/og/faq.png"
 	description="Answers about renting a music studio in Amsterdam at Waterhouse Studios — pricing, location, equipment, streaming, the residency and hosting events."
 />
 <JsonLd schema={graph(faqSchema(faqs), breadcrumb([{ name: 'FAQ', path: '/faq' }]))} />

@@ -9,6 +9,7 @@
 
 <Seo
 	title="About Waterhouse Studios Amsterdam"
+	image="/og/about.png"
 	description="Waterhouse Studios is a music studio, artist residency, event space and online radio in Amsterdam's Houthaven — {SITE.facts.studioCount} acoustically designed studios built by DJs and musicians for creators."
 />
 <JsonLd schema={graph(breadcrumb([{ name: 'About', path: '/about' }]))} />

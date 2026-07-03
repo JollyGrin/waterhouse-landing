@@ -31,6 +31,7 @@
 
 <Seo
 	title="Artist Residency in Amsterdam"
+	image="/og/residency.png"
 	description="The Waterhouse Studios artist residency in Amsterdam is a launchpad for {SITE.facts.residentCount}+ resident DJs, producers and musicians — workshops, mentorship, performances, and help finding paid work."
 />
 <JsonLd schema={graph(breadcrumb([{ name: 'Residency', path: '/residency' }]))} />

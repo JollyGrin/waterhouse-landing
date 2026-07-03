@@ -9,6 +9,7 @@
 
 <Seo
 	title="Events at Waterhouse Studios Amsterdam"
+	image="/og/events.png"
 	description="Waterhouse Studios hosts club nights, showcases and live events for up to {SITE.facts.eventCapacity} people in Amsterdam's Houthaven. Find our lineups on Resident Advisor and DICE, and catch every set live on the stream."
 />
 <JsonLd schema={graph(breadcrumb([{ name: 'Events', path: '/events' }]))} />
