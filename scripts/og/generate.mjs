@@ -138,7 +138,7 @@ const CARDS = [
 	{
 		out: 'og.png',
 		title: 'Music studios, events & online radio in Amsterdam',
-		sub: 'Rent a studio · 24/7 online radio · live events'
+		sub: 'Rent a studio · weekly online radio · live events'
 	},
 	{
 		out: 'og/studios.png',
@@ -158,7 +158,7 @@ const CARDS = [
 	{
 		out: 'og/radio.png',
 		title: 'Waterhouse Radio — live from Amsterdam',
-		sub: '24/7 online DJ streams from the stream room'
+		sub: 'Weekly online DJ streams from the stream room'
 	},
 	{
 		out: 'og/events.png',

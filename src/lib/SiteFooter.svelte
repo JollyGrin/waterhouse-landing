@@ -12,7 +12,7 @@
 			<img src="/logo.png" width="160" height="40" alt="Waterhouse Studios" class="mb-3" />
 			<p class="max-w-sm text-sm opacity-70">
 				{SITE.facts.studioCount} acoustically designed music studios, ateliers, an artist residency,
-				live events and 24/7 online radio — built by DJs and musicians for creators in Amsterdam.
+				live events and weekly online radio — built by DJs and musicians for creators in Amsterdam.
 			</p>
 		</div>
 

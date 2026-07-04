@@ -96,7 +96,7 @@ Add `src/routes/sitemap.xml/+server.ts` with `export const prerender = true`, em
 - **`og:image` / `twitter:image`:** create a 1200×630 branded card (the `og-image` skill in this repo can generate it from the existing design system), place at `static/og.png`, reference with absolute URL. Per-page overrides for events.
 - **Unique title + description per route.** Homepage title should carry the money keywords, e.g.:
   - Title: `Waterhouse Studios — Music Studio Rental, Events & Online Radio in Amsterdam`
-  - Description: `25 acoustically designed music studios for rent in Amsterdam (Houthaven). Shared studios from €30/hr, private 24/7 studios, ateliers, live events and 24/7 online radio from Amsterdam's DJ community.`
+  - Description: `25 acoustically designed music studios for rent in Amsterdam (Houthaven). Shared studios from €30/hr, private 24/7 studios, ateliers, live events and weekly online radio from Amsterdam's DJ community.`
 - Recommended pattern (SvelteKit official): return SEO fields from each page's `load`, render once in root layout `<svelte:head>`.
 
 ### 3.5 Bug fixes
