@@ -13,6 +13,9 @@
 		{ id: 'amber', label: 'Amber', note: 'accent — use sparingly', dark: true }
 	];
 
+	// 512/1024 for smaller uploads, 2000 for hi-res square avatars (SoundCloud,
+	// Spotify, YouTube). All are square — safe to crop to a circle.
+	const ICON_SIZES = [512, 1024, 2000];
 	const ICONS = [
 		{ id: 'cream', label: 'Ink on cream' },
 		{ id: 'black', label: 'White on ink' },
@@ -22,8 +25,83 @@
 
 	const COVERS = [
 		{ file: 'waterhouse-cover-1500x500.png', label: 'X / Twitter header', dims: '1500 × 500' },
+		{ file: 'waterhouse-cover-2480x520.png', label: 'SoundCloud header', dims: '2480 × 520' },
 		{ file: 'waterhouse-cover-1584x396.png', label: 'LinkedIn banner', dims: '1584 × 396' },
+		{ file: 'waterhouse-cover-1600x900.png', label: 'Mixcloud cover · 16:9', dims: '1600 × 900' },
+		{ file: 'waterhouse-cover-2560x1440.png', label: 'YouTube channel art', dims: '2560 × 1440' },
 		{ file: 'waterhouse-cover-3000x1000.png', label: 'Hi-res master', dims: '3000 × 1000' }
+	];
+
+	// Copy-paste cheat sheet: the exact avatar/header to grab per platform.
+	// `avatar.size` picks a square icon tile above; `cover.file` a header above.
+	// Every file we ship is a lightweight PNG far under each platform's MB cap —
+	// the usual upload failure is a too-small or non-square image, not weight.
+	const AVATAR_VARIANT = 'cream';
+	const PLATFORMS = [
+		{
+			name: 'SoundCloud',
+			avatar: { size: 2000, label: '2000 × 2000', note: 'min 1000 · square' },
+			cover: { file: 'waterhouse-cover-2480x520.png', label: '2480 × 520' },
+			limits: 'JPG / PNG · 2 MB max'
+		},
+		{
+			name: 'Mixcloud',
+			avatar: { size: 1024, label: '1024 × 1024', note: 'min 640 · square' },
+			cover: { file: 'waterhouse-cover-1600x900.png', label: '1600 × 900 · 16:9' },
+			limits: 'JPG / PNG / GIF · 10 MB'
+		},
+		{
+			name: 'X / Twitter',
+			avatar: { size: 512, label: '512 × 512', note: 'min 400 · square' },
+			cover: { file: 'waterhouse-cover-1500x500.png', label: '1500 × 500 · 3:1' },
+			limits: 'JPG / PNG · 2 MB avatar, 5 MB header'
+		},
+		{
+			name: 'Instagram',
+			avatar: { size: 1024, label: '1024 × 1024', note: 'shown at 320 · square' },
+			cover: null,
+			limits: 'JPG / PNG · no header'
+		},
+		{
+			name: 'Facebook Page',
+			avatar: { size: 512, label: '512 × 512', note: 'square' },
+			cover: {
+				file: 'waterhouse-cover-1500x500.png',
+				label: '1500 × 500',
+				note: 'crop to 851 × 315'
+			},
+			limits: 'JPG / PNG (PNG for logos)'
+		},
+		{
+			name: 'YouTube',
+			avatar: { size: 1024, label: '1024 × 1024', note: 'min 800 · square' },
+			cover: {
+				file: 'waterhouse-cover-2560x1440.png',
+				label: '2560 × 1440',
+				note: 'safe area 1546 × 423'
+			},
+			limits: 'JPG / PNG · 6 MB'
+		},
+		{
+			name: 'LinkedIn',
+			avatar: { size: 512, label: '512 × 512', note: 'min 400 · square' },
+			cover: {
+				file: 'waterhouse-cover-1584x396.png',
+				label: '1584 × 396',
+				note: 'personal banner'
+			},
+			limits: 'PNG / JPG · 3 MB'
+		},
+		{
+			name: 'Spotify',
+			avatar: { size: 2000, label: '2000 × 2000', note: 'min 750 · square' },
+			cover: {
+				file: 'waterhouse-cover-3000x1000.png',
+				label: '3000 × 1000',
+				note: 'crop to 2660 × 1140'
+			},
+			limits: 'JPG / PNG · 20 MB'
+		}
 	];
 
 	const COLORS = [
@@ -106,6 +184,64 @@
 			</div>
 		</header>
 
+		<!-- Platform sizes cheat sheet -->
+		<section class="mb-16">
+			<h2 class="section-title"><span class="led-sq" aria-hidden="true"></span>Platform sizes</h2>
+			<p class="mb-6 max-w-2xl text-lg opacity-70">
+				The right avatar and header for each platform, ready to grab. Tap a size to download —
+				avatars are square (safe to crop round), headers are pre-sized. Every file is a lightweight
+				PNG, well under each platform's upload limit.
+			</p>
+			<div class="panel overflow-x-auto rounded-2xl p-2">
+				<table class="w-full min-w-[640px] border-collapse text-left">
+					<thead>
+						<tr class="text-sm tracking-wide uppercase opacity-60">
+							<th class="p-3 font-normal">Platform</th>
+							<th class="p-3 font-normal">Avatar · square</th>
+							<th class="p-3 font-normal">Header / cover</th>
+							<th class="p-3 font-normal">Format · limit</th>
+						</tr>
+					</thead>
+					<tbody>
+						{#each PLATFORMS as p (p.name)}
+							<tr class="border-t-2 border-black/10 align-top">
+								<td class="p-3 text-xl leading-tight">{p.name}</td>
+								<td class="p-3">
+									<a
+										href="/brand/waterhouse-icon-{AVATAR_VARIANT}-{p.avatar.size}.png"
+										download={`waterhouse-icon-${AVATAR_VARIANT}-${p.avatar.size}.png`}
+										class="chip">{p.avatar.size}</a
+									>
+									<span class="mt-1 block text-sm opacity-60"
+										>{p.avatar.label} · {p.avatar.note}</span
+									>
+								</td>
+								<td class="p-3">
+									{#if p.cover}
+										<a href="/brand/{p.cover.file}" download={p.cover.file} class="chip">PNG</a>
+										<span class="mt-1 block text-sm opacity-60"
+											>{p.cover.label}{#if p.cover.note}
+												· {p.cover.note}{/if}</span
+										>
+									{:else}
+										<span class="opacity-40">— none</span>
+									{/if}
+								</td>
+								<td class="p-3 text-sm opacity-70">{p.limits}</td>
+							</tr>
+						{/each}
+					</tbody>
+				</table>
+			</div>
+			<p class="strip mt-4 rounded-lg border-2 border-black bg-white text-sm">
+				<span>SOUNDCLOUD TIP</span>
+				<span class="tracking-normal normal-case"
+					>Profile pics must be square and under 2 MB — grab the 2000 avatar tile, not a wide logo
+					file</span
+				>
+			</p>
+		</section>
+
 		<!-- Logo -->
 		<section class="mb-16">
 			<h2 class="section-title"><span class="led-sq" aria-hidden="true"></span>Logo</h2>
@@ -156,7 +292,7 @@
 			<h2 class="section-title"><span class="led-sq" aria-hidden="true"></span>Avatar tiles</h2>
 			<p class="mb-6 max-w-2xl text-lg opacity-70">
 				Square, pre-padded versions for profile pictures, playlists and app icons. Round cropping is
-				safe.
+				safe. Grab 2000 for hi-res platforms (SoundCloud, Spotify), 512 for smaller uploads.
 			</p>
 			<div class="grid grid-cols-2 gap-6 md:grid-cols-4">
 				{#each ICONS as icon (icon.id)}
@@ -168,17 +304,14 @@
 							loading="lazy"
 						/>
 						<span class="mb-2 text-lg leading-tight">{icon.label}</span>
-						<div class="flex gap-2">
-							<a
-								href="/brand/waterhouse-icon-{icon.id}-512.png"
-								download={`waterhouse-icon-${icon.id}-512.png`}
-								class="chip">512</a
-							>
-							<a
-								href="/brand/waterhouse-icon-{icon.id}-1024.png"
-								download={`waterhouse-icon-${icon.id}-1024.png`}
-								class="chip">1024</a
-							>
+						<div class="flex flex-wrap gap-2">
+							{#each ICON_SIZES as size (size)}
+								<a
+									href="/brand/waterhouse-icon-{icon.id}-{size}.png"
+									download={`waterhouse-icon-${icon.id}-${size}.png`}
+									class="chip">{size}</a
+								>
+							{/each}
 						</div>
 					</div>
 				{/each}
