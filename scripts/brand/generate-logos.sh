@@ -35,9 +35,11 @@ for color in black white amber; do
 done
 
 # --- 3. Square avatar tiles (logo centered on a brand background) -------------
+# 2000px covers the largest avatar any platform asks for (SoundCloud/Spotify
+# hi-res, ~1000px min); 512/1024 stay for smaller uploads (X, Facebook, IG).
 # tile <name> <bg-color> <logo-variant>
 tile() {
-	for s in 512 1024; do
+	for s in 512 1024 2000; do
 		logo_w=$((s * 62 / 100))
 		magick -background none -density 300 "$OUT/waterhouse-logo-$3.svg" \
 			-resize "${logo_w}x" -background "$2" -gravity center \

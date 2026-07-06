@@ -168,14 +168,133 @@ function cover(hh) {
 	);
 }
 
+// A 16:9 banner for platforms whose covers aren't wide strips (YouTube channel
+// art 2560x1440, Mixcloud 1600x900). The hardware panel floats centered inside
+// the safe area so it survives YouTube's aggressive per-device cropping (the
+// guaranteed-visible zone is only the middle ~1546x423 of a 2560x1440 banner).
+function banner169(hh) {
+	const s = hh / 900;
+	const pads = h(
+		{ display: 'flex', gap: 12 * s },
+		[0, 1, 2, 3].map((i) =>
+			h(
+				{
+					width: 40 * s,
+					height: 40 * s,
+					borderRadius: 8 * s,
+					border: `${3 * s}px solid #000`,
+					backgroundColor: i === 2 ? AMBER : '#ffffff',
+					boxShadow: `${3 * s}px ${3 * s}px 0 #000`
+				},
+				[]
+			)
+		)
+	);
+	const strip = {
+		display: 'flex',
+		alignItems: 'center',
+		justifyContent: 'space-between',
+		paddingTop: 14 * s,
+		paddingBottom: 14 * s,
+		paddingLeft: 34 * s,
+		paddingRight: 34 * s,
+		fontSize: 22 * s,
+		letterSpacing: 6 * s,
+		color: 'rgba(0,0,0,0.56)'
+	};
+	return h(
+		{
+			width: '100%',
+			height: '100%',
+			display: 'flex',
+			alignItems: 'center',
+			justifyContent: 'center',
+			backgroundColor: CREAM,
+			fontFamily: 'Jersey 15'
+		},
+		[
+			// Panel constrained to ~60% width so it lands inside YouTube's safe area.
+			h(
+				{
+					width: '60%',
+					display: 'flex',
+					flexDirection: 'column',
+					border: `${6 * s}px solid #000`,
+					borderRadius: 22 * s,
+					backgroundImage: 'linear-gradient(180deg, #ffffff 0%, #efece6 100%)',
+					boxShadow: `${12 * s}px ${12 * s}px 0 #000`
+				},
+				[
+					h({ ...strip, borderBottom: '2px solid rgba(0,0,0,0.14)' }, [
+						h({ display: 'flex', alignItems: 'center', gap: 12 * s }, [
+							h(
+								{
+									width: 14 * s,
+									height: 14 * s,
+									borderRadius: 999,
+									backgroundColor: AMBER,
+									boxShadow: `0 0 ${12 * s}px ${AMBER}`
+								},
+								[]
+							),
+							h({ display: 'flex' }, 'WATERHOUSE · WH—08')
+						]),
+						h({ display: 'flex' }, 'AMSTERDAM')
+					]),
+					h(
+						{
+							display: 'flex',
+							flexDirection: 'column',
+							alignItems: 'center',
+							gap: 24 * s,
+							paddingTop: 54 * s,
+							paddingBottom: 54 * s
+						},
+						[
+							img(logoUri, 300 * s, 200 * s),
+							h(
+								{ display: 'flex', fontSize: 76 * s, lineHeight: 0.9, color: INK },
+								'WATERHOUSE STUDIOS'
+							),
+							h(
+								{ display: 'flex', fontSize: 30 * s, color: AMBER },
+								'Music studios · events · online radio — Amsterdam'
+							),
+							pads
+						]
+					),
+					h(
+						{
+							...strip,
+							fontSize: 19 * s,
+							letterSpacing: 4 * s,
+							borderTop: '2px solid rgba(0,0,0,0.14)'
+						},
+						[
+							h({ display: 'flex' }, 'MADE IN AMSTERDAM'),
+							h({ display: 'flex', color: INK }, 'waterhousestudios.nl')
+						]
+					)
+				]
+			)
+		]
+	);
+}
+
+// Wide-strip covers (roughly 3:1) share the cover() design; 16:9 covers use
+// banner169(). SoundCloud header is 2480x520; the strip design scales cleanly.
 const COVERS = [
-	{ out: 'waterhouse-cover-1500x500.png', w: 1500, h: 500 },
-	{ out: 'waterhouse-cover-3000x1000.png', w: 3000, h: 1000 },
-	{ out: 'waterhouse-cover-1584x396.png', w: 1584, h: 396 }
+	{ out: 'waterhouse-cover-1500x500.png', w: 1500, h: 500, kind: 'strip' },
+	{ out: 'waterhouse-cover-2480x520.png', w: 2480, h: 520, kind: 'strip' },
+	{ out: 'waterhouse-cover-3000x1000.png', w: 3000, h: 1000, kind: 'strip' },
+	{ out: 'waterhouse-cover-1584x396.png', w: 1584, h: 396, kind: 'strip' },
+	{ out: 'waterhouse-cover-2560x1440.png', w: 2560, h: 1440, kind: '169' },
+	{ out: 'waterhouse-cover-1600x900.png', w: 1600, h: 900, kind: '169' }
 ];
 
 for (const c of COVERS) {
-	const svg = await satori(cover(c.h), {
+	const tree = c.kind === '169' ? banner169(c.h) : cover(c.h);
+	const svg = await satori(tree, {
 		width: c.w,
 		height: c.h,
 		fonts: [{ name: 'Jersey 15', data: jersey, weight: 400, style: 'normal' }]
