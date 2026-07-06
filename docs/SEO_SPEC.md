@@ -3,7 +3,7 @@
 **Site:** https://waterhousestudios.nl
 **Repo:** `waterhouse-landing` (SvelteKit 2 + Svelte 5, `adapter-static`, GitHub Pages behind Cloudflare)
 **Date:** 2026-07-03
-**Business:** Music studio rental (25 acoustically designed studios), ateliers, artist residency (15+ residents, growing), in-person events (capacity ~120), and online radio via Twitch (`twitch.tv/waterhousestudios`). Location: Danzigerkade 1, 1013 AP Amsterdam (Houthaven).
+**Business:** Music studio rental (15+ acoustically designed studios), ateliers, artist residency (15+ residents, growing), in-person events (capacity ~120), and online radio via Twitch (`twitch.tv/waterhousestudios`). Location: Danzigerkade 1, 1013 AP Amsterdam (Houthaven).
 
 ---
 
@@ -96,7 +96,7 @@ Add `src/routes/sitemap.xml/+server.ts` with `export const prerender = true`, em
 - **`og:image` / `twitter:image`:** create a 1200×630 branded card (the `og-image` skill in this repo can generate it from the existing design system), place at `static/og.png`, reference with absolute URL. Per-page overrides for events.
 - **Unique title + description per route.** Homepage title should carry the money keywords, e.g.:
   - Title: `Waterhouse Studios — Music Studio Rental, Events & Online Radio in Amsterdam`
-  - Description: `25 acoustically designed music studios for rent in Amsterdam (Houthaven). Shared studios from €30/hr, private 24/7 studios, ateliers, live events and weekly online radio from Amsterdam's DJ community.`
+  - Description: `15+ acoustically designed music studios for rent in Amsterdam (Houthaven). Shared studios from €30/hr, private 24/7 studios, ateliers, live events and weekly online radio from Amsterdam's DJ community.`
 - Recommended pattern (SvelteKit official): return SEO fields from each page's `load`, render once in root layout `<svelte:head>`.
 
 ### 3.5 Bug fixes
@@ -132,8 +132,8 @@ Delete `SEOContent.svelte` usage once Phase 1 pages exist (do it in the same rel
 
 ### 4.2 Content rules for every page (from Google's guide + GEO research)
 - Exactly one `<h1>` containing the page's primary query phrasing; H2s phrased as questions where natural.
-- **Lead with a direct, self-contained 40–60 word answer** ("Waterhouse Studios rents 25 acoustically designed music studios in Amsterdam's Houthaven, from €30/hour shared sessions to €1,100/month private 24/7 studios…") — this is what snippets and AI answers extract.
-- **Specific numbers everywhere:** 25 studios, 15+ residents, 120-person event space, 24-bit/96 kHz, prices, address. Stats lift AI citation rates ~37–40% (Princeton GEO).
+- **Lead with a direct, self-contained 40–60 word answer** ("Waterhouse Studios rents 15+ acoustically designed music studios in Amsterdam's Houthaven, from €30/hour shared sessions to €1,100/month private 24/7 studios…") — this is what snippets and AI answers extract.
+- **Specific numbers everywhere:** 15+ studios, 15+ residents, 120-person event space, 24-bit/96 kHz, prices, address. Stats lift AI citation rates ~37–40% (Princeton GEO).
 - Semantic HTML (`<main>`, `<nav>`, `<article>`), descriptive alt text, descriptive internal anchor text.
 - Visible **"Last updated"** dates on pages that change.
 - Written for humans in Waterhouse's voice — no keyword stuffing (it measurably *reduces* AI visibility).
@@ -163,7 +163,7 @@ No schema exists today. Implement JSON-LD (Google's only supported-everywhere fo
       "@type": "MusicVenue",
       "@id": "https://waterhousestudios.nl/#venue",
       "name": "Waterhouse Studios",
-      "description": "Music studio rental, artist residency, events and online radio in Amsterdam. 25 acoustically designed studios built by DJs and musicians for creators.",
+      "description": "Music studio rental, artist residency, events and online radio in Amsterdam. 15+ acoustically designed studios built by DJs and musicians for creators.",
       "url": "https://waterhousestudios.nl",
       "logo": "https://waterhousestudios.nl/logo.png",
       "image": "https://waterhousestudios.nl/og.png",
