@@ -409,10 +409,10 @@
 />
 
 <header class="font-jersey text-secondary container relative z-10 mx-auto px-4 text-center">
-	<h1 class="text-2xl leading-tight md:text-3xl">
+	<h1 class="hero-legible text-2xl leading-tight md:text-3xl">
 		Waterhouse Studios — music studio rental, events &amp; online radio in Amsterdam
 	</h1>
-	<p class="mt-1 text-base opacity-60">
+	<p class="hero-legible-sm mt-1 text-base opacity-60">
 		{SITE.facts.studioCountLabel} acoustically designed studios in the Houthaven ·
 		<a href="/studios" class="hover:text-amber underline">rent a studio</a> ·
 		<a href="/radio" class="hover:text-amber underline">live radio</a> ·

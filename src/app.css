@@ -31,3 +31,28 @@ body {
 .midi {
 	@apply shadow-flat hover:shadow-hover hover:translate-reset translate-adjust active:shadow-hover active:translate-reset rounded border-2 border-black transition-all;
 }
+
+/*
+ * Paper-colored glyph halo (knockout) — makes wires appear to duck behind
+ * each character with a clean light gap, so hero + nav text stays legible
+ * where a cable (esp. the black one) crosses it. Wires stay fully visible;
+ * no boxy panel. Suits the pixel display font (font-jersey).
+ */
+.hero-legible {
+	paint-order: stroke fill;
+	-webkit-text-stroke: 3px var(--color-primary); /* #faf6f6 paper */
+	text-shadow:
+		0 0 4px var(--color-primary),
+		0 0 4px var(--color-primary),
+		0 0 8px var(--color-primary);
+}
+
+/* Lighter ring for smaller supporting text (subtitle, nav links). */
+.hero-legible-sm {
+	paint-order: stroke fill;
+	-webkit-text-stroke: 2px var(--color-primary);
+	text-shadow:
+		0 0 3px var(--color-primary),
+		0 0 3px var(--color-primary),
+		0 0 6px var(--color-primary);
+}
