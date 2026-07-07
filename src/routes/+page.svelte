@@ -12,6 +12,7 @@
 	import ModalVideo from '$lib/modal/ModalVideo.svelte';
 	import Nav from '$lib/Nav.svelte';
 	import SpeakerGrate from '$lib/SpeakerGrate.svelte';
+	import TwitchEmbed from '$lib/TwitchEmbed.svelte';
 	import Seo from '$lib/seo/Seo.svelte';
 	import JsonLd from '$lib/seo/JsonLd.svelte';
 	import SiteFooter from '$lib/SiteFooter.svelte';
@@ -51,6 +52,43 @@
 	const onOpenJoin = () => (isModalOpen = 'join');
 
 	const comingSoon = () => toast.success('Coming soon!');
+
+	// Hero screen swaps to a live Twitch player only when the backend explicitly
+	// reports the stream is on air. Fail-safe by construction: any error,
+	// non-OK response, or missing `live: true` leaves `live` false and shows the
+	// existing sampler screen. Re-checks every 60s so a mid-session stream appears
+	// without a manual refresh.
+	const STREAM_STATUS_URL = 'https://twitch-api.waterhousestudios.nl/streams/status';
+	let live = $state(false);
+	let streamInfo = $state<{ title?: string; viewers?: number } | null>(null);
+
+	async function checkStream() {
+		try {
+			const res = await fetch(STREAM_STATUS_URL);
+			if (!res.ok) {
+				live = false;
+				streamInfo = null;
+				return;
+			}
+			const data = await res.json();
+			if (data && data.live === true) {
+				live = true;
+				streamInfo = { title: data.title, viewers: data.viewers };
+			} else {
+				live = false;
+				streamInfo = null;
+			}
+		} catch {
+			live = false;
+			streamInfo = null;
+		}
+	}
+
+	$effect(() => {
+		checkStream();
+		const id = setInterval(checkStream, 60_000);
+		return () => clearInterval(id);
+	});
 
 	const drumSounds = [
 		'MM Snare 1 copy.wav',
@@ -480,7 +518,11 @@
 			{@render mainButtons()}
 		</div>
 		<div class="screen flex flex-col gap-2">
-			{@render screen()}
+			{#if live}
+				<TwitchEmbed title={streamInfo?.title} viewers={streamInfo?.viewers} />
+			{:else}
+				{@render screen()}
+			{/if}
 			<div class="hidden h-full grid-cols-2 gap-2 md:grid md:text-4xl xl:text-7xl">
 				{@render mainButtons()}
 			</div>
