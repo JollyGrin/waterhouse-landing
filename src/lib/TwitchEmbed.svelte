@@ -1,14 +1,21 @@
 <script lang="ts">
 	// Live Twitch player that stands in for the hero sampler screen while the
-	// waterhousestudios stream is on air. Mirrors the embed pattern used on the
-	// /radio page: autoplay requires `muted=true`, and Twitch needs every host
-	// domain declared as a `parent` (localhost included for local preview).
-	const parents = ['waterhousestudios.nl', 'localhost'];
-	const embedSrc =
-		`https://player.twitch.tv/?channel=waterhousestudios&muted=true&` +
-		parents.map((p) => `parent=${p}`).join('&');
+	// stream is on air. Mirrors the embed pattern used on the /radio page:
+	// autoplay requires `muted=true`, and Twitch needs every host domain declared
+	// as a `parent` (localhost included for local preview). `parent` is the host
+	// domain, not the channel, so it stays fixed while `channel` follows the
+	// status payload.
+	let {
+		channel = undefined,
+		title = undefined,
+		viewers = undefined
+	}: { channel?: string; title?: string; viewers?: number } = $props();
 
-	let { title = undefined, viewers = undefined }: { title?: string; viewers?: number } = $props();
+	const parents = ['waterhousestudios.nl', 'localhost'];
+	const embedSrc = $derived(
+		`https://player.twitch.tv/?channel=${channel || 'waterhousestudios'}&muted=true&` +
+			parents.map((p) => `parent=${p}`).join('&')
+	);
 </script>
 
 <div class="lcd relative w-full overflow-hidden rounded">

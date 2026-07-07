@@ -25,6 +25,7 @@
 	import { Confetti } from 'svelte-confetti';
 	import { scale } from 'svelte/transition';
 	import { quintOut } from 'svelte/easing';
+	import { env } from '$env/dynamic/public';
 
 	const galleryImages = [
 		'event_1.jpg',
@@ -58,13 +59,18 @@
 	// non-OK response, or missing `live: true` leaves `live` false and shows the
 	// existing sampler screen. Re-checks every 60s so a mid-session stream appears
 	// without a manual refresh.
-	const STREAM_STATUS_URL = 'https://twitch-api.waterhousestudios.nl/streams/status';
+	//
+	// Endpoint is overridable via PUBLIC_STREAM_STATUS_URL so we can point at a
+	// local backend during testing; unset (prod / GitHub Pages) => prod URL. The
+	// env is read inside checkStream (client-only, via $effect) rather than at
+	// module scope, since $env/dynamic/public can't be read during prerender.
+	const DEFAULT_STREAM_STATUS_URL = 'https://twitch-api.waterhousestudios.nl/streams/status';
 	let live = $state(false);
-	let streamInfo = $state<{ title?: string; viewers?: number } | null>(null);
+	let streamInfo = $state<{ title?: string; viewers?: number; channel?: string } | null>(null);
 
 	async function checkStream() {
 		try {
-			const res = await fetch(STREAM_STATUS_URL);
+			const res = await fetch(env.PUBLIC_STREAM_STATUS_URL || DEFAULT_STREAM_STATUS_URL);
 			if (!res.ok) {
 				live = false;
 				streamInfo = null;
@@ -73,7 +79,7 @@
 			const data = await res.json();
 			if (data && data.live === true) {
 				live = true;
-				streamInfo = { title: data.title, viewers: data.viewers };
+				streamInfo = { title: data.title, viewers: data.viewers, channel: data.channel };
 			} else {
 				live = false;
 				streamInfo = null;
@@ -519,7 +525,11 @@
 		</div>
 		<div class="screen flex flex-col gap-2">
 			{#if live}
-				<TwitchEmbed title={streamInfo?.title} viewers={streamInfo?.viewers} />
+				<TwitchEmbed
+					channel={streamInfo?.channel}
+					title={streamInfo?.title}
+					viewers={streamInfo?.viewers}
+				/>
 			{:else}
 				{@render screen()}
 			{/if}
