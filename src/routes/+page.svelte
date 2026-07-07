@@ -408,7 +408,7 @@
 	onOpenAtelier={() => (isModalOpen = 'offices')}
 />
 
-<header class="font-jersey text-secondary container mx-auto px-4 text-center">
+<header class="font-jersey text-secondary container relative z-10 mx-auto px-4 text-center">
 	<h1 class="text-2xl leading-tight md:text-3xl">
 		Waterhouse Studios — music studio rental, events &amp; online radio in Amsterdam
 	</h1>
