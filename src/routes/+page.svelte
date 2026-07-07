@@ -413,7 +413,7 @@
 		Waterhouse Studios — music studio rental, events &amp; online radio in Amsterdam
 	</h1>
 	<p class="mt-1 text-base opacity-60">
-		{SITE.facts.studioCount} acoustically designed studios in the Houthaven ·
+		{SITE.facts.studioCountLabel} acoustically designed studios in the Houthaven ·
 		<a href="/studios" class="hover:text-amber underline">rent a studio</a> ·
 		<a href="/radio" class="hover:text-amber underline">live radio</a> ·
 		<a href="/events" class="hover:text-amber underline">events</a>

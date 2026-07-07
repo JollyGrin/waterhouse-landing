@@ -8,7 +8,7 @@ export const SITE = {
 	url: 'https://waterhousestudios.nl',
 	tagline: 'Music studios, events & online radio in Amsterdam',
 	description:
-		'Waterhouse Studios rents 25 acoustically designed music studios in Amsterdam (Houthaven), from €30/hour shared sessions to €1,100/month private 24/7 studios. Home to an artist residency, live events and a weekly online radio stream of Amsterdam DJs and artists.',
+		'Waterhouse Studios rents 15+ acoustically designed music studios in Amsterdam (Houthaven), from €30/hour shared sessions to €1,100/month private 24/7 studios. Home to an artist residency, live events and a weekly online radio stream of Amsterdam DJs and artists.',
 	email: 'info@waterhousestudios.nl',
 	// Physical location — Houthaven / western harbour, Amsterdam.
 	address: {
@@ -25,7 +25,8 @@ export const SITE = {
 	ogImage: '/og.png',
 	// Key facts, reused across pages and schema so numbers never drift.
 	facts: {
-		studioCount: 25,
+		// Rendered as a string so copy can read "15+"; keep every call site grammatical.
+		studioCountLabel: '15+',
 		eventCapacity: 120,
 		residentCount: 15,
 		audio: '24-bit / 96 kHz'

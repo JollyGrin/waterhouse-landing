@@ -10,7 +10,7 @@
 <Seo
 	title="About Waterhouse Studios Amsterdam"
 	image="/og/about.png"
-	description="Waterhouse Studios is a music studio, artist residency, event space and online radio in Amsterdam's Houthaven — {SITE.facts.studioCount} acoustically designed studios built by DJs and musicians for creators."
+	description="Waterhouse Studios is a music studio, artist residency, event space and online radio in Amsterdam's Houthaven — {SITE.facts.studioCountLabel} acoustically designed studios built by DJs and musicians for creators."
 />
 <JsonLd schema={graph(breadcrumb([{ name: 'About', path: '/about' }]))} />
 
@@ -27,7 +27,7 @@
 		<p class="mb-6 text-xl leading-relaxed">
 			Waterhouse Studios is a launchpad built by DJs and musicians for creators in Amsterdam's
 			Houthaven. Everything we offer is tailored to the needs of music creators and the people working
-			in the music industry: {SITE.facts.studioCount} acoustically designed studios, ateliers, an
+			in the music industry: {SITE.facts.studioCountLabel} acoustically designed studios, ateliers, an
 			artist residency, an event space for up to {SITE.facts.eventCapacity} people, and a weekly online
 			radio stream — all in one place.
 		</p>
