@@ -12,6 +12,7 @@
 	import ModalVideo from '$lib/modal/ModalVideo.svelte';
 	import Nav from '$lib/Nav.svelte';
 	import SpeakerGrate from '$lib/SpeakerGrate.svelte';
+	import TwitchEmbed from '$lib/TwitchEmbed.svelte';
 	import Seo from '$lib/seo/Seo.svelte';
 	import JsonLd from '$lib/seo/JsonLd.svelte';
 	import SiteFooter from '$lib/SiteFooter.svelte';
@@ -24,6 +25,7 @@
 	import { Confetti } from 'svelte-confetti';
 	import { scale } from 'svelte/transition';
 	import { quintOut } from 'svelte/easing';
+	import { env } from '$env/dynamic/public';
 
 	const galleryImages = [
 		'event_1.jpg',
@@ -51,6 +53,48 @@
 	const onOpenJoin = () => (isModalOpen = 'join');
 
 	const comingSoon = () => toast.success('Coming soon!');
+
+	// Hero screen swaps to a live Twitch player only when the backend explicitly
+	// reports the stream is on air. Fail-safe by construction: any error,
+	// non-OK response, or missing `live: true` leaves `live` false and shows the
+	// existing sampler screen. Re-checks every 60s so a mid-session stream appears
+	// without a manual refresh.
+	//
+	// Endpoint is overridable via PUBLIC_STREAM_STATUS_URL so we can point at a
+	// local backend during testing; unset (prod / GitHub Pages) => prod URL. The
+	// env is read inside checkStream (client-only, via $effect) rather than at
+	// module scope, since $env/dynamic/public can't be read during prerender.
+	const DEFAULT_STREAM_STATUS_URL = 'https://twitch-api.waterhousestudios.nl/streams/status';
+	let live = $state(false);
+	let streamInfo = $state<{ title?: string; viewers?: number; channel?: string } | null>(null);
+
+	async function checkStream() {
+		try {
+			const res = await fetch(env.PUBLIC_STREAM_STATUS_URL || DEFAULT_STREAM_STATUS_URL);
+			if (!res.ok) {
+				live = false;
+				streamInfo = null;
+				return;
+			}
+			const data = await res.json();
+			if (data && data.live === true) {
+				live = true;
+				streamInfo = { title: data.title, viewers: data.viewers, channel: data.channel };
+			} else {
+				live = false;
+				streamInfo = null;
+			}
+		} catch {
+			live = false;
+			streamInfo = null;
+		}
+	}
+
+	$effect(() => {
+		checkStream();
+		const id = setInterval(checkStream, 60_000);
+		return () => clearInterval(id);
+	});
 
 	const drumSounds = [
 		'MM Snare 1 copy.wav',
@@ -479,9 +523,17 @@
 		<div class="buttons flex flex-col gap-2 md:hidden">
 			{@render mainButtons()}
 		</div>
-		<div class="screen flex flex-col gap-2">
-			{@render screen()}
-			<div class="hidden h-full grid-cols-2 gap-2 md:grid md:text-4xl xl:text-7xl">
+		<div class="screen flex flex-col gap-2" class:screen-live={live}>
+			{#if live}
+				<TwitchEmbed
+					channel={streamInfo?.channel}
+					title={streamInfo?.title}
+					viewers={streamInfo?.viewers}
+				/>
+			{:else}
+				{@render screen()}
+			{/if}
+			<div class="screen-buttons hidden h-full grid-cols-2 gap-2 md:grid md:text-4xl xl:text-7xl">
 				{@render mainButtons()}
 			</div>
 		</div>
@@ -1591,6 +1643,22 @@
 
 	.screen {
 		grid-area: screen;
+	}
+
+	/* When the stream is live the Twitch embed renders at its true 16:9 aspect
+	   (see TwitchEmbed's .embed-frame). By default flexbox vertically compresses
+	   it — the studios/ateliers block below claims height via h-full — which
+	   letterboxes the player. So on desktop (the buttons block is hidden on
+	   mobile) stop the embed from shrinking and let the buttons block surrender
+	   exactly the extra height the 16:9 player needs, keeping a legible floor.
+	   Gated on .screen-live so the offline sampler layout is unchanged. */
+	@media (min-width: 768px) {
+		.screen-live > :global(.lcd) {
+			flex: none;
+		}
+		.screen-live > .screen-buttons {
+			min-height: 2.75rem;
+		}
 	}
 
 	.buttons {
