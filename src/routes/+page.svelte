@@ -523,7 +523,7 @@
 		<div class="buttons flex flex-col gap-2 md:hidden">
 			{@render mainButtons()}
 		</div>
-		<div class="screen flex flex-col gap-2">
+		<div class="screen flex flex-col gap-2" class:screen-live={live}>
 			{#if live}
 				<TwitchEmbed
 					channel={streamInfo?.channel}
@@ -533,7 +533,7 @@
 			{:else}
 				{@render screen()}
 			{/if}
-			<div class="hidden h-full grid-cols-2 gap-2 md:grid md:text-4xl xl:text-7xl">
+			<div class="screen-buttons hidden h-full grid-cols-2 gap-2 md:grid md:text-4xl xl:text-7xl">
 				{@render mainButtons()}
 			</div>
 		</div>
@@ -1643,6 +1643,22 @@
 
 	.screen {
 		grid-area: screen;
+	}
+
+	/* When the stream is live the Twitch embed renders at its true 16:9 aspect
+	   (see TwitchEmbed's .embed-frame). By default flexbox vertically compresses
+	   it — the studios/ateliers block below claims height via h-full — which
+	   letterboxes the player. So on desktop (the buttons block is hidden on
+	   mobile) stop the embed from shrinking and let the buttons block surrender
+	   exactly the extra height the 16:9 player needs, keeping a legible floor.
+	   Gated on .screen-live so the offline sampler layout is unchanged. */
+	@media (min-width: 768px) {
+		.screen-live > :global(.lcd) {
+			flex: none;
+		}
+		.screen-live > .screen-buttons {
+			min-height: 2.75rem;
+		}
 	}
 
 	.buttons {
