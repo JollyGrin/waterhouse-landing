@@ -5,14 +5,15 @@
 	// stream is on air. `parent` is the host domain (not the channel), so it
 	// stays fixed while `channel` follows the status payload.
 	//
-	// Chrome blocks *unmuted* autoplay, so the player starts muted+autoplay. To
-	// offer sound we use the Twitch Player JS SDK: `player.setMuted(false)` called
-	// inside a user click gesture is allowed, and — unlike swapping the iframe
-	// `src` — it unmutes the *existing* stream without reloading/reconnecting.
+	// The player starts muted+autoplay (Chrome plays muted video without a
+	// gesture; on mobile it may stay paused). We use the Twitch Player JS SDK so a
+	// single tap on our own full-area overlay can start + unmute the *existing*
+	// stream in place (play + setMuted, no reload/reconnect) — the user never has
+	// to hunt for Twitch's own buried play/unmute controls.
 	//
 	// FAIL-SAFE: if the SDK script fails to load or `Twitch.Player` is
-	// unavailable, we fall back to a plain muted iframe (the original embed), so
-	// the feature can never break the hero.
+	// unavailable, we fall back to a plain muted+autoplay iframe (the original
+	// embed), so the feature can never break the hero.
 	let {
 		channel = undefined,
 		title = undefined,
@@ -29,10 +30,13 @@
 	);
 
 	// 'loading' — SDK in flight, target div mounted so the player has a home.
-	// 'sdk'     — SDK player created; the unmute overlay is available.
+	// 'sdk'     — SDK player created; the tap-to-watch overlay is available.
 	// 'fallback'— SDK unavailable; render the plain muted iframe instead.
 	let status = $state<'loading' | 'sdk' | 'fallback'>('loading');
-	let muted = $state(true);
+	// Full-area overlay is shown until the first tap. On mobile muted autoplay
+	// may not start, leaving the player paused behind Twitch's own chrome; the
+	// overlay is our single clean tap target that starts + unmutes in one gesture.
+	let interacted = $state(false);
 	let playerEl = $state<HTMLDivElement>();
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	let player: any = null;
@@ -92,13 +96,15 @@
 		};
 	});
 
-	function unmute() {
+	function activate() {
 		if (!player) return;
-		// The video is already playing (muted autoplay), so this click only needs
-		// to add sound — unmute the existing stream in place, no reload, no play().
+		// One user gesture starts everything in place (no reload): play() covers
+		// mobile where muted autoplay never started (harmless no-op on desktop
+		// where it's already playing); setMuted(false)+setVolume add sound.
+		player.play();
 		player.setMuted(false);
 		player.setVolume(0.5);
-		muted = false;
+		interacted = true;
 	}
 </script>
 
@@ -116,20 +122,25 @@
 			<div bind:this={playerEl} class="player-target"></div>
 		{/if}
 
-		{#if status === 'sdk' && muted}
-			<button class="unmute-btn" onclick={unmute} aria-label="Tap to unmute the live stream">
-				<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
-					<path
-						fill="currentColor"
-						d="M3 9v6h4l5 5V4L7 9H3zm13.5 3a4.5 4.5 0 0 0-2.5-4.03v8.06A4.5 4.5 0 0 0 16.5 12zM14 3.23v2.06a7 7 0 0 1 0 13.42v2.06A9 9 0 0 0 14 3.23z"
-					/>
-				</svg>
-				<span>tap to unmute</span>
+		{#if status === 'sdk' && !interacted}
+			<button
+				class="tap-overlay"
+				onclick={activate}
+				aria-label="Tap to watch the live stream with sound"
+			>
+				<span class="tap-inner">
+					<span class="tap-icon" aria-hidden="true">
+						<svg viewBox="0 0 24 24" width="30" height="30">
+							<path fill="currentColor" d="M8 5v14l11-7z" />
+						</svg>
+					</span>
+					<span class="tap-label">tap to watch with sound</span>
+				</span>
 			</button>
 		{/if}
 	</div>
 	<div
-		class="lcd-hud pointer-events-none absolute inset-x-0 top-0 z-20 flex items-center justify-between p-2 text-[0.6rem] tracking-[0.18em] md:p-3 md:text-xs"
+		class="lcd-hud pointer-events-none absolute inset-x-0 top-0 z-40 flex items-center justify-between p-2 text-[0.6rem] tracking-[0.18em] md:p-3 md:text-xs"
 	>
 		<span class="flex items-center gap-1.5">
 			<span class="led-live"></span>
@@ -200,43 +211,67 @@
 			opacity: 0.35;
 		}
 	}
-	/* Unmute affordance in the sampler/LCD aesthetic — amber, glowing, monospace. */
-	.unmute-btn {
+	/* Full-area tap target over the whole video — one clean control of ours that
+	   sits above Twitch's cluttered chrome and starts + unmutes in a single tap.
+	   Sampler/LCD aesthetic: darkened video, amber glowing play prompt. */
+	.tap-overlay {
 		position: absolute;
-		left: 50%;
-		bottom: 12px;
-		transform: translateX(-50%);
+		inset: 0;
 		z-index: 30;
 		pointer-events: auto;
-		display: inline-flex;
-		align-items: center;
-		gap: 8px;
-		padding: 8px 16px;
-		border: 1.5px solid rgba(255, 163, 64, 0.7);
-		border-radius: 999px;
-		background: rgba(6, 8, 9, 0.82);
+		display: grid;
+		place-items: center;
+		width: 100%;
+		height: 100%;
+		margin: 0;
+		padding: 0;
+		border: 0;
+		cursor: pointer;
+		/* Fairly opaque so Twitch's own chrome (Follow/Subscribe/play) is masked and
+		   our prompt reads as the single thing to tap. */
+		background: radial-gradient(
+			ellipse at center,
+			rgba(6, 8, 9, 0.82) 0%,
+			rgba(6, 8, 9, 0.95) 100%
+		);
 		color: #ffa340;
 		font-family: var(--font-jersey);
-		font-size: 0.8rem;
-		letter-spacing: 0.14em;
+		text-shadow:
+			0 0 6px rgba(255, 140, 26, 0.6),
+			0 0 12px rgba(255, 140, 26, 0.3);
+		transition: background 0.15s ease;
+	}
+	.tap-overlay:hover {
+		background: radial-gradient(ellipse at center, rgba(6, 8, 9, 0.72) 0%, rgba(6, 8, 9, 0.9) 100%);
+	}
+	.tap-inner {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 12px;
+		padding: 0 16px;
+		text-align: center;
+	}
+	.tap-icon {
+		display: grid;
+		place-items: center;
+		width: 64px;
+		height: 64px;
+		padding-left: 4px; /* optically center the play triangle */
+		border: 2px solid rgba(255, 163, 64, 0.85);
+		border-radius: 50%;
+		background: rgba(6, 8, 9, 0.55);
+		box-shadow:
+			0 0 0 1px rgba(0, 0, 0, 0.4),
+			0 0 22px rgba(255, 140, 26, 0.4),
+			inset 0 0 16px rgba(255, 140, 26, 0.2);
+	}
+	.tap-overlay:active .tap-icon {
+		transform: translateY(1px);
+	}
+	.tap-label {
+		font-size: 0.95rem;
+		letter-spacing: 0.16em;
 		text-transform: uppercase;
-		cursor: pointer;
-		text-shadow: 0 0 6px rgba(255, 140, 26, 0.5);
-		box-shadow:
-			0 0 0 1px rgba(0, 0, 0, 0.4),
-			0 0 16px rgba(255, 140, 26, 0.35);
-		transition:
-			background 0.15s ease,
-			box-shadow 0.15s ease,
-			transform 0.05s ease;
-	}
-	.unmute-btn:hover {
-		background: rgba(16, 22, 29, 0.92);
-		box-shadow:
-			0 0 0 1px rgba(0, 0, 0, 0.4),
-			0 0 22px rgba(255, 140, 26, 0.55);
-	}
-	.unmute-btn:active {
-		transform: translateX(-50%) translateY(1px);
 	}
 </style>
