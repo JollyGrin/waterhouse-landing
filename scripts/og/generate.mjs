@@ -163,7 +163,7 @@ const CARDS = [
 	{
 		out: 'og/events.png',
 		title: 'Events at Waterhouse Studios',
-		sub: 'Club nights & showcases · up to 120 people'
+		sub: 'Label & artist showcases · up to 120 people'
 	},
 	{
 		out: 'og/about.png',

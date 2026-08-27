@@ -10,7 +10,7 @@
 <Seo
 	title="Events at Waterhouse Studios Amsterdam"
 	image="/og/events.png"
-	description="Waterhouse Studios hosts club nights, showcases and live events for up to {SITE.facts.eventCapacity} people in Amsterdam's Houthaven. Find our lineups on Resident Advisor and DICE, and catch every set live on the stream."
+	description="Waterhouse Studios hosts label showcases, artist showcases and live events for up to {SITE.facts.eventCapacity} people in Amsterdam's Houthaven. Find our lineups on Resident Advisor and DICE, and catch every set live on the stream."
 />
 <JsonLd schema={graph(breadcrumb([{ name: 'Events', path: '/events' }]))} />
 
@@ -26,9 +26,8 @@
 
 		<p class="mb-8 max-w-3xl text-xl leading-relaxed">
 			Waterhouse Studios is a music venue and event space in Amsterdam's Houthaven with capacity for
-			up to {SITE.facts.eventCapacity} people. We host club nights, label showcases and artist
-			showcases — including recurring resident series — and broadcast many of them live on Waterhouse
-			Radio.
+			up to {SITE.facts.eventCapacity} people. We host label showcases and artist showcases — including
+			recurring resident series — and broadcast many of them live on Waterhouse Radio.
 		</p>
 
 		<section class="mb-12 grid gap-6 md:grid-cols-2">
