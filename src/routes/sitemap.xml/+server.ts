@@ -16,6 +16,7 @@ const paths = [
 	'/contact',
 	'/booking',
 	'/mediakit',
+	'/ade2025',
 	'/privacy',
 	'/terms'
 ];

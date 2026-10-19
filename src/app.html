@@ -9,6 +9,23 @@
   <link href="https://fonts.googleapis.com/css2?family=Jersey+15&family=Ovo&family=Sigmar&display=swap"
     rel="stylesheet">
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script>
+    // ADE26 takeover gate. Runs before first paint so the yellow theme never
+    // flashes paper. This is the ONLY date check on the site: after the cutoff
+    // the site returns to its normal look by itself, no deploy needed.
+    // Review overrides: ?ade=1 forces on, ?ade=0 forces off (kept for the tab).
+    (function () {
+      var ADE_UNTIL = '2026-10-26T08:00:00+01:00'; // Mon after ADE, 08:00 Amsterdam (CET)
+      var on = Date.now() < Date.parse(ADE_UNTIL);
+      try {
+        var q = new URLSearchParams(location.search).get('ade');
+        if (q === '1' || q === '0') sessionStorage.setItem('ade', q);
+        var s = sessionStorage.getItem('ade');
+        if (s === '1' || s === '0') on = s === '1';
+      } catch (e) {}
+      if (on) document.documentElement.dataset.ade = '';
+    })();
+  </script>
   %sveltekit.head%
 </head>
 
