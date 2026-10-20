@@ -59,7 +59,7 @@
 			<h2 class="mb-4 text-4xl">Past events & archives</h2>
 			<ul class="space-y-2 text-xl">
 				<li>
-					<a href="/ade" class="hover:text-amber underline">ADE — Waterhouse Stream Marathon</a>
+					<a href="/ade2025" class="hover:text-amber underline">ADE — Waterhouse Stream Marathon</a>
 					<span class="opacity-60">— our Amsterdam Dance Event programme</span>
 				</li>
 			</ul>

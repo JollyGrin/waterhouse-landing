@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { Toaster } from 'svelte-french-toast';
 	import '../app.css';
+	import AdeBar from '$lib/AdeBar.svelte';
 	import JsonLd from '$lib/seo/JsonLd.svelte';
 	import { graph, venueSchema } from '$lib/seo/schema';
 	let { children } = $props();
@@ -11,4 +12,5 @@
 <JsonLd schema={graph(venueSchema())} />
 
 <Toaster />
+<AdeBar />
 {@render children()}

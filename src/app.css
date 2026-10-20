@@ -56,3 +56,34 @@ body {
 		0 0 3px var(--color-primary),
 		0 0 6px var(--color-primary);
 }
+
+/*
+ * ADE26 takeover theme — active only while the inline gate in app.html sets
+ * <html data-ade>. Unlayered, so it beats Tailwind's theme/utility layers.
+ * --color-amber becomes the LED/accent-surface yellow; hover/accent TEXT is
+ * split off below so nothing renders yellow on yellow.
+ */
+html[data-ade] {
+	--color-primary: #ffff07; /* ADE yellow (was #faf6f6 paper) */
+	--color-amber: #ffff07;
+	--color-amber-glow: #ffff07;
+	--color-amber-dim: rgba(255, 255, 7, 0.18);
+	--color-lcd-bg: #000;
+}
+
+/* Home renders on the default body background, so paint it too. */
+html[data-ade] body {
+	background-color: var(--color-primary);
+}
+
+/* Accent text on the yellow surface reads black… */
+html[data-ade] .text-amber,
+html[data-ade] .hover\:text-amber:hover,
+html[data-ade] .group:hover .group-hover\:text-amber {
+	color: var(--color-secondary);
+}
+
+/* …except on the black footer, where yellow is the visible accent. */
+html[data-ade] footer .hover\:text-amber:hover {
+	color: var(--color-amber);
+}

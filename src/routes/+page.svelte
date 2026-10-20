@@ -908,6 +908,16 @@
 		--amber-dim: rgba(255, 140, 26, 0.18);
 		--led-rec: #ff3838;
 	}
+	/* ADE26 takeover (see app.css): LEDs glow yellow, faceplate readouts go black. */
+	:global(html[data-ade]) {
+		--amber: #ffff07;
+		--amber-glow: rgba(255, 255, 7, 0.75);
+		--amber-dim: rgba(255, 255, 7, 0.18);
+	}
+	:global(html[data-ade]) :is(.knob-value, .fader-marque, .fader-value) {
+		color: var(--color-secondary);
+		text-shadow: none;
+	}
 	input[type='range'] {
 		writing-mode: vertical-lr;
 		direction: rtl;
