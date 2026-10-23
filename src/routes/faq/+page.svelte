@@ -10,7 +10,7 @@
 	const faqs = [
 		{
 			q: 'How much does it cost to rent a music studio in Amsterdam?',
-			a: 'At Waterhouse Studios, shared studios start at €30 per hour, with bundles of 10 hours for €150, 20 hours for €200, 40 hours for €250 and 60 hours for €300. A private 24/7 solo studio is €1,100 per month, and an atelier is €500 per month. Every plan includes stream-room access.'
+			a: 'At Waterhouse Studios, shared studios start at €40 per hour, with bundles of 10 hours for €150, 20 hours for €200, 40 hours for €250 and 60 hours for €300. A private 24/7 solo studio is €1,100 per month, and an atelier is €500 per month. Every plan includes stream-room access.'
 		},
 		{
 			q: 'Where is Waterhouse Studios located?',

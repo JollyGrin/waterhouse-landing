@@ -96,7 +96,7 @@ Add `src/routes/sitemap.xml/+server.ts` with `export const prerender = true`, em
 - **`og:image` / `twitter:image`:** create a 1200×630 branded card (the `og-image` skill in this repo can generate it from the existing design system), place at `static/og.png`, reference with absolute URL. Per-page overrides for events.
 - **Unique title + description per route.** Homepage title should carry the money keywords, e.g.:
   - Title: `Waterhouse Studios — Music Studio Rental, Events & Online Radio in Amsterdam`
-  - Description: `14+ acoustically designed music studios for rent in Amsterdam (Houthaven). Shared studios from €30/hr, private 24/7 studios, ateliers, live events and weekly online radio from Amsterdam's DJ community.`
+  - Description: `14+ acoustically designed music studios for rent in Amsterdam (Houthaven). Shared studios from €40/hr, private 24/7 studios, ateliers, live events and weekly online radio from Amsterdam's DJ community.`
 - Recommended pattern (SvelteKit official): return SEO fields from each page's `load`, render once in root layout `<svelte:head>`.
 
 ### 3.5 Bug fixes
@@ -120,7 +120,7 @@ Delete `SEOContent.svelte` usage once Phase 1 pages exist (do it in the same rel
 | Route | Purpose | Target queries | Primary content source |
 |---|---|---|---|
 | `/studios` | Studio rental sales page | music studio rental amsterdam, muziekstudio huren, production studio | ModalMusicStudio + ModalFacilities content |
-| `/studios/pricing` (or section on `/studios`) | Transparent pricing | studio huren prijs, cheap music studio amsterdam | `constants-price.ts` + hourly bundles (€30/1h … €300/60h, Solo €1,100/mo) |
+| `/studios/pricing` (or section on `/studios`) | Transparent pricing | studio huren prijs, cheap music studio amsterdam | `constants-price.ts` + hourly bundles (€40/1h … €300/60h, Solo €1,100/mo) |
 | `/ateliers` | Atelier/office rental | atelier huren amsterdam, creative workspace amsterdam | ModalOffice |
 | `/residency` | The residency program + how to join | artist residency amsterdam, music residency | ModalOpportunities/benefits |
 | `/residents` + `/residents/[slug]` | Artist roster; one page per resident (15+, growing) | each artist's name, "amsterdam dj X" | new; links to artists' IG/RA/SoundCloud |
@@ -132,7 +132,7 @@ Delete `SEOContent.svelte` usage once Phase 1 pages exist (do it in the same rel
 
 ### 4.2 Content rules for every page (from Google's guide + GEO research)
 - Exactly one `<h1>` containing the page's primary query phrasing; H2s phrased as questions where natural.
-- **Lead with a direct, self-contained 40–60 word answer** ("Waterhouse Studios rents 14+ acoustically designed music studios in Amsterdam's Houthaven, from €30/hour shared sessions to €1,100/month private 24/7 studios…") — this is what snippets and AI answers extract.
+- **Lead with a direct, self-contained 40–60 word answer** ("Waterhouse Studios rents 14+ acoustically designed music studios in Amsterdam's Houthaven, from €40/hour shared sessions to €1,100/month private 24/7 studios…") — this is what snippets and AI answers extract.
 - **Specific numbers everywhere:** 14+ studios, 15+ residents, 120-person event space, 24-bit/96 kHz, prices, address. Stats lift AI citation rates ~37–40% (Princeton GEO).
 - Semantic HTML (`<main>`, `<nav>`, `<article>`), descriptive alt text, descriptive internal anchor text.
 - Visible **"Last updated"** dates on pages that change.
