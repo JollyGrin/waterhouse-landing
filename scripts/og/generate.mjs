@@ -143,7 +143,7 @@ const CARDS = [
 	{
 		out: 'og/studios.png',
 		title: 'Music studio rental in Amsterdam',
-		sub: 'Shared from €30/hr · private 24/7 from €1,100/mo'
+		sub: 'Shared from €40/hr · private 24/7 from €1,100/mo'
 	},
 	{
 		out: 'og/ateliers.png',

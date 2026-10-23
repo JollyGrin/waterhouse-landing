@@ -8,7 +8,7 @@ export const SITE = {
 	url: 'https://waterhousestudios.nl',
 	tagline: 'Music studios, events & online radio in Amsterdam',
 	description:
-		'Waterhouse Studios rents 14+ acoustically designed music studios in Amsterdam (Houthaven), from €30/hour shared sessions to €1,100/month private 24/7 studios. Home to an artist residency, live events and a weekly online radio stream of Amsterdam DJs and artists.',
+		'Waterhouse Studios rents 14+ acoustically designed music studios in Amsterdam (Houthaven), from €40/hour shared sessions to €1,100/month private 24/7 studios. Home to an artist residency, live events and a weekly online radio stream of Amsterdam DJs and artists.',
 	email: 'info@waterhousestudios.nl',
 	// Physical location — Houthaven / western harbour, Amsterdam.
 	address: {
@@ -61,7 +61,7 @@ export const SAME_AS: string[] = [
 // Studio rental pricing. Single source of truth for pages, schema Offers, and
 // the machine-readable /pricing.md build artifact.
 export const PRICING = {
-	sharedHourly: 30,
+	sharedHourly: 40,
 	sharedBundles: [
 		{ hours: 10, price: 150 },
 		{ hours: 20, price: 200 },
