@@ -26,6 +26,10 @@
 	import { scale } from 'svelte/transition';
 	import { quintOut } from 'svelte/easing';
 	import { env } from '$env/dynamic/public';
+	import UpcomingRadio from '$lib/radio/UpcomingRadio.svelte';
+	import RadioLcd from '$lib/radio/RadioLcd.svelte';
+	import { useRadioLineup } from '$lib/radio/lineup.svelte';
+	import { lcdState, useLcdClock } from '$lib/radio/lcd.svelte';
 
 	const galleryImages = [
 		'event_1.jpg',
@@ -95,6 +99,13 @@
 		const id = setInterval(checkStream, 60_000);
 		return () => clearInterval(id);
 	});
+
+	// Not-live hero screen follows the radio lineup (OFF AIR / PRE-SHOW / ON AIR);
+	// no lineup (loading, error, empty, and the prerendered HTML) keeps the
+	// sampler video. A live stream still swaps in TwitchEmbed above all this.
+	const lineup = useRadioLineup();
+	const lcdClock = useLcdClock();
+	const lcd = $derived(lcdState(lineup.status, lineup.all, lcdClock.now));
 
 	const drumSounds = [
 		'MM Snare 1 copy.wav',
@@ -401,30 +412,36 @@
 
 {#snippet screen()}
 	<div class="lcd relative grid min-h-40 w-full place-items-center overflow-hidden rounded md:min-h-50">
-		<video src="/screen.mp4" autoplay muted loop class="lcd-video relative z-0 h-50 object-cover"
-		></video>
+		{#if lcd.kind === 'fallback'}
+			<video src="/screen.mp4" autoplay muted loop class="lcd-video relative z-0 h-50 object-cover"
+			></video>
+		{:else}
+			<RadioLcd state={lcd} now={lcdClock.now} />
+		{/if}
 		<div class="lcd-scanlines pointer-events-none absolute inset-0 z-10"></div>
-		<div class="lcd-hud pointer-events-none absolute inset-0 z-20 flex flex-col justify-between p-2 md:p-3">
-			<div class="lcd-row flex items-center justify-between text-[0.6rem] tracking-[0.18em] md:text-xs">
-				<span class="flex items-center gap-1.5">
-					<span class="led-rec"></span>
-					<span>REC</span>
-				</span>
-				<span class="hidden md:inline">WH—08 · DRUM SAMPLER</span>
-				<span class="md:hidden">WH—08</span>
-				<span>90.00 BPM</span>
+		{#if lcd.kind === 'fallback'}
+			<div class="lcd-hud pointer-events-none absolute inset-0 z-20 flex flex-col justify-between p-2 md:p-3">
+				<div class="lcd-row flex items-center justify-between text-[0.6rem] tracking-[0.18em] md:text-xs">
+					<span class="flex items-center gap-1.5">
+						<span class="led-rec"></span>
+						<span>REC</span>
+					</span>
+					<span class="hidden md:inline">WH—08 · DRUM SAMPLER</span>
+					<span class="md:hidden">WH—08</span>
+					<span>90.00 BPM</span>
+				</div>
+				<div class="lcd-steps flex items-end gap-1.5">
+					<span class="step"></span>
+					<span class="step"></span>
+					<span class="step"></span>
+					<span class="step"></span>
+					<span class="step"></span>
+					<span class="step"></span>
+					<span class="step"></span>
+					<span class="step"></span>
+				</div>
 			</div>
-			<div class="lcd-steps flex items-end gap-1.5">
-				<span class="step"></span>
-				<span class="step"></span>
-				<span class="step"></span>
-				<span class="step"></span>
-				<span class="step"></span>
-				<span class="step"></span>
-				<span class="step"></span>
-				<span class="step"></span>
-			</div>
-		</div>
+		{/if}
 		<div class="lcd-glow pointer-events-none absolute inset-0 z-30 rounded"></div>
 	</div>
 {/snippet}
@@ -840,6 +857,8 @@
 	</g>
 </svg>
 </div>
+
+<UpcomingRadio />
 
 {#if showConfetti}
 	<div
