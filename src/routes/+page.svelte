@@ -26,6 +26,7 @@
 	import { scale } from 'svelte/transition';
 	import { quintOut } from 'svelte/easing';
 	import { env } from '$env/dynamic/public';
+	import UpcomingRadio from '$lib/radio/UpcomingRadio.svelte';
 
 	const galleryImages = [
 		'event_1.jpg',
@@ -840,6 +841,8 @@
 	</g>
 </svg>
 </div>
+
+<UpcomingRadio />
 
 {#if showConfetti}
 	<div
