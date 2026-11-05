@@ -229,8 +229,16 @@ const timeFmt = new Intl.DateTimeFormat('en-GB', {
 	hourCycle: 'h23'
 });
 
-/** e.g. "Fri 6 Nov", in Amsterdam time regardless of the visitor's timezone. */
-export const formatShowDay = (ms: number) => dayFmt.format(ms);
+/**
+ * e.g. "Fri 6 Nov", in Amsterdam time regardless of the visitor's timezone.
+ * Built from parts because some ICU builds format en-GB as "Fri, 6 Nov".
+ */
+export const formatShowDay = (ms: number) => {
+	const parts = dayFmt.formatToParts(ms);
+	const part = (type: Intl.DateTimeFormatPartTypes) =>
+		parts.find((p) => p.type === type)?.value ?? '';
+	return `${part('weekday')} ${part('day')} ${part('month')}`;
+};
 /** e.g. "20:00", in Amsterdam time. */
 export const formatShowTime = (ms: number) => timeFmt.format(ms);
 /** e.g. "20:00–22:00", in Amsterdam time. */
