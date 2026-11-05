@@ -94,6 +94,10 @@ class RadioLineup {
 	status = $state<RadioLineupStatus>('loading');
 	/** Every show from the last good response, including ones that have since ended. */
 	#all = $state.raw<RadioShow[]>([]);
+	/** Every show from the last good response, including ended ones (for callers with their own clock). */
+	get all(): readonly RadioShow[] {
+		return this.#all;
+	}
 	/** Current time; advanced at show boundaries, every 30s, on refresh and on tab focus. */
 	now = $state(Date.now());
 
