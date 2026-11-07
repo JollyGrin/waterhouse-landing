@@ -5,6 +5,7 @@
 	// video, so swapping faces never shifts the layout. Times are Amsterdam.
 	import { formatShowDay, formatShowTime, type RadioShow } from './lineup.svelte';
 	import { formatCountdown, formatPreshow, PRESHOW_MS, type LcdState } from './lcd.svelte';
+	import LcdTwitchLink from './LcdTwitchLink.svelte';
 
 	let { state, now }: { state: Exclude<LcdState, { kind: 'fallback' }>; now: number } = $props();
 
@@ -41,6 +42,10 @@
 					<p class="onair-artists max-w-full truncate">{artists(state.show).toUpperCase()}</p>
 				{/if}
 			</div>
+			<!-- Scheduled slot, stream not detected yet: the embed replaces this face once live. -->
+			<div class="bottom-row flex justify-end">
+				<LcdTwitchLink verb="watch" />
+			</div>
 		{:else if state.kind === 'preshow'}
 			<div class="flex min-h-0 flex-1 flex-col items-center justify-center text-center">
 				<p class="label">NEXT ON AIR</p>
@@ -51,10 +56,13 @@
 						).toUpperCase()}{/if}
 				</p>
 			</div>
-			<div class="bars flex items-end gap-[3px]" style:--warm={warm} aria-hidden="true">
-				{#each BARS as i (i)}
-					<span class="bar" style:animation-delay="{-((i * 0.7 * 180) % 1131)}ms"></span>
-				{/each}
+			<div class="bottom-row flex items-end gap-3">
+				<div class="bars flex flex-1 items-end gap-[3px]" style:--warm={warm} aria-hidden="true">
+					{#each BARS as i (i)}
+						<span class="bar" style:animation-delay="{-((i * 0.7 * 180) % 1131)}ms"></span>
+					{/each}
+				</div>
+				<LcdTwitchLink />
 			</div>
 		{:else}
 			<div class="offair min-h-0 flex-1">
@@ -79,10 +87,13 @@
 					</ol>
 				{/if}
 			</div>
-			<div class="steps flex gap-1.5" aria-hidden="true">
-				{#each STEPS as i (i)}
-					<span class="step" style:animation-delay="{i * 0.333}s"></span>
-				{/each}
+			<div class="bottom-row flex items-center gap-3">
+				<div class="steps flex flex-1 gap-1.5" aria-hidden="true">
+					{#each STEPS as i (i)}
+						<span class="step" style:animation-delay="{i * 0.333}s"></span>
+					{/each}
+				</div>
+				<LcdTwitchLink />
 			</div>
 		{/if}
 	</div>
@@ -117,6 +128,11 @@
 	.label {
 		font-size: 0.8rem;
 		letter-spacing: 0.18em;
+	}
+	/* Shared by every face: holds the Twitch key (plus steps / warm-up bars). */
+	.bottom-row {
+		flex-shrink: 0;
+		margin-top: 0.35rem;
 	}
 
 	/* HUD row */

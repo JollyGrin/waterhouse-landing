@@ -28,6 +28,7 @@
 	import { env } from '$env/dynamic/public';
 	import UpcomingRadio from '$lib/radio/UpcomingRadio.svelte';
 	import RadioLcd from '$lib/radio/RadioLcd.svelte';
+	import LcdTwitchLink from '$lib/radio/LcdTwitchLink.svelte';
 	import { useRadioLineup } from '$lib/radio/lineup.svelte';
 	import { lcdState, useLcdClock } from '$lib/radio/lcd.svelte';
 
@@ -430,15 +431,19 @@
 					<span class="md:hidden">WH—08</span>
 					<span>90.00 BPM</span>
 				</div>
-				<div class="lcd-steps flex items-end gap-1.5">
-					<span class="step"></span>
-					<span class="step"></span>
-					<span class="step"></span>
-					<span class="step"></span>
-					<span class="step"></span>
-					<span class="step"></span>
-					<span class="step"></span>
-					<span class="step"></span>
+				<!-- HUD is pointer-events-none; LcdTwitchLink opts itself back in. -->
+				<div class="flex items-center gap-3">
+					<div class="lcd-steps flex flex-1 items-end gap-1.5">
+						<span class="step"></span>
+						<span class="step"></span>
+						<span class="step"></span>
+						<span class="step"></span>
+						<span class="step"></span>
+						<span class="step"></span>
+						<span class="step"></span>
+						<span class="step"></span>
+					</div>
+					<LcdTwitchLink />
 				</div>
 			</div>
 		{/if}
@@ -1168,6 +1173,7 @@
 			inset 0 0 120px rgba(0, 0, 0, 0.45);
 	}
 	.lcd-hud {
+		container-type: inline-size;
 		color: #ffa340;
 		font-family: var(--font-jersey);
 		text-shadow:
