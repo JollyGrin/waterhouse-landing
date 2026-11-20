@@ -34,6 +34,7 @@
 							<span class="text-6xl"> €{PRICES.OFFICE} </span>
 							<div class="flex flex-col text-sm">
 								<span class=""> /month </span>
+								<span class="text-xs opacity-60"> excl. VAT </span>
 								<!-- <span class=" opacity-50"> (not including utilities) </span> -->
 							</div>
 						</div>

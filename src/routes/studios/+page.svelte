@@ -5,6 +5,7 @@
 	import SiteHeader from '$lib/SiteHeader.svelte';
 	import SiteFooter from '$lib/SiteFooter.svelte';
 	import { SITE, PRICING, LINKS } from '$lib/site';
+	import { formatPrice } from '$lib/constants-price';
 
 	const facilities = [
 		{
@@ -41,8 +42,8 @@
 
 		<p class="mb-8 max-w-3xl text-xl leading-relaxed">
 			Waterhouse Studios rents {SITE.facts.studioCountLabel} acoustically designed music studios in Amsterdam's
-			Houthaven, from €{PRICING.sharedHourly}/hour shared sessions to €{PRICING.soloMonthly}/month private
-			24/7 studios. Each room is custom-designed by industry professionals for recording, producing,
+			Houthaven, from €{PRICING.sharedHourly}/hour shared sessions to €{formatPrice(PRICING.soloMonthly)}/month private
+			24/7 studios (prices excl. VAT). Each room is custom-designed by industry professionals for recording, producing,
 			mixing and streaming at {SITE.facts.audio} — built by creators, for creators.
 		</p>
 
@@ -67,6 +68,7 @@
 					<h3 class="text-3xl">Shared Studio</h3>
 					<p class="mb-4 opacity-70">Perfect for emerging artists</p>
 					<p class="text-5xl">€{PRICING.sharedHourly}<span class="text-lg opacity-60">/hour</span></p>
+					<p class="text-sm opacity-60">excl. VAT</p>
 					<ul class="mt-4 space-y-1 text-lg">
 						{#each PRICING.sharedBundles as bundle (bundle.hours)}
 							<li>{bundle.hours} hours — €{bundle.price}</li>
@@ -78,7 +80,8 @@
 				<div class="border-secondary bg-amber/10 rounded-lg border-2 p-6" style="box-shadow: 6px 6px 0 black;">
 					<h3 class="text-3xl">Solo Studio</h3>
 					<p class="mb-4 opacity-70">Your private creative space</p>
-					<p class="text-5xl">€{PRICING.soloMonthly}<span class="text-lg opacity-60">/month</span></p>
+					<p class="text-5xl">€{formatPrice(PRICING.soloMonthly)}<span class="text-lg opacity-60">/month</span></p>
+					<p class="text-sm opacity-60">excl. VAT</p>
 					<ul class="mt-4 space-y-1 text-lg">
 						<li>24/7 private access</li>
 						<li>Storage space</li>
@@ -90,6 +93,7 @@
 					<h3 class="text-3xl">Atelier</h3>
 					<p class="mb-4 opacity-70">For artists & industry pros</p>
 					<p class="text-5xl">€{PRICING.atelierMonthly}<span class="text-lg opacity-60">/month</span></p>
+					<p class="text-sm opacity-60">excl. VAT</p>
 					<ul class="mt-4 space-y-1 text-lg">
 						<li>Meeting-room access</li>
 						<li>Business amenities</li>

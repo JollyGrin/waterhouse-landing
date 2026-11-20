@@ -26,7 +26,7 @@
 
 		<p class="mb-8 max-w-3xl text-xl leading-relaxed">
 			Waterhouse Studios rents ateliers — creative office spaces for artists, managers, labels and
-			other music-industry professionals — in Amsterdam's Houthaven for €{PRICING.atelierMonthly}/month.
+			other music-industry professionals — in Amsterdam's Houthaven for €{PRICING.atelierMonthly}/month (excl. VAT).
 			Get a dedicated base with 24/7 access, meeting-room and business amenities, and full access to
 			the stream room, all inside a working community of musicians and DJs.
 		</p>
@@ -36,6 +36,7 @@
 				<h2 class="text-3xl">Atelier</h2>
 				<p class="mb-4 opacity-70">For artists & industry professionals — 24/7 access</p>
 				<p class="text-6xl">€{PRICING.atelierMonthly}<span class="text-lg opacity-60">/month</span></p>
+				<p class="text-sm opacity-60">excl. VAT</p>
 				<ul class="mt-4 space-y-1 text-lg">
 					<li>Meeting-room access</li>
 					<li>Business amenities</li>
