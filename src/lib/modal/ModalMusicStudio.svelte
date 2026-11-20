@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { PRICES } from '$lib/constants-price';
+	import { formatPrice } from '$lib/constants-price';
+	import { PRICING } from '$lib/site';
 	import Modal from './Modal.svelte';
 	import { fade, fly } from 'svelte/transition';
 
@@ -10,12 +11,19 @@
 	}: { isOpen?: boolean; onClose(): void; onOpenJoin(): void } = $props();
 
 	const studioOptions = [
-		{ name: 'Shared Studio', price: 30, hours: 1, type: 'shared' },
-		{ name: 'Shared Studio', price: 150, hours: 10, type: 'shared' },
-		{ name: 'Shared Studio', price: 200, hours: 20, type: 'shared' },
-		{ name: 'Shared Studio', price: 250, hours: 40, type: 'shared' },
-		{ name: 'Shared Studio', price: 300, hours: 60, type: 'shared' },
-		{ name: 'Solo Studio', price: 1100, hours: '24/7 private access', type: 'solo' }
+		{ name: 'Shared Studio', price: PRICING.sharedHourly, hours: 1, type: 'shared' },
+		...PRICING.sharedBundles.map((b) => ({
+			name: 'Shared Studio',
+			price: b.price,
+			hours: b.hours,
+			type: 'shared'
+		})),
+		{
+			name: 'Solo Studio',
+			price: PRICING.soloMonthly,
+			hours: '24/7 private access',
+			type: 'solo'
+		}
 	];
 
 	let selectedOption = $state(1); // Default to Standard Studio (index 1)
@@ -103,9 +111,10 @@
 					<div class="flex h-full flex-col bg-white/10 p-6">
 						<h2 class="mb-4 text-2xl">{studioOptions[selectedOption].name}</h2>
 						<div class="mb-6 flex items-center gap-2">
-							<span class="text-6xl"> €{studioOptions[selectedOption].price} </span>
+							<span class="text-6xl"> €{formatPrice(studioOptions[selectedOption].price)} </span>
 							<div class="flex flex-col text-sm">
 								<span class=""> /month </span>
+								<span class="text-xs opacity-60"> excl. VAT </span>
 							</div>
 						</div>
 
@@ -118,7 +127,7 @@
 											? 'text-white'
 											: 'text-white/60'}"
 									>
-										€{option.price}
+										€{formatPrice(option.price)}
 									</span>
 								{/each}
 							</div>

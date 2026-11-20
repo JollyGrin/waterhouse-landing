@@ -1,6 +1,6 @@
 # Pricing — Waterhouse Studios
 
-Music studio and atelier rental in Amsterdam (Danzigerkade 1, 1013 AP). All prices in EUR. All plans include stream-room access. Contact: info@waterhousestudios.nl.
+Music studio and atelier rental in Amsterdam (Danzigerkade 1, 1013 AP). All prices in EUR, excluding VAT. All plans include stream-room access. Contact: info@waterhousestudios.nl.
 
 ## Shared Studio
 - €40 per hour
@@ -11,7 +11,7 @@ Music studio and atelier rental in Amsterdam (Danzigerkade 1, 1013 AP). All pric
 - Shared workspace, professional equipment, acoustic treatment, stream-room access.
 
 ## Solo Studio
-- €1,100 per month
+- €1,125 per month
 - Private 24/7 access, storage space, premium equipment, stream-room access.
 
 ## Atelier (creative office)

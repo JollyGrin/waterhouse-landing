@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { PRICES } from '$lib/constants-price';
+	import { PRICES, formatPrice } from '$lib/constants-price';
 	import Modal from './Modal.svelte';
 
 	let {
@@ -12,7 +12,7 @@
 {#snippet priceText(price: string)}
 	<div class="flex flex-col items-start justify-center">
 		<span class="font-jersey text-6xl">€{price}</span>
-		<span class="text-secondary/30 font-jersey ml-1 text-xs">per month</span>
+		<span class="text-secondary/30 font-jersey ml-1 text-xs">per month · excl. VAT</span>
 	</div>
 {/snippet}
 
@@ -54,7 +54,7 @@
 				])}
 
 				<!-- Solo Studio -->
-				{@render pane('Solo Studio', 'Your private creative space', PRICES.SOLO.toString(), [
+				{@render pane('Solo Studio', 'Your private creative space', formatPrice(PRICES.SOLO), [
 					'24/7 private access',
 					'Storage space',
 					'Premium equipment',
