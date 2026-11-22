@@ -17,11 +17,12 @@
 	import JsonLd from '$lib/seo/JsonLd.svelte';
 	import SiteFooter from '$lib/SiteFooter.svelte';
 	import { graph, studioServiceSchema } from '$lib/seo/schema';
-	import { SITE } from '$lib/site';
+	import { LINKS, SITE } from '$lib/site';
 	import GradientBanner from '$lib/GradientBanner.svelte';
 	import toast from 'svelte-french-toast';
 	import IconInstagram from '$lib/icon/IconInstagram.svelte';
 	import IconTwitch from '$lib/icon/IconTwitch.svelte';
+	import IconYoutube from '$lib/icon/IconYoutube.svelte';
 	import { Confetti } from 'svelte-confetti';
 	import { scale } from 'svelte/transition';
 	import { quintOut } from 'svelte/easing';
@@ -562,16 +563,21 @@
 		<div class="news grid place-items-center">
 			<!-- svelte-ignore a11y_no_static_element_interactions -->
 			<div
-				class="relative grid h-full w-full grid-cols-2 gap-2 md:h-[50%] md:w-full md:grid-cols-1 md:gap-0"
+				class="relative grid h-full w-full grid-cols-3 gap-2 md:w-full md:grid-cols-1 md:gap-0"
 			>
-				<a href="https://www.instagram.com/waterhousestudiosamsterdam" class="h-full w-full">
-					<button class="grid h-full place-items-center rounded-xl">
+				<a href={LINKS.instagram} aria-label="Instagram" class="h-full w-full">
+					<button class="grid h-full place-items-center rounded-xl" tabindex="-1">
 						<IconInstagram w={35} className="md:h-[50px] md:w-[50px]" />
 					</button>
 				</a>
-				<a href="https://www.twitch.tv/waterhousestudios" class="h-full w-full">
-					<button class="grid h-full place-items-center rounded-xl">
+				<a href={LINKS.twitch} aria-label="Twitch" class="h-full w-full">
+					<button class="grid h-full place-items-center rounded-xl" tabindex="-1">
 						<IconTwitch w={35} class="md:h-[50px] md:w-[50px]" />
+					</button>
+				</a>
+				<a href={LINKS.youtube} aria-label="YouTube" class="h-full w-full">
+					<button class="grid h-full place-items-center rounded-xl" tabindex="-1">
+						<IconYoutube w={35} className="md:h-[50px] md:w-[50px]" />
 					</button>
 				</a>
 			</div>
@@ -1670,9 +1676,15 @@
 			grid-auto-flow: row;
 			grid-template-areas:
 				'screen screen screen screen'
-				'location contact news speaker'
+				'location contact news news'
 				'slider buttons buttons buttons'
 				'social-1 social-2 social-3 social-3';
+		}
+
+		/* The three social tiles (Instagram, Twitch, YouTube) take the speaker
+		   grille's cell on mobile; a single quarter-width cell is too narrow. */
+		.speaker {
+			display: none;
 		}
 	}
 
